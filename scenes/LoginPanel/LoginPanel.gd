@@ -2,9 +2,9 @@ extends Panel
 
 
 func _ready():
-	multiplayer.connected_to_server.connect(_connected_succeeded)
-	multiplayer.connection_failed.connect(_connected_fail)
-	multiplayer.server_disconnected.connect(_server_disconnected)
+	PlayersConnection.multiplayer_api.connected_to_server.connect(_connected_succeeded)
+	PlayersConnection.multiplayer_api.connection_failed.connect(_connected_fail)
+	PlayersConnection.multiplayer_api.server_disconnected.connect(_server_disconnected)
 
 
 func _on_login_button_pressed():
@@ -17,16 +17,16 @@ func _on_login_button_pressed():
 		$VBoxContainer/ErrorLabel.text = "Invalid username or password"
 		return false
 
-	if !Connection.connect_to_server(ip, port):
+	if !PlayersConnection.connect_to_server(ip, port):
 		$VBoxContainer/ErrorLabel.text = "Error conneting server"
 		print("Failed to connect to server")
 		return false
 
-	await multiplayer.connected_to_server
+	await PlayersConnection.multiplayer_api.connected_to_server
 
-	Connection.authenticate.rpc_id(1, username, password)
+	PlayersConnection.authenticate.rpc_id(1, username, password)
 
-	var logged_in = await Connection.login
+	var logged_in = await PlayersConnection.login
 	if !logged_in:
 		$VBoxContainer/ErrorLabel.text = "Login failed"
 		print("Failed logging in to server")

@@ -8,15 +8,16 @@ var cert = load("res://data/certs/X509_certificate.crt")
 var logged_in = false
 var cookie = ""
 
+var client = ENetMultiplayerPeer.new()
+var multiplayer_api : MultiplayerAPI = MultiplayerAPI.create_default_interface()
 
 func connect_to_server(ip, port):
-	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_client(ip, port)
+	var error = client.create_client(ip, port)
 	if error != OK:
 		print("Error while creating")
 		return false
 
-	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
+	if client.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		print("Failed to connect to game")
 		# OS.alert("Failed to start multiplayer client.")
 		return false
@@ -25,29 +26,30 @@ func connect_to_server(ip, port):
 	# var client_tls_options = TLSOptions.client(cert)
 	#TODO: Remove next line
 	var client_tls_options = TLSOptions.client_unsafe(cert)
-	error = peer.host.dtls_client_setup(ip, client_tls_options)
+	error = client.host.dtls_client_setup(ip, client_tls_options)
 	if error != OK:
 		print("Failed to connect via DTLS")
 		return false
 
-	multiplayer.multiplayer_peer = peer
+	get_tree().set_multiplayer(multiplayer_api, self.get_path()) 
+	multiplayer_api.multiplayer_peer = client
 
-	multiplayer.connected_to_server.connect(_connected_succeeded)
-	multiplayer.connection_failed.connect(_connected_fail)
-	multiplayer.server_disconnected.connect(_server_disconnected)
+	multiplayer_api.connected_to_server.connect(_on_connection_succeeded)
+	multiplayer_api.connection_failed.connect(_on_connection_failed)
+	multiplayer_api.server_disconnected.connect(_on_server_disconnected)
 
 	return true
 
 
-func _connected_succeeded():
+func _on_connection_succeeded():
 	print("Connection succeeded")
 
 
-func _server_disconnected():
+func _on_server_disconnected():
 	print("Server disconnected us")
 
 
-func _connected_fail():
+func _on_connection_failed():
 	print("Connection failed")
 
 
