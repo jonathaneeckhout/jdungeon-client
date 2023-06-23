@@ -11,6 +11,12 @@ var cookie = ""
 var client = ENetMultiplayerPeer.new()
 var multiplayer_api : MultiplayerAPI = MultiplayerAPI.create_default_interface()
 
+func _ready():
+	multiplayer_api.connected_to_server.connect(_on_connection_succeeded)
+	multiplayer_api.connection_failed.connect(_on_connection_failed)
+	multiplayer_api.server_disconnected.connect(_on_server_disconnected)
+
+
 func connect_to_server(ip, port):
 	var error = client.create_client(ip, port)
 	if error != OK:
@@ -33,10 +39,6 @@ func connect_to_server(ip, port):
 
 	get_tree().set_multiplayer(multiplayer_api, self.get_path()) 
 	multiplayer_api.multiplayer_peer = client
-
-	multiplayer_api.connected_to_server.connect(_on_connection_succeeded)
-	multiplayer_api.connection_failed.connect(_on_connection_failed)
-	multiplayer_api.server_disconnected.connect(_on_server_disconnected)
 
 	return true
 
@@ -65,3 +67,12 @@ func client_login_response(succeeded: bool, login_cookie: String):
 	logged_in = succeeded
 	cookie = login_cookie
 	login.emit(succeeded)
+
+
+@rpc("call_remote", "authority", "reliable") 
+func switch_level_server(level: String, address: String, port: int):
+	print("Switching to level %s on address %s on port %d" % [level, address, port])
+	#Close the current connection
+	client.close()
+	#Connect to the new level
+	connect_to_server(address, port)
