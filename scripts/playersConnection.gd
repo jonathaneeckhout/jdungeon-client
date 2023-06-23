@@ -61,7 +61,7 @@ func authenticate(_username: String, _password: String):
 	pass
 
 
-@rpc("call_remote", "authority", "reliable") 
+@rpc("call_remote", "authority", "reliable")
 func client_login_response(succeeded: bool, login_cookie: String):
 	print("Login %s, cookie=%s" % [succeeded, login_cookie])
 	logged_in = succeeded
@@ -69,7 +69,7 @@ func client_login_response(succeeded: bool, login_cookie: String):
 	login.emit(succeeded)
 
 
-@rpc("call_remote", "authority", "reliable") 
+@rpc("call_remote", "authority", "reliable")
 func switch_level_server(level: String, address: String, port: int):
 	print("Switching to level %s on address %s on port %d" % [level, address, port])
 	#Close the current connection
