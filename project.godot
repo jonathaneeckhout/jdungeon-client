@@ -17,7 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PlayersConnection="*res://scripts/playersConnection.gd"
+AuthenticationConnection="*res://scripts/authenticationConnection.gd"
+LevelsConnection="*res://scripts/levelsConnection.gd"
 
 [rendering]
 

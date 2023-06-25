@@ -6,6 +6,7 @@ signal login(status: bool)
 var cert = load("res://data/certs/X509_certificate.crt")
 
 var logged_in = false
+var username = ""
 var cookie = ""
 
 var client = ENetMultiplayerPeer.new()
@@ -73,6 +74,6 @@ func client_login_response(succeeded: bool, login_cookie: String):
 func switch_level_server(level: String, address: String, port: int):
 	print("Switching to level %s on address %s on port %d" % [level, address, port])
 	#Close the current connection
-	client.close()
+	LevelsConnection.disconnect_to_server()
 	#Connect to the new level
-	connect_to_server(address, port)
+	LevelsConnection.connect_to_server(address, port)
