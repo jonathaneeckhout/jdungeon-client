@@ -1,6 +1,9 @@
 extends Node
 
+
 signal login(status: bool)
+signal player_added(character_name: String, pos: Vector2)
+signal player_synced(username: String, pos: Vector2, vel: Vector2)
 
 
 var cert = load("res://data/certs/X509_certificate.crt")
@@ -9,6 +12,7 @@ var logged_in = false
 
 var client = ENetMultiplayerPeer.new()
 var multiplayer_api : MultiplayerAPI = MultiplayerAPI.create_default_interface()
+
 
 func _ready():
 	multiplayer_api.connected_to_server.connect(_on_connection_succeeded)
@@ -71,3 +75,13 @@ func client_login_response(succeeded: bool):
 	print("Login %s" % [succeeded])
 	logged_in = succeeded
 	login.emit(succeeded)
+
+
+@rpc("call_remote", "authority", "reliable")
+func add_player(character_name: String, pos: Vector2):
+	player_added.emit(character_name, pos)
+
+
+@rpc("call_remote", "authority", "unreliable")
+func sync_player(character_name: String, pos: Vector2, vel: Vector2):
+	player_synced.emit(character_name, pos, vel)

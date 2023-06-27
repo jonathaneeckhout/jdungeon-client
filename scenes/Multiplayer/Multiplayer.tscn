@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cau3t6w3kde11"]
+[gd_scene load_steps=4 format=3 uid="uid://cau3t6w3kde11"]
 
 [ext_resource type="PackedScene" uid="uid://cbsaidmhsp2ph" path="res://scenes/LoginPanel/LoginPanel.tscn" id="1_0yetu"]
+[ext_resource type="Script" path="res://scenes/Multiplayer/Multiplayer.gd" id="1_oso30"]
+[ext_resource type="PackedScene" uid="uid://dmdy80i827fn5" path="res://scenes/Level/Level.tscn" id="2_yiimm"]
 
 [node name="Multiplayer" type="Node2D"]
+script = ExtResource("1_oso30")
+
+[node name="Level" parent="." instance=ExtResource("2_yiimm")]
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
