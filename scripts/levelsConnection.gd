@@ -48,7 +48,8 @@ func disconnect_to_server():
 
 func _on_connection_succeeded():
 	print("Connection succeeded")
-	authenticate_with_cookie.rpc_id(1, AuthenticationConnection.username, AuthenticationConnection.cookie)
+	#TODO: currently the character's name is the player's name
+	authenticate_with_cookie.rpc_id(1, AuthenticationConnection.username, AuthenticationConnection.cookie, AuthenticationConnection.username)
 
 
 func _on_server_disconnected():
@@ -60,7 +61,7 @@ func _on_connection_failed():
 
 
 @rpc("call_remote", "any_peer", "reliable")
-func authenticate_with_cookie(_username: String, _cookie: String):
+func authenticate_with_cookie(_username: String, _cookie: String, _character: String):
 	#Placeholder code for client
 	pass
 
