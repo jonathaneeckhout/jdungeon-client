@@ -1,77 +1,101 @@
 extends Node
 
 signal login(status: bool)
+signal connected_to_server
+signal server_disconnected
 
+const URL = "wss://localhost:4433"
 
 var cert = load("res://data/certs/X509_certificate.crt")
-
-var logged_in = false
-var username = ""
 var cookie = ""
+var logged_in = false
+var socket = WebSocketPeer.new()
+var username = ""
+var _connected = false
 
-var client = ENetMultiplayerPeer.new()
-var multiplayer_api : MultiplayerAPI = MultiplayerAPI.create_default_interface()
 
 func _ready():
-	multiplayer_api.connected_to_server.connect(_on_connection_succeeded)
-	multiplayer_api.connection_failed.connect(_on_connection_failed)
-	multiplayer_api.server_disconnected.connect(_on_server_disconnected)
+	set_process(false)
 
 
 func connect_to_server(ip, port):
-	var error = client.create_client(ip, port)
-	if error != OK:
-		print("Error while creating")
+	var err = socket.connect_to_url("wss://%s:%d" % [ip, port], TLSOptions.client_unsafe(cert))
+	if err != OK:
+		print("Unable to connect")
+		set_process(false)
 		return false
 
-	if client.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
-		print("Failed to connect to game")
-		# OS.alert("Failed to start multiplayer client.")
-		return false
-
-	#TODO: Use this function instead of debug function
-	# var client_tls_options = TLSOptions.client(cert)
-	#TODO: Remove next line
-	var client_tls_options = TLSOptions.client_unsafe(cert)
-	error = client.host.dtls_client_setup(ip, client_tls_options)
-	if error != OK:
-		print("Failed to connect via DTLS")
-		return false
-
-	get_tree().set_multiplayer(multiplayer_api, self.get_path()) 
-	multiplayer_api.multiplayer_peer = client
+	set_process(true)
 
 	return true
 
 
-func _on_connection_succeeded():
-	print("Connection succeeded")
+func _process(_delta):
+	socket.poll()
+	var state = socket.get_ready_state()
+	if state == WebSocketPeer.STATE_OPEN:
+		if !_connected:
+			_connected = true
+			_on_connected()
+		while socket.get_available_packet_count():
+			_on_message_received(socket.get_packet().get_string_from_utf8())
+	elif state == WebSocketPeer.STATE_CLOSING:
+		# Keep polling to achieve proper close.
+		pass
+	elif state == WebSocketPeer.STATE_CLOSED:
+		var code = socket.get_close_code()
+		var reason = socket.get_close_reason()
+		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
+		if _connected:
+			_connected = false
+			_on_disconnect()
+		set_process(false)  # Stop processing.
 
 
-func _on_server_disconnected():
-	print("Server disconnected us")
+func _on_connected():
+	print("Websocket connected")
+	connected_to_server.emit()
 
 
-func _on_connection_failed():
-	print("Connection failed")
+func _on_disconnect():
+	print("Websocket disconnected")
+	server_disconnected.emit()
 
 
-@rpc("call_remote", "any_peer", "reliable")
-func authenticate(_username: String, _password: String):
-	#Placeholder code for client
-	pass
+func _on_message_received(message: String):
+	# print("Received message: %s" % message)
+	var res = JSON.parse_string(message)
+
+	if res["error"]:
+		print("Error in message")
+		return
+
+	var data = res["data"]
+
+	match res["type"]:
+		"auth-response":
+			_on_authenticate_response(data["auth"], data["cookie"])
+		"switch-level":
+			_on_switch_level_server(data["level"], data["address"], data["port"])
 
 
-@rpc("call_remote", "authority", "reliable")
-func client_login_response(succeeded: bool, login_cookie: String):
+func authenticate(player_username: String, password: String):
+	username = player_username
+	socket.send_text(
+		JSON.stringify(
+			{"type": "auth", "args": {"username": player_username, "password": str(password).sha256_text()}}
+		)
+	)
+
+
+func _on_authenticate_response(succeeded: bool, login_cookie: String):
 	print("Login %s, cookie=%s" % [succeeded, login_cookie])
 	logged_in = succeeded
 	cookie = login_cookie
 	login.emit(succeeded)
 
 
-@rpc("call_remote", "authority", "reliable")
-func switch_level_server(level: String, address: String, port: int):
+func _on_switch_level_server(level: String, address: String, port: int):
 	print("Switching to level %s on address %s on port %d" % [level, address, port])
 	#Close the current connection
 	LevelsConnection.disconnect_to_server()

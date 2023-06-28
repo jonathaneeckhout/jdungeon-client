@@ -2,9 +2,8 @@ extends Panel
 
 
 func _ready():
-	AuthenticationConnection.multiplayer_api.connected_to_server.connect(_connected_succeeded)
-	AuthenticationConnection.multiplayer_api.connection_failed.connect(_connected_fail)
-	AuthenticationConnection.multiplayer_api.server_disconnected.connect(_server_disconnected)
+	AuthenticationConnection.connected_to_server.connect(_connected_succeeded)
+	AuthenticationConnection.server_disconnected.connect(_server_disconnected)
 
 
 func _on_login_button_pressed():
@@ -22,9 +21,9 @@ func _on_login_button_pressed():
 		print("Failed to connect to server")
 		return false
 
-	await AuthenticationConnection.multiplayer_api.connected_to_server
+	await AuthenticationConnection.connected_to_server
 
-	AuthenticationConnection.authenticate.rpc_id(1, username, password)
+	AuthenticationConnection.authenticate(username, password)
 	AuthenticationConnection.username = username
 	var logged_in = await AuthenticationConnection.login
 	if !logged_in:
@@ -43,9 +42,4 @@ func _connected_succeeded():
 
 func _server_disconnected():
 	$VBoxContainer/ErrorLabel.text = "Disconnected from server"
-	$".".show()
-
-
-func _connected_fail():
-	$VBoxContainer/ErrorLabel.text = "Error conneting server"
 	$".".show()
