@@ -75,8 +75,9 @@ func _on_message_received(message: String):
 	match res["type"]:
 		"auth-response":
 			_on_authenticate_response(data["auth"], data["cookie"])
-		"switch-level":
-			_on_switch_level_server(data["level"], data["address"], data["port"])
+		"load-character-response":
+			print(data)
+			_on_load_character_response(data["level"], data["address"], data["port"])
 
 
 func authenticate(player_username: String, password: String):
@@ -94,8 +95,13 @@ func _on_authenticate_response(succeeded: bool, login_cookie: String):
 	cookie = login_cookie
 	login.emit(succeeded)
 
+	#TODO: open up character selection window, for now load the character with the player's name
+	socket.send_text(
+		JSON.stringify({"type": "load-character", "args": {"username": username, "character": username}})
+	)
 
-func _on_switch_level_server(level: String, address: String, port: int):
+
+func _on_load_character_response(level: String, address: String, port: int):
 	print("Switching to level %s on address %s on port %d" % [level, address, port])
 	#Close the current connection
 	LevelsConnection.disconnect_to_server()
