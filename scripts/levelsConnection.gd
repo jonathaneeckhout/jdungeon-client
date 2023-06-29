@@ -11,13 +11,6 @@ var cert = load("res://data/certs/X509_certificate.crt")
 var logged_in = false
 
 var client = ENetMultiplayerPeer.new()
-var multiplayer_api : MultiplayerAPI = MultiplayerAPI.create_default_interface()
-
-
-func _ready():
-	multiplayer_api.connected_to_server.connect(_on_connection_succeeded)
-	multiplayer_api.connection_failed.connect(_on_connection_failed)
-	multiplayer_api.server_disconnected.connect(_on_server_disconnected)
 
 
 func connect_to_server(ip, port):
@@ -40,8 +33,11 @@ func connect_to_server(ip, port):
 		print("Failed to connect via DTLS")
 		return false
 
-	get_tree().set_multiplayer(multiplayer_api, self.get_path()) 
-	multiplayer_api.multiplayer_peer = client
+	multiplayer.multiplayer_peer = client
+
+	multiplayer.connected_to_server.connect(_on_connection_succeeded)
+	multiplayer.connection_failed.connect(_on_connection_failed)
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 	return true
 
