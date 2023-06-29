@@ -10,8 +10,7 @@ var enemies: Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	LevelsConnection.player_added.connect(_on_player_added)
-	LevelsConnection.player_synced.connect(_on_player_synced)
-
+	
 
 func set_level(level_name: String):
 	var scene
@@ -44,10 +43,3 @@ func add_player(character_name: String, pos: Vector2):
 
 func _on_player_added(character_name: String, pos: Vector2):
 	add_player(character_name, pos)
-
-
-func _on_player_synced(username: String, pos: Vector2, vel: Vector2):
-	var player = players.get_node(username)
-	if player:
-		player.position = pos
-		player.velocity = vel

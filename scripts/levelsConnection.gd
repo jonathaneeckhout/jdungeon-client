@@ -3,7 +3,6 @@ extends Node
 
 signal login(status: bool)
 signal player_added(character_name: String, pos: Vector2)
-signal player_synced(username: String, pos: Vector2, vel: Vector2)
 
 
 var cert = load("res://data/certs/X509_certificate.crt")
@@ -77,7 +76,3 @@ func client_login_response(succeeded: bool):
 func add_player(character_name: String, pos: Vector2):
 	player_added.emit(character_name, pos)
 
-
-@rpc("call_remote", "authority", "unreliable")
-func sync_player(character_name: String, pos: Vector2, vel: Vector2):
-	player_synced.emit(character_name, pos, vel)
