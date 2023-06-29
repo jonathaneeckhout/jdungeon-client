@@ -35,6 +35,7 @@ func set_level(level_name: String):
 
 func add_player(character_name: String, pos: Vector2):
 	var player = player_scene.instantiate()
+	player.player = multiplayer.get_unique_id()
 	player.position = pos
 	player.username = character_name
 	player.name = character_name

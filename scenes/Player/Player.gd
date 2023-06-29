@@ -5,6 +5,11 @@ extends CharacterBody2D
 		username = user
 		$Interface/Username.text = username
 
+# Set by the authority, synchronized on spawn.
+@export var player := 1:
+	set(id):
+		player = id
+
 @export var vel: Vector2
 
 

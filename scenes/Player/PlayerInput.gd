@@ -19,10 +19,10 @@ func interact(target: String):
 		interact_target = $"../../../Enemies".get_node(target)
 
 
-# func _ready():
-# 	# Only process for the local player.
-# 	set_process(get_multiplayer_authority() == multiplayer.get_unique_id())
-# 	set_process_input(get_multiplayer_authority() == multiplayer.get_unique_id())
+func _ready():
+	# Only process for the local player.
+	set_process($"../".player == multiplayer.get_unique_id())
+	set_process_input($"../".player == multiplayer.get_unique_id())
 
 
 func _input(event):
