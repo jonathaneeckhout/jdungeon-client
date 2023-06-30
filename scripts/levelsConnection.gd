@@ -61,7 +61,7 @@ func _on_connection_failed():
 
 @rpc("call_remote", "any_peer", "reliable")
 func authenticate_with_cookie(_username: String, _cookie: String, _character: String):
-	#Placeholder code for client
+	#Placeholder code
 	pass
 
 
@@ -76,3 +76,14 @@ func client_login_response(succeeded: bool):
 func add_player(character_name: String, pos: Vector2):
 	player_added.emit(character_name, pos)
 
+
+@rpc("call_remote", "any_peer", "reliable")
+func move(_pos):
+	#Placeholder code
+	pass
+
+
+@rpc("call_remote", "any_peer", "reliable")
+func interact(_target: String):
+	#Placeholder code
+	pass

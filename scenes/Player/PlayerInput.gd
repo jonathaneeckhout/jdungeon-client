@@ -1,22 +1,4 @@
-extends MultiplayerSynchronizer
-
-@export var moving := false
-@export var move_target := Vector2()
-
-@export var interacting := false
-var interact_target = ""
-
-@rpc("call_local", "any_peer", "reliable")
-func move(position):
-	moving = true
-	move_target = position
-
-
-@rpc("call_local", "any_peer", "reliable")
-func interact(target: String):
-	if $"../../../Enemies".has_node(target):
-		interacting = true
-		interact_target = $"../../../Enemies".get_node(target)
+extends Node2D
 
 
 func _ready():
@@ -35,11 +17,6 @@ func _input(event):
 		_handle_right_click()
 
 
-func reset_inputs():
-	moving = false
-	interacting = false
-
-
 func _handle_right_click():
 	$"../MouseArea2D".set_global_position($"..".get_global_mouse_position())
 
@@ -53,9 +30,9 @@ func _handle_right_click():
 
 	#Move if nothing is under the mouse area
 	if bodies.is_empty():
-		move.rpc($"..".get_global_mouse_position())
+		LevelsConnection.move.rpc($"..".get_global_mouse_position())
 	else:
 		#TODO: not sure if this needs to be improved, just take the first
 		var target = bodies[0]
 		if target != $"../":
-			interact.rpc(target.name)
+			LevelsConnection.interact.rpc(target.name)
