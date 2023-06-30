@@ -10,7 +10,8 @@ var enemies: Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	LevelsConnection.player_added.connect(_on_player_added)
-	
+	LevelsConnection.player_removed.connect(_on_player_removed)
+
 
 func set_level(level_name: String):
 	var scene
@@ -42,5 +43,14 @@ func add_player(character_name: String, pos: Vector2):
 	players.add_child(player)
 
 
+func remove_player(character_name: String):
+	if players.has_node(character_name):
+		players.get_node(character_name).queue_free()
+
+
 func _on_player_added(character_name: String, pos: Vector2):
 	add_player(character_name, pos)
+
+
+func _on_player_removed(character_name: String):
+	remove_player(character_name)

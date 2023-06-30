@@ -3,6 +3,7 @@ extends Node
 
 signal login(status: bool)
 signal player_added(character_name: String, pos: Vector2)
+signal player_removed(character_name: String)
 
 
 var cert = load("res://data/certs/X509_certificate.crt")
@@ -75,6 +76,11 @@ func client_login_response(succeeded: bool):
 @rpc("call_remote", "authority", "reliable")
 func add_player(character_name: String, pos: Vector2):
 	player_added.emit(character_name, pos)
+
+
+@rpc("call_remote", "authority", "reliable")
+func remove_player(character_name: String):
+	player_removed.emit(character_name)
 
 
 @rpc("call_remote", "any_peer", "reliable")
