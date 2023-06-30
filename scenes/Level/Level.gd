@@ -34,9 +34,9 @@ func set_level(level_name: String):
 	return true
 
 
-func add_player(character_name: String, pos: Vector2):
+func add_player(id: int, character_name: String, pos: Vector2):
 	var player = player_scene.instantiate()
-	player.player = multiplayer.get_unique_id()
+	player.player = id
 	player.position = pos
 	player.username = character_name
 	player.name = character_name
@@ -48,8 +48,8 @@ func remove_player(character_name: String):
 		players.get_node(character_name).queue_free()
 
 
-func _on_player_added(character_name: String, pos: Vector2):
-	add_player(character_name, pos)
+func _on_player_added(id: int, character_name: String, pos: Vector2):
+	add_player(id, character_name, pos)
 
 
 func _on_player_removed(character_name: String):

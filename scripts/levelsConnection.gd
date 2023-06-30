@@ -2,7 +2,7 @@ extends Node
 
 
 signal login(status: bool)
-signal player_added(character_name: String, pos: Vector2)
+signal player_added(id: int, character_name: String, pos: Vector2)
 signal player_removed(character_name: String)
 
 
@@ -49,6 +49,7 @@ func disconnect_to_server():
 func _on_connection_succeeded():
 	print("Connection succeeded")
 	#TODO: currently the character's name is the player's name
+	print(multiplayer.get_unique_id())
 	authenticate_with_cookie.rpc_id(1, AuthenticationConnection.username, AuthenticationConnection.cookie, AuthenticationConnection.username)
 
 
@@ -74,8 +75,8 @@ func client_login_response(succeeded: bool):
 
 
 @rpc("call_remote", "authority", "reliable")
-func add_player(character_name: String, pos: Vector2):
-	player_added.emit(character_name, pos)
+func add_player(id: int, character_name: String, pos: Vector2):
+	player_added.emit(id, character_name, pos)
 
 
 @rpc("call_remote", "authority", "reliable")

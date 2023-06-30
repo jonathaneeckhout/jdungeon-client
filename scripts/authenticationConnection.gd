@@ -3,6 +3,7 @@ extends Node
 signal login(status: bool)
 signal connected_to_server
 signal server_disconnected
+signal chat_message_received(type: String, from: String, message:String)
 
 const URL = "wss://localhost:4433"
 
@@ -67,7 +68,7 @@ func _on_message_received(message: String):
 	var res = JSON.parse_string(message)
 
 	if res["error"]:
-		print("Error in message")
+		print("Error in message, reason=[%s]" % res["reason"])
 		return
 
 	var data = res["data"]
@@ -76,8 +77,9 @@ func _on_message_received(message: String):
 		"auth-response":
 			_on_authenticate_response(data["auth"], data["cookie"])
 		"load-character-response":
-			print(data)
 			_on_load_character_response(data["level"], data["address"], data["port"])
+		"chat-message":
+			_on_chat_message(data["type"], data["from"], data["message"])
 
 
 func authenticate(player_username: String, password: String):
@@ -99,6 +101,18 @@ func _on_authenticate_response(succeeded: bool, login_cookie: String):
 	socket.send_text(
 		JSON.stringify({"type": "load-character", "args": {"username": username, "character": username}})
 	)
+
+
+func send_message(type: String, target: String, message: String):
+	socket.send_text(
+		JSON.stringify(
+			{"type": "send-chat-message", "args": {"type": type, "target": target, "message": message}}
+		)
+	)
+
+
+func _on_chat_message(type: String, from: String, message:String):
+	chat_message_received.emit(type, from, message)
 
 
 func _on_load_character_response(level: String, address: String, port: int):

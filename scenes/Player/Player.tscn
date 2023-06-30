@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dq18xjaweyeec"]
+[gd_scene load_steps=9 format=3 uid="uid://dq18xjaweyeec"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.gd" id="1_2682b"]
 [ext_resource type="Script" path="res://scenes/Player/PlayerInput.gd" id="2_3kipm"]
+[ext_resource type="PackedScene" uid="uid://dmf2tmcuq22vg" path="res://scenes/ChatPanel/ChatPanel.tscn" id="2_k42yq"]
 [ext_resource type="Script" path="res://scenes/Player/ServerSynchronizer.gd" id="2_wjiil"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bgovn"]
@@ -37,9 +38,11 @@ shape = SubResource("CircleShape2D_wdacq")
 
 [node name="Interface" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Username" type="Label" parent="Interface"]
 layout_mode = 1
@@ -71,6 +74,18 @@ offset_bottom = -21.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_rn7ha")
 value = 100.0
 metadata/_edit_lock_ = true
+
+[node name="ChatPanel" parent="Interface" instance=ExtResource("2_k42yq")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_left = -543.0
+offset_top = 74.0
+offset_right = -199.0
+offset_bottom = 290.0
+grow_horizontal = 1
+grow_vertical = 0
 
 [node name="ServerSynchronizer" type="Node" parent="."]
 script = ExtResource("2_wjiil")
