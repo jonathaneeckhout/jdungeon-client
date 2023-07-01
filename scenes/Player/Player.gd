@@ -14,10 +14,9 @@ extends CharacterBody2D
 func _ready():
 	if player == multiplayer.get_unique_id():
 		$Camera2D.make_current()
-		$Interface/ChatPanel.user_name = username
-		$Interface/ChatPanel.show()
+		$Camera2D/UILayer/GUI/ChatPanel.user_name = username
+		$Camera2D/UILayer.show()
 	else:
-		$Interface/ChatPanel.queue_free()
 		$Camera2D.queue_free()
 
 
