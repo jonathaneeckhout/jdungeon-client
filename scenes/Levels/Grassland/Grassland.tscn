@@ -3,7 +3,10 @@
 [node name="Grassland" type="Node2D"]
 
 [node name="Players" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="NPCS" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Enemies" type="Node2D" parent="."]
+y_sort_enabled = true
