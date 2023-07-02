@@ -1,12 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://dq18xjaweyeec"]
+[gd_scene load_steps=15 format=3 uid="uid://dq18xjaweyeec"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.gd" id="1_2682b"]
 [ext_resource type="Script" path="res://scenes/Player/PlayerInput.gd" id="2_3kipm"]
 [ext_resource type="PackedScene" uid="uid://dmf2tmcuq22vg" path="res://scenes/ChatPanel/ChatPanel.tscn" id="2_k42yq"]
 [ext_resource type="Script" path="res://scenes/Player/ServerSynchronizer.gd" id="2_wjiil"]
+[ext_resource type="Texture2D" uid="uid://2gshutanpd8q" path="res://assets/thief/thief_backarm.png" id="5_lng8y"]
+[ext_resource type="Texture2D" uid="uid://cbdy1rryd4k3u" path="res://assets/thief/thief_frontleg.png" id="6_oogrb"]
+[ext_resource type="Texture2D" uid="uid://4kodnsyvllv2" path="res://assets/thief/thief_backleg.png" id="7_yor3t"]
+[ext_resource type="Texture2D" uid="uid://bgbdqelcdo8bq" path="res://assets/thief/thief_torso.png" id="8_ilwrp"]
+[ext_resource type="Texture2D" uid="uid://dhh0dtg173bec" path="res://assets/thief/daggerarm.png" id="9_4g30o"]
+[ext_resource type="Texture2D" uid="uid://bsvfq141bedg4" path="res://assets/thief/thief_head.png" id="10_ingiv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bgovn"]
-radius = 16.0
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g87ai"]
 radius = 1.0
@@ -44,6 +50,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_top = -64.0
+offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -109,3 +117,33 @@ offset_right = 390.0
 offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 0
+
+[node name="Sprites" type="Node2D" parent="."]
+position = Vector2(0, -24)
+scale = Vector2(0.1, 0.1)
+
+[node name="ThiefBackarm" type="Sprite2D" parent="Sprites"]
+position = Vector2(-160, 80)
+texture = ExtResource("5_lng8y")
+
+[node name="ThiefFrontleg" type="Sprite2D" parent="Sprites"]
+position = Vector2(160, 320)
+texture = ExtResource("6_oogrb")
+
+[node name="ThiefBackleg" type="Sprite2D" parent="Sprites"]
+position = Vector2(-160, 320)
+texture = ExtResource("7_yor3t")
+
+[node name="ThiefTorso" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, 80)
+texture = ExtResource("8_ilwrp")
+
+[node name="Daggerarm" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, 80)
+scale = Vector2(1, 1)
+texture = ExtResource("9_4g30o")
+
+[node name="ThiefHead" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, -320)
+scale = Vector2(1, 1)
+texture = ExtResource("10_ingiv")
