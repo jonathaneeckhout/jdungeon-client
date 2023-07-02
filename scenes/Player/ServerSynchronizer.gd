@@ -6,3 +6,8 @@ extends Node2D
 func sync(pos, vel):
 	player.position = pos
 	player.velocity = vel
+
+
+@rpc("call_remote", "authority", "reliable")
+func hurt(current_hp: int, amount: int):
+	player.hurt(current_hp, amount)

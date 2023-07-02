@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+const MAX_HP = 100.0
+
+
 @export var username := "":
 	set(user):
 		username = user
@@ -9,6 +12,9 @@ extends CharacterBody2D
 @export var player := 1:
 	set(id):
 		player = id
+
+
+var hp = MAX_HP
 
 
 func _ready():
@@ -22,3 +28,12 @@ func _ready():
 
 func _process(_delta):
 	move_and_slide()
+
+func hurt(current_hp: int, _damage: int):
+	hp = current_hp
+
+	update_hp_bar()
+
+
+func update_hp_bar():
+	$Interface/HPBar.value = (hp / MAX_HP) * 100
