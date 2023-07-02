@@ -38,24 +38,27 @@ shape = SubResource("CircleShape2D_wdacq")
 
 [node name="Interface" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
 [node name="Username" type="Label" parent="Interface"]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -100.0
-offset_right = -1.0
-offset_bottom = -74.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = -80.0
+offset_right = 48.0
+offset_bottom = -54.0
 grow_horizontal = 2
-grow_vertical = 2
+text = "Testname"
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="Interface"]
@@ -75,7 +78,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_rn7ha")
 value = 100.0
 metadata/_edit_lock_ = true
 
-[node name="ServerSynchronizer" type="Node" parent="."]
+[node name="ServerSynchronizer" type="Node2D" parent="."]
 script = ExtResource("2_wjiil")
 
 [node name="PlayerInput" type="Node2D" parent="."]

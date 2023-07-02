@@ -4,6 +4,8 @@ extends Node
 signal login(status: bool)
 signal player_added(id: int, character_name: String, pos: Vector2)
 signal player_removed(character_name: String)
+signal enemy_added(enemy_name: String, pos: Vector2)
+signal enemy_removed(enemy_name: String)
 
 
 var cert = load("res://data/certs/X509_certificate.crt")
@@ -94,3 +96,13 @@ func move(_pos):
 func interact(_target: String):
 	#Placeholder code
 	pass
+
+
+@rpc("call_remote", "authority", "reliable")
+func add_enemy(enemy_name: String, pos: Vector2):
+	enemy_added.emit(enemy_name, pos)
+
+
+@rpc("call_remote", "authority", "reliable")
+func remove_enemy(enemy_name: String):
+	enemy_removed.emit(enemy_name)
