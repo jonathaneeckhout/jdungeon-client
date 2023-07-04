@@ -5,9 +5,11 @@ signal connected_to_server
 signal server_disconnected
 signal chat_message_received(type: String, from: String, message:String)
 
-const URL = "wss://localhost:4433"
+var auth_request = preload("res://scripts/requests/authRequest.gd")
 
-var cert = load("res://data/certs/X509_certificate.crt")
+
+const URL = "wss://localhost:3001"
+
 var cookie = ""
 var logged_in = false
 var socket = WebSocketPeer.new()
@@ -20,7 +22,8 @@ func _ready():
 
 
 func connect_to_server(ip, port):
-	var err = socket.connect_to_url("wss://%s:%d" % [ip, port], TLSOptions.client_unsafe(cert))
+	socket.handshake_headers = ["cookie: %s" % cookie]
+	var err = socket.connect_to_url("wss://%s:%d" % [ip, port], TLSOptions.client_unsafe())
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)
@@ -74,8 +77,6 @@ func _on_message_received(message: String):
 	var data = res["data"]
 
 	match res["type"]:
-		"auth-response":
-			_on_authenticate_response(data["auth"], data["cookie"])
 		"load-character-response":
 			_on_load_character_response(data["level"], data["address"], data["port"])
 		"chat-message":
@@ -83,20 +84,20 @@ func _on_message_received(message: String):
 
 
 func authenticate(player_username: String, password: String):
-	username = player_username
-	socket.send_text(
-		JSON.stringify(
-			{"type": "auth", "args": {"username": player_username, "password": str(password).sha256_text()}}
-		)
-	)
+	var new_req = auth_request.new()
+	add_child(new_req)
+	var res = await new_req.authenticate(player_username, str(password).sha256_text())
+	new_req.queue_free()
+	if res["response"]:
+		logged_in = true
+		username = player_username
+		cookie = res["cookie"]
+	
+	login.emit(res["response"])
+	return res["response"]
 
 
-func _on_authenticate_response(succeeded: bool, login_cookie: String):
-	print("Login %s, cookie=%s" % [succeeded, login_cookie])
-	logged_in = succeeded
-	cookie = login_cookie
-	login.emit(succeeded)
-
+func load_character():
 	#TODO: open up character selection window, for now load the character with the player's name
 	socket.send_text(
 		JSON.stringify({"type": "load-character", "args": {"username": username, "character": username}})

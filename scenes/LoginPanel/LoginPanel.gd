@@ -16,22 +16,24 @@ func _on_login_button_pressed():
 		$VBoxContainer/ErrorLabel.text = "Invalid username or password"
 		return false
 
-	if !AuthenticationConnection.connect_to_server(ip, port):
-		$VBoxContainer/ErrorLabel.text = "Error conneting server"
-		print("Failed to connect to server")
-		return false
-
-	await AuthenticationConnection.connected_to_server
-
-	AuthenticationConnection.authenticate(username, password)
-	AuthenticationConnection.username = username
-	var logged_in = await AuthenticationConnection.login
+	var logged_in = await AuthenticationConnection.authenticate(username, password)
 	if !logged_in:
 		$VBoxContainer/ErrorLabel.text = "Login failed"
 		print("Failed logging in to server")
 		return false
 
+	print("Successfully logged into server")
+
+	if !AuthenticationConnection.connect_to_server(ip, 3001):
+		$VBoxContainer/ErrorLabel.text = "Error conneting server"
+		print("Failed to connect to server")
+		return false
+
 	$"../".hide()
+
+	await AuthenticationConnection.connected_to_server
+
+	AuthenticationConnection.load_character()
 
 	return true
 

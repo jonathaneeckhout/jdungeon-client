@@ -29,7 +29,7 @@ func connect_to_server(ip, port):
 	#TODO: Use this function instead of debug function
 	# var client_tls_options = TLSOptions.client(cert)
 	#TODO: Remove next line
-	var client_tls_options = TLSOptions.client_unsafe(cert)
+	var client_tls_options = TLSOptions.client_unsafe()
 	error = client.host.dtls_client_setup(ip, client_tls_options)
 	if error != OK:
 		print("Failed to connect via DTLS")
