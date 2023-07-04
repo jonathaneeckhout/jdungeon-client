@@ -1,7 +1,7 @@
 extends Node
 
 const HEADERS = ["Content-Type: application/json"]
-const AUTHENTICATION_SERVER = "https://localhost:3001/login"
+const AUTHENTICATION_SERVER = "https://localhost:3001/login/player"
 
 @onready var http_request = HTTPRequest.new()
 
