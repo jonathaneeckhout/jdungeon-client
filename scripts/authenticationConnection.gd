@@ -11,6 +11,7 @@ var auth_request = preload("res://scripts/requests/authRequest.gd")
 const URL = "wss://localhost:3001"
 
 var cookie = ""
+var secret = ""
 var logged_in = false
 var socket = WebSocketPeer.new()
 var username = ""
@@ -92,6 +93,7 @@ func authenticate(player_username: String, password: String):
 		logged_in = true
 		username = player_username
 		cookie = res["cookie"]
+		secret = res["secret"]
 	
 	login.emit(res["response"])
 	return res["response"]

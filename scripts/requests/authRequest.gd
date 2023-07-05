@@ -1,7 +1,7 @@
 extends Node
 
 const HEADERS = ["Content-Type: application/json"]
-const AUTHENTICATION_SERVER = "https://localhost:3001/login/player"
+const AUTHENTICATION_SERVER = "https://localhost:3000/login/player"
 
 @onready var http_request = HTTPRequest.new()
 
@@ -37,12 +37,12 @@ func authenticate(username: String, password: String):
 # Called when the HTTP request is completed.
 func _http_request_completed(result, response_code, headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
-		auth_response.emit({"response": false, "cookie": ""})
+		auth_response.emit({"response": false, "cookie": "", "secret": ""})
 		return
 
 	if response_code != 200:
 		print("Error in response")
-		auth_response.emit({"response": false, "cookie": ""})
+		auth_response.emit({"response": false, "cookie": "", "secret": ""})
 		return
 
 	var json = JSON.new()
@@ -50,7 +50,7 @@ func _http_request_completed(result, response_code, headers, body):
 	var response = json.get_data()
 
 	if !response.has("error") or response["error"] or !response.has("data"):
-		auth_response.emit({"response": false, "cookie": ""})
+		auth_response.emit({"response": false, "cookie": "", "secret": ""})
 		return
 
 	var regex = RegEx.new()
@@ -60,7 +60,7 @@ func _http_request_completed(result, response_code, headers, body):
 	for val in headers:
 		var res = regex.search(val)
 		if res:
-			auth_response.emit({"response":response["data"]["auth"], "cookie":res.get_string(1)})
+			auth_response.emit({"response":response["data"]["auth"], "cookie":res.get_string(1), "secret": response["data"]["secret"]})
 			return
 
-	auth_response.emit({"response": false, "cookie": ""})
+	auth_response.emit({"response": false, "cookie": "", "secret": ""})

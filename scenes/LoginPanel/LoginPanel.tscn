@@ -42,7 +42,7 @@ horizontal_alignment = 1
 
 [node name="ServerPortText" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
-text = "4433"
+text = "3000"
 alignment = 1
 expand_to_text_length = true
 

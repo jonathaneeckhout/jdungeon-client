@@ -8,8 +8,6 @@ signal enemy_added(enemy_name: String, pos: Vector2)
 signal enemy_removed(enemy_name: String)
 
 
-var cert = load("res://data/certs/X509_certificate.crt")
-
 var logged_in = false
 
 var client = ENetMultiplayerPeer.new()
@@ -52,7 +50,7 @@ func _on_connection_succeeded():
 	print("Connection succeeded")
 	#TODO: currently the character's name is the player's name
 	print(multiplayer.get_unique_id())
-	authenticate_with_cookie.rpc_id(1, AuthenticationConnection.username, AuthenticationConnection.cookie, AuthenticationConnection.username)
+	authenticate_with_secret.rpc_id(1, AuthenticationConnection.username, AuthenticationConnection.secret, AuthenticationConnection.username)
 
 
 func _on_server_disconnected():
@@ -64,7 +62,7 @@ func _on_connection_failed():
 
 
 @rpc("call_remote", "any_peer", "reliable")
-func authenticate_with_cookie(_username: String, _cookie: String, _character: String):
+func authenticate_with_secret(_username: String, _secret: String, _character: String):
 	#Placeholder code
 	pass
 

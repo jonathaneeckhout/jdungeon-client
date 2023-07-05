@@ -24,7 +24,7 @@ func _on_login_button_pressed():
 
 	print("Successfully logged into server")
 
-	if !AuthenticationConnection.connect_to_server(ip, 3001):
+	if !AuthenticationConnection.connect_to_server(ip, port):
 		$VBoxContainer/ErrorLabel.text = "Error conneting server"
 		print("Failed to connect to server")
 		return false
