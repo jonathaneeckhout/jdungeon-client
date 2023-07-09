@@ -15,7 +15,7 @@ var user_name = "player"
 func _ready():
 	input_field.text_submitted.connect(_on_text_submitted)
 	change_group("Global")
-	AuthenticationConnection.chat_message_received.connect(_on_message)
+	CommonConnection.chat_message_received.connect(_on_message)
 
 
 func _input(event):
@@ -79,7 +79,7 @@ func _on_text_submitted(text):
 	if text != "":
 		match current_group:
 			"Global":
-				AuthenticationConnection.send_message("Global", "", text)
+				CommonConnection.send_message("Global", "", text)
 			_:
 				#TODO: implement other cases
 				append_chat_line_escaped(user_name, text, GROUPS[current_group]["color"])

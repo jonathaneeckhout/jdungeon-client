@@ -1,7 +1,10 @@
 extends Node
 
+@onready var debug = Env.get_value("DEBUG")
+@onready var common_server_address = Env.get_value("COMMON_SERVER_ADDRESS")
+@onready var url = "%s/login/player" % common_server_address
+
 const HEADERS = ["Content-Type: application/json"]
-const AUTHENTICATION_SERVER = "https://localhost:3000/login/player"
 
 @onready var http_request = HTTPRequest.new()
 
@@ -10,10 +13,12 @@ signal auth_response(response)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#TODO: Use this function instead of debug function
-	# var client_tls_options = TLSOptions.client()
-	#TODO: Remove next line
-	var client_tls_options = TLSOptions.client_unsafe()
+	var client_tls_options: TLSOptions
+
+	if debug =="true":
+		client_tls_options = TLSOptions.client_unsafe()
+	else:
+		client_tls_options = TLSOptions.client()
 
 	http_request.set_tls_options(client_tls_options)
 
@@ -24,10 +29,10 @@ func _ready():
 func authenticate(username: String, password: String):
 	var body = JSON.stringify({"username": username, "password": password})
 
-	var error = http_request.request(AUTHENTICATION_SERVER, HEADERS, HTTPClient.METHOD_POST, body)
+	var error = http_request.request(url, HEADERS, HTTPClient.METHOD_POST, body)
 	if error != OK:
 		print("An error occurred in the HTTP request.")
-		return false
+		return {"response": false, "cookie": "", "secret": ""}
 	else:
 		var response = await auth_response
 

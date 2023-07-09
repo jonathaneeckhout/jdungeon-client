@@ -1,9 +1,24 @@
 extends Panel
 
+@onready var server_address = Env.get_value("COMMON_SERVER_HOST")
+@onready var server_port = Env.get_value("COMMON_SERVER_PORT")
+@onready var debug_username = Env.get_value("DEBUG_USERNAME")
+@onready var debug_password = Env.get_value("DEBUG_PASSWORD")
+
 
 func _ready():
-	AuthenticationConnection.connected_to_server.connect(_connected_succeeded)
-	AuthenticationConnection.server_disconnected.connect(_server_disconnected)
+	$VBoxContainer/ServerAddressText.text = server_address
+	$VBoxContainer/ServerPortText.text = server_port
+
+	if debug_username:
+		$VBoxContainer/UsernameText.text = debug_username
+
+	if debug_password:
+		$VBoxContainer/PasswordText.text = debug_password
+
+
+	CommonConnection.connected_to_server.connect(_connected_succeeded)
+	CommonConnection.server_disconnected.connect(_server_disconnected)
 
 
 func _on_login_button_pressed():
@@ -16,7 +31,7 @@ func _on_login_button_pressed():
 		$VBoxContainer/ErrorLabel.text = "Invalid username or password"
 		return false
 
-	var logged_in = await AuthenticationConnection.authenticate(username, password)
+	var logged_in = await CommonConnection.authenticate(username, password)
 	if !logged_in:
 		$VBoxContainer/ErrorLabel.text = "Login failed"
 		print("Failed logging in to server")
@@ -24,16 +39,16 @@ func _on_login_button_pressed():
 
 	print("Successfully logged into server")
 
-	if !AuthenticationConnection.connect_to_server(ip, port):
+	if !CommonConnection.connect_to_server(ip, port):
 		$VBoxContainer/ErrorLabel.text = "Error conneting server"
 		print("Failed to connect to server")
 		return false
 
 	$"../".hide()
 
-	await AuthenticationConnection.connected_to_server
+	await CommonConnection.connected_to_server
 
-	AuthenticationConnection.load_character()
+	CommonConnection.load_character()
 
 	return true
 

@@ -1,5 +1,6 @@
 extends Node
 
+@onready var debug = Env.get_value("DEBUG")
 
 signal login(status: bool)
 signal player_added(id: int, character_name: String, pos: Vector2)
@@ -24,10 +25,13 @@ func connect_to_server(ip, port):
 		# OS.alert("Failed to start multiplayer client.")
 		return false
 
-	#TODO: Use this function instead of debug function
-	# var client_tls_options = TLSOptions.client(cert)
-	#TODO: Remove next line
-	var client_tls_options = TLSOptions.client_unsafe()
+	var client_tls_options: TLSOptions
+
+	if debug =="true":
+		client_tls_options = TLSOptions.client_unsafe()
+	else:
+		client_tls_options = TLSOptions.client()
+
 	error = client.host.dtls_client_setup(ip, client_tls_options)
 	if error != OK:
 		print("Failed to connect via DTLS")
@@ -49,8 +53,10 @@ func disconnect_to_server():
 func _on_connection_succeeded():
 	print("Connection succeeded")
 	#TODO: currently the character's name is the player's name
-	print(multiplayer.get_unique_id())
-	authenticate_with_secret.rpc_id(1, AuthenticationConnection.username, AuthenticationConnection.secret, AuthenticationConnection.username)
+	#TODO: figure out why this delay is needed
+	await get_tree().create_timer(1).timeout
+
+	authenticate_with_secret.rpc_id(1, CommonConnection.username, CommonConnection.secret, CommonConnection.username)
 
 
 func _on_server_disconnected():

@@ -1,5 +1,7 @@
 extends Node
 
+@onready var debug = Env.get_value("DEBUG")
+
 signal login(status: bool)
 signal connected_to_server
 signal server_disconnected
@@ -7,8 +9,6 @@ signal chat_message_received(type: String, from: String, message:String)
 
 var auth_request = preload("res://scripts/requests/authRequest.gd")
 
-
-const URL = "wss://localhost:3001"
 
 var cookie = ""
 var secret = ""
@@ -24,7 +24,15 @@ func _ready():
 
 func connect_to_server(ip, port):
 	socket.handshake_headers = ["cookie: %s" % cookie]
-	var err = socket.connect_to_url("wss://%s:%d" % [ip, port], TLSOptions.client_unsafe())
+
+	var client_tls_options: TLSOptions
+
+	if debug =="true":
+		client_tls_options = TLSOptions.client_unsafe()
+	else:
+		client_tls_options = TLSOptions.client()
+
+	var err = socket.connect_to_url("wss://%s:%d" % [ip, port], client_tls_options)
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)

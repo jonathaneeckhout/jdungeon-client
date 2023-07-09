@@ -31,7 +31,6 @@ horizontal_alignment = 1
 
 [node name="ServerAddressText" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
-text = "127.0.0.1"
 alignment = 1
 expand_to_text_length = true
 
@@ -42,7 +41,6 @@ horizontal_alignment = 1
 
 [node name="ServerPortText" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
-text = "3000"
 alignment = 1
 expand_to_text_length = true
 
@@ -53,7 +51,6 @@ horizontal_alignment = 1
 
 [node name="UsernameText" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
-text = "testplayer"
 placeholder_text = "Enter username"
 alignment = 1
 expand_to_text_length = true
@@ -65,7 +62,6 @@ horizontal_alignment = 1
 
 [node name="PasswordText" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
-text = "testpassword"
 placeholder_text = "Enter password"
 alignment = 1
 secret = true
