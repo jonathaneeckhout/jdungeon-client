@@ -1,0 +1,40 @@
+name: build latest
+on: [push]
+
+env:
+  GODOT_VERSION: "4.1"
+  EXPORT_NAME: Jdungeon-client
+  PROJECT_PATH: ./
+
+jobs:
+  build:
+    name: Linux Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Linux Build
+        run: |
+          mkdir -v -p build/linux
+          cd $PROJECT_PATH
+          godot -v --headless --export-release "Linux/X11" build/linux/$EXPORT_NAME.x86_64
+      - name: Add config
+        run: |
+          touch build/linux/.env
+          echo "DEBUG=false" >> build/linux/.env
+          echo "COMMON_SERVER_ADDRESS=${{ vars.COMMON_SERVER_ADDRESS }}" >> build/linux/.env
+          echo "COMMON_SERVER_HOST=${{ vars.COMMON_SERVER_HOST }}" >> build/linux/.env
+          echo "COMMON_SERVER_PORT=${{ vars.COMMON_SERVER_PORT }}" >> build/linux/.env
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: linux
+          path: build/linux
