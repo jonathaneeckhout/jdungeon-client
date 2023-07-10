@@ -16,7 +16,6 @@ func _ready():
 	if debug_password:
 		$VBoxContainer/PasswordText.text = debug_password
 
-
 	CommonConnection.connected_to_server.connect(_connected_succeeded)
 	CommonConnection.server_disconnected.connect(_server_disconnected)
 

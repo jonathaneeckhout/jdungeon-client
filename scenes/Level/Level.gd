@@ -1,12 +1,13 @@
 extends Node2D
 
-@onready var player_scene = load("res://scenes/Player/Player.tscn")
-@onready var wolf_scene = load("res://scenes/Enemies/Wolf/Wolf.tscn")
-
 var level: String = ""
 var players: Node2D
 var npcs: Node2D
 var enemies: Node2D
+
+@onready var player_scene = load("res://scenes/Player/Player.tscn")
+@onready var wolf_scene = load("res://scenes/Enemies/Wolf/Wolf.tscn")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -69,6 +70,7 @@ func _on_player_added(id: int, character_name: String, pos: Vector2):
 
 func _on_player_removed(character_name: String):
 	remove_player(character_name)
+
 
 func _on_enemy_added(enemy_name: String, pos: Vector2):
 	add_enemy(enemy_name, pos)

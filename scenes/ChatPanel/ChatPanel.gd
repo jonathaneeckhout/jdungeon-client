@@ -89,7 +89,7 @@ func _on_text_submitted(text):
 		input_field.release_focus()
 
 
-func _on_message(type: String, from: String, message:String):
+func _on_message(type: String, from: String, message: String):
 	match type:
 		"Global":
 			append_chat_line_escaped(from, message, GROUPS["Global"]["color"])

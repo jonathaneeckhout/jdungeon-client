@@ -4,7 +4,8 @@ const MAX_HP = 100.0
 
 var hp = MAX_HP
 
-func _physics_process(delta):
+
+func _physics_process(_delta):
 	move_and_slide()
 
 

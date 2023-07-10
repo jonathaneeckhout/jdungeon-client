@@ -1,21 +1,19 @@
 extends Node
 
-@onready var debug = Env.get_value("DEBUG")
-
 signal login(status: bool)
 signal connected_to_server
 signal server_disconnected
-signal chat_message_received(type: String, from: String, message:String)
+signal chat_message_received(type: String, from: String, message: String)
 
 var auth_request = preload("res://scripts/requests/authRequest.gd")
-
-
 var cookie = ""
-var secret = ""
 var logged_in = false
+var secret = ""
 var socket = WebSocketPeer.new()
 var username = ""
 var _connected = false
+
+@onready var debug = Env.get_value("DEBUG")
 
 
 func _ready():
@@ -27,7 +25,7 @@ func connect_to_server(ip, port):
 
 	var client_tls_options: TLSOptions
 
-	if debug =="true":
+	if debug == "true":
 		client_tls_options = TLSOptions.client_unsafe()
 	else:
 		client_tls_options = TLSOptions.client()
@@ -102,7 +100,7 @@ func authenticate(player_username: String, password: String):
 		username = player_username
 		cookie = res["cookie"]
 		secret = res["secret"]
-	
+
 	login.emit(res["response"])
 	return res["response"]
 
@@ -110,19 +108,24 @@ func authenticate(player_username: String, password: String):
 func load_character():
 	#TODO: open up character selection window, for now load the character with the player's name
 	socket.send_text(
-		JSON.stringify({"type": "load-character", "args": {"username": username, "character": username}})
+		JSON.stringify(
+			{"type": "load-character", "args": {"username": username, "character": username}}
+		)
 	)
 
 
 func send_message(type: String, target: String, message: String):
 	socket.send_text(
 		JSON.stringify(
-			{"type": "send-chat-message", "args": {"type": type, "target": target, "message": message}}
+			{
+				"type": "send-chat-message",
+				"args": {"type": type, "target": target, "message": message}
+			}
 		)
 	)
 
 
-func _on_chat_message(type: String, from: String, message:String):
+func _on_chat_message(type: String, from: String, message: String):
 	chat_message_received.emit(type, from, message)
 
 
