@@ -1,15 +1,12 @@
 extends Panel
 
 @onready var server_address = Env.get_value("COMMON_SERVER_HOST")
-@onready var server_port = Env.get_value("COMMON_SERVER_PORT")
+@onready var server_port = int(Env.get_value("COMMON_SERVER_PORT"))
 @onready var debug_username = Env.get_value("DEBUG_USERNAME")
 @onready var debug_password = Env.get_value("DEBUG_PASSWORD")
 
 
 func _ready():
-	$VBoxContainer/ServerAddressText.text = server_address
-	$VBoxContainer/ServerPortText.text = server_port
-
 	if debug_username:
 		$VBoxContainer/UsernameText.text = debug_username
 
@@ -21,8 +18,6 @@ func _ready():
 
 
 func _on_login_button_pressed():
-	var ip = $VBoxContainer/ServerAddressText.text
-	var port = int($VBoxContainer/ServerPortText.text)
 	var username = $VBoxContainer/UsernameText.text
 	var password = $VBoxContainer/PasswordText.text
 
@@ -38,7 +33,7 @@ func _on_login_button_pressed():
 
 	print("Successfully logged into server")
 
-	if !CommonConnection.connect_to_server(ip, port):
+	if !CommonConnection.connect_to_server(server_address, server_port):
 		$VBoxContainer/ErrorLabel.text = "Error conneting server"
 		print("Failed to connect to server")
 		return false

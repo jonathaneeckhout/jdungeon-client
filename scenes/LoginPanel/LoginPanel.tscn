@@ -11,7 +11,6 @@ anchor_bottom = 0.5
 offset_left = -128.0
 offset_top = -256.0
 offset_right = 128.0
-offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_50sjr")
@@ -26,23 +25,8 @@ grow_vertical = 2
 
 [node name="ServerAddressLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Server:"
+text = "Welcome to Jdungeon"
 horizontal_alignment = 1
-
-[node name="ServerAddressText" type="LineEdit" parent="VBoxContainer"]
-layout_mode = 2
-alignment = 1
-expand_to_text_length = true
-
-[node name="ServerPortLabel" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Port:"
-horizontal_alignment = 1
-
-[node name="ServerPortText" type="LineEdit" parent="VBoxContainer"]
-layout_mode = 2
-alignment = 1
-expand_to_text_length = true
 
 [node name="UsernameLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2

@@ -21,3 +21,5 @@ grow_vertical = 2
 
 [node name="LoginPanel" parent="UI" instance=ExtResource("1_0yetu")]
 layout_mode = 1
+offset_top = -128.0
+offset_bottom = 128.0
