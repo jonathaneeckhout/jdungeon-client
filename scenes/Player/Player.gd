@@ -17,6 +17,7 @@ var hp = MAX_HP
 
 @onready var target_position = position
 
+
 func _ready():
 	if player == multiplayer.get_unique_id():
 		$Camera2D.make_current()
@@ -24,12 +25,6 @@ func _ready():
 		$Camera2D/UILayer.show()
 	else:
 		$Camera2D.queue_free()
-
-
-func _process(_delta):
-	velocity = position.direction_to(target_position) * SPEED
-	if position.distance_to(target_position) > 10:
-		move_and_slide()
 
 
 func hurt(current_hp: int, _damage: int):

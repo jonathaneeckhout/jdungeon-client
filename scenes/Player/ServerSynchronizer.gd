@@ -1,6 +1,6 @@
 extends Node2D
 
-const INTERPOLATION_OFFSET = 100
+const INTERPOLATION_OFFSET = 0.1
 
 var last_sync_timestamp = 0.0
 var server_syncs_buffer = []
@@ -9,22 +9,22 @@ var server_syncs_buffer = []
 
 
 func _process(_delta):
-	var render_time = Time.get_unix_time_from_system()
+	var render_time = Time.get_unix_time_from_system() - INTERPOLATION_OFFSET
+
+	while server_syncs_buffer.size() > 2 and render_time > server_syncs_buffer[1]["timestamp"]:
+		server_syncs_buffer.remove_at(0)
 
 	if server_syncs_buffer.size() > 1:
-		while server_syncs_buffer.size() > 2 and render_time > server_syncs_buffer[1]["timestamp"]:
-			server_syncs_buffer.remove_at(0)
-
 		var interpolation_factor = (
 			float(render_time - server_syncs_buffer[0]["timestamp"])
 			/ float(server_syncs_buffer[1]["timestamp"] - server_syncs_buffer[0]["timestamp"])
 		)
 
 		var new_position = server_syncs_buffer[0]["position"].lerp(
-			server_syncs_buffer[0]["position"], interpolation_factor
+			server_syncs_buffer[1]["position"], interpolation_factor
 		)
 
-		player.target_position = new_position
+		player.position = new_position
 
 
 @rpc("call_remote", "authority", "unreliable") func sync(timestamp: float, pos: Vector2):

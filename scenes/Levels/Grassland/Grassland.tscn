@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://us65dkj5bnp1"]
 
 [node name="Grassland" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Players" type="Node2D" parent="."]
 y_sort_enabled = true
