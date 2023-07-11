@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/Player/Player.gd" id="1_2682b"]
 [ext_resource type="Script" path="res://scenes/Player/PlayerInput.gd" id="2_3kipm"]
 [ext_resource type="PackedScene" uid="uid://dmf2tmcuq22vg" path="res://scenes/ChatPanel/ChatPanel.tscn" id="2_k42yq"]
-[ext_resource type="Script" path="res://scenes/Player/ServerSynchronizer.gd" id="2_wjiil"]
+[ext_resource type="Script" path="res://scripts/ServerSynchronizer.gd" id="2_n7vm0"]
 [ext_resource type="Texture2D" uid="uid://2gshutanpd8q" path="res://assets/thief/thief_backarm.png" id="5_lng8y"]
 [ext_resource type="Texture2D" uid="uid://cbdy1rryd4k3u" path="res://assets/thief/thief_frontleg.png" id="6_oogrb"]
 [ext_resource type="Texture2D" uid="uid://4kodnsyvllv2" path="res://assets/thief/thief_backleg.png" id="7_yor3t"]
@@ -88,7 +88,7 @@ value = 100.0
 metadata/_edit_lock_ = true
 
 [node name="ServerSynchronizer" type="Node2D" parent="."]
-script = ExtResource("2_wjiil")
+script = ExtResource("2_n7vm0")
 
 [node name="PlayerInput" type="Node2D" parent="."]
 script = ExtResource("2_3kipm")
