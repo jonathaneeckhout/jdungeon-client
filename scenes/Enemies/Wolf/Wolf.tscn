@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxkvjfrkfutv1"]
+[gd_scene load_steps=7 format=3 uid="uid://cxkvjfrkfutv1"]
 
 [ext_resource type="Script" path="res://scenes/Enemies/Wolf/Wolf.gd" id="1_h5ig6"]
 [ext_resource type="Script" path="res://scenes/Enemies/Wolf/ServerSynchronizer.gd" id="1_wkp03"]
+[ext_resource type="Texture2D" uid="uid://bunbwl1emyrap" path="res://assets/wolf/wolf.png" id="2_3cl6q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vau8a"]
 radius = 32.0
@@ -17,6 +18,13 @@ script = ExtResource("1_h5ig6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vau8a")
+
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2(0.1, 0.1)
+
+[node name="Sheep" type="Sprite2D" parent="Sprites"]
+position = Vector2(1, 0)
+texture = ExtResource("2_3cl6q")
 
 [node name="Interface" type="Control" parent="."]
 layout_mode = 3
@@ -36,14 +44,15 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.0
-offset_top = -80.0
+offset_top = -88.0
 offset_right = 48.0
-offset_bottom = -54.0
+offset_bottom = -62.0
 grow_horizontal = 2
 text = "Wolf"
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="Interface"]
+visible = false
 layout_mode = 0
 offset_left = -16.0
 offset_top = -16.0
@@ -54,12 +63,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ehtts")
 [node name="HPBar" type="ProgressBar" parent="Interface"]
 layout_mode = 0
 offset_left = -32.0
-offset_top = -48.0
+offset_top = -64.0
 offset_right = 32.0
-offset_bottom = -21.0
+offset_bottom = -37.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_fn543")
 value = 100.0
-metadata/_edit_lock_ = true
 
 [node name="ServerSynchronizer" type="Node2D" parent="."]
 script = ExtResource("1_wkp03")

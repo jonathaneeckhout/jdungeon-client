@@ -140,10 +140,8 @@ texture = ExtResource("8_ilwrp")
 
 [node name="Daggerarm" type="Sprite2D" parent="Sprites"]
 position = Vector2(0, 80)
-scale = Vector2(1, 1)
 texture = ExtResource("9_4g30o")
 
 [node name="ThiefHead" type="Sprite2D" parent="Sprites"]
 position = Vector2(0, -320)
-scale = Vector2(1, 1)
 texture = ExtResource("10_ingiv")

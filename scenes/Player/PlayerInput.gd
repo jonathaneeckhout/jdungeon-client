@@ -1,7 +1,10 @@
 extends Node2D
 
+var input_sequence = 0
+
 @onready var player = $"../"
 @onready var mouse_area = $"../MouseArea2D"
+
 
 func _ready():
 	# Only process for the local player.
@@ -34,9 +37,11 @@ func _handle_right_click():
 	if bodies.is_empty():
 		var target_position = player.get_global_mouse_position()
 		player.target_position = target_position
-		LevelsConnection.move.rpc(target_position)
+		input_sequence += 1
+		LevelsConnection.move.rpc(input_sequence, target_position)
 	else:
 		#TODO: not sure if this needs to be improved, just take the first
 		var target = bodies[0]
 		if target != player:
-			LevelsConnection.interact.rpc(target.name)
+			input_sequence += 1
+			LevelsConnection.interact.rpc(input_sequence, target.name)

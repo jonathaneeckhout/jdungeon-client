@@ -89,12 +89,12 @@ func add_player(id: int, character_name: String, pos: Vector2):
 	player_removed.emit(character_name)
 
 
-@rpc("call_remote", "any_peer", "reliable") func move(_pos):
+@rpc("call_remote", "any_peer", "reliable") func move(_input_sequence: int, _pos: Vector2):
 	#Placeholder code
 	pass
 
 
-@rpc("call_remote", "any_peer", "reliable") func interact(_target: String):
+@rpc("call_remote", "any_peer", "reliable") func interact(_input_sequence: int, _target: String):
 	#Placeholder code
 	pass
 
