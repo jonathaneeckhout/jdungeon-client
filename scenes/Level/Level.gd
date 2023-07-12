@@ -8,6 +8,7 @@ var enemies: Node2D
 @onready var player_scene = load("res://scenes/Player/Player.tscn")
 @onready var wolf_scene = load("res://scenes/Enemies/Wolf/Wolf.tscn")
 @onready var sheep_scene = load("res://scenes/Enemies/Sheep/Sheep.tscn")
+@onready var ram_scene = load("res://scenes/Enemies/Ram/Ram.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -61,6 +62,8 @@ func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2):
 			enemy = wolf_scene.instantiate()
 		"Sheep":
 			enemy = sheep_scene.instantiate()
+		"Ram":
+			enemy = ram_scene.instantiate()
 
 	enemy.position = pos
 	enemy.name = enemy_name
