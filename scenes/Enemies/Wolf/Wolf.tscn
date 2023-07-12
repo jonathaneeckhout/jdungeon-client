@@ -1,15 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxkvjfrkfutv1"]
+[gd_scene load_steps=5 format=3 uid="uid://cxkvjfrkfutv1"]
 
 [ext_resource type="Script" path="res://scenes/Enemies/Wolf/Wolf.gd" id="1_h5ig6"]
 [ext_resource type="Texture2D" uid="uid://bunbwl1emyrap" path="res://assets/wolf/wolf.png" id="2_3cl6q"]
-[ext_resource type="Script" path="res://scripts/ServerSynchronizer.gd" id="3_5uef1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j10yg"]
 radius = 40.0
 height = 112.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehtts"]
-bg_color = Color(0, 0.666667, 0.811765, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fn543"]
 bg_color = Color(0.356863, 0.690196, 0.364706, 1)
@@ -54,15 +50,6 @@ grow_horizontal = 2
 text = "Wolf"
 horizontal_alignment = 1
 
-[node name="Panel" type="Panel" parent="Interface"]
-visible = false
-layout_mode = 0
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ehtts")
-
 [node name="HPBar" type="ProgressBar" parent="Interface"]
 layout_mode = 0
 offset_left = -32.0
@@ -71,6 +58,3 @@ offset_right = 32.0
 offset_bottom = -85.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_fn543")
 value = 100.0
-
-[node name="ServerSynchronizer" type="Node2D" parent="."]
-script = ExtResource("3_5uef1")

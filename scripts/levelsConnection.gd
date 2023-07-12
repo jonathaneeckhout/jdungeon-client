@@ -1,6 +1,6 @@
 extends Node
 
-signal enemy_added(enemy_name: String, pos: Vector2)
+signal enemy_added(enemy_name: String, enemy_class: String, pos: Vector2)
 signal enemy_removed(enemy_name: String)
 signal login(status: bool)
 signal player_added(id: int, character_name: String, pos: Vector2)
@@ -99,8 +99,9 @@ func add_player(id: int, character_name: String, pos: Vector2):
 	pass
 
 
-@rpc("call_remote", "authority", "reliable") func add_enemy(enemy_name: String, pos: Vector2):
-	enemy_added.emit(enemy_name, pos)
+@rpc("call_remote", "authority", "reliable")
+func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2):
+	enemy_added.emit(enemy_name, enemy_class, pos)
 
 
 @rpc("call_remote", "authority", "reliable") func remove_enemy(enemy_name: String):

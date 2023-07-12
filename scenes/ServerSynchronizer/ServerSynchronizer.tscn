@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn8rhyodbgj1t"]
+
+[ext_resource type="Script" path="res://scenes/ServerSynchronizer/ServerSynchronizer.gd" id="1_fd6nb"]
+
+[node name="ServerSynchronizer" type="Node2D"]
+script = ExtResource("1_fd6nb")

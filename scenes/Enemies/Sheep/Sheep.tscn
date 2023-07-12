@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://mjhnh28tyraa"]
+
+[ext_resource type="Script" path="res://scenes/Enemies/Sheep/Sheep.gd" id="1_5yk8u"]
+[ext_resource type="Texture2D" uid="uid://e27fs144y2da" path="res://assets/sheep/sheep.png" id="1_c77dh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_31j1k"]
+radius = 56.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bo43"]
+bg_color = Color(0.356863, 0.690196, 0.364706, 1)
+
+[node name="Sheep" type="CharacterBody2D"]
+script = ExtResource("1_5yk8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_31j1k")
+
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2(0.1, 0.1)
+
+[node name="Sheep" type="Sprite2D" parent="Sprites"]
+position = Vector2(8, 0)
+texture = ExtResource("1_c77dh")
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Username" type="Label" parent="Interface"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = -112.0
+offset_right = 48.0
+offset_bottom = -86.0
+grow_horizontal = 2
+text = "Sheep"
+horizontal_alignment = 1
+
+[node name="HPBar" type="ProgressBar" parent="Interface"]
+layout_mode = 0
+offset_left = -32.0
+offset_top = -80.0
+offset_right = 32.0
+offset_bottom = -53.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_4bo43")
+value = 100.0

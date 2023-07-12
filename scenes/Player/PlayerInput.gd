@@ -36,7 +36,6 @@ func _handle_right_click():
 	#Move if nothing is under the mouse area
 	if bodies.is_empty():
 		var target_position = player.get_global_mouse_position()
-		player.target_position = target_position
 		input_sequence += 1
 		LevelsConnection.move.rpc(input_sequence, target_position)
 	else:

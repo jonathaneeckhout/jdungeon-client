@@ -7,6 +7,7 @@ var enemies: Node2D
 
 @onready var player_scene = load("res://scenes/Player/Player.tscn")
 @onready var wolf_scene = load("res://scenes/Enemies/Wolf/Wolf.tscn")
+@onready var sheep_scene = load("res://scenes/Enemies/Sheep/Sheep.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -52,8 +53,15 @@ func remove_player(character_name: String):
 		players.get_node(character_name).queue_free()
 
 
-func add_enemy(enemy_name: String, pos: Vector2):
-	var enemy = wolf_scene.instantiate()
+func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2):
+	var enemy: Entity
+
+	match enemy_class:
+		"Wolf":
+			enemy = wolf_scene.instantiate()
+		"Sheep":
+			enemy = sheep_scene.instantiate()
+
 	enemy.position = pos
 	enemy.name = enemy_name
 	enemies.add_child(enemy)
@@ -72,8 +80,8 @@ func _on_player_removed(character_name: String):
 	remove_player(character_name)
 
 
-func _on_enemy_added(enemy_name: String, pos: Vector2):
-	add_enemy(enemy_name, pos)
+func _on_enemy_added(enemy_name: String, enemy_class: String, pos: Vector2):
+	add_enemy(enemy_name, enemy_class, pos)
 
 
 func _on_enemy_removed(enemy_name: String):
