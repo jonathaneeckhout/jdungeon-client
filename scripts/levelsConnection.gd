@@ -8,7 +8,7 @@ signal player_removed(character_name: String)
 
 const CLOCK_SYNC_TIMER_TIME = 0.5
 const LATENCY_BUFFER_SIZE = 9
-const LATENCY_BUFFER_MID_POINT = int(LATENCY_BUFFER_SIZE / 2)
+const LATENCY_BUFFER_MID_POINT = int(LATENCY_BUFFER_SIZE / float(2))
 const LATENCY_MINIMUM_THRESHOLD = 20
 
 var client: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
@@ -168,6 +168,7 @@ func return_server_time(server_time: float, client_time: float):
 	latency_buffer.append((Time.get_unix_time_from_system() - client_time) / 2)
 	if latency_buffer.size() == LATENCY_BUFFER_SIZE:
 		var total_latency = 0
+		var total_counted = 0
 
 		latency_buffer.sort()
 
@@ -175,14 +176,14 @@ func return_server_time(server_time: float, client_time: float):
 
 		for i in range(LATENCY_BUFFER_SIZE - 1):
 			if (
-				latency_buffer[i] > mid_point_threshold
-				and latency_buffer[i] > LATENCY_MINIMUM_THRESHOLD
+				latency_buffer[i] < mid_point_threshold
+				or latency_buffer[i] < LATENCY_MINIMUM_THRESHOLD
 			):
-				latency_buffer.remove_at(i)
-			else:
 				total_latency += latency_buffer[i]
+				total_counted += 1
 
-		var average_latency = total_latency / latency_buffer.size()
+		var average_latency = total_latency / total_counted
 		delta_latency = average_latency - latency
 		latency = average_latency
+
 		latency_buffer.clear()
