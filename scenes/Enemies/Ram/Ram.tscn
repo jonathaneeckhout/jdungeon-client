@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm62eypls8ai0"]
+[gd_scene load_steps=9 format=3 uid="uid://bm62eypls8ai0"]
 
 [ext_resource type="Script" path="res://scenes/Enemies/Ram/Ram.gd" id="1_y4ip7"]
 [ext_resource type="Texture2D" uid="uid://b713r6vx1qovi" path="res://assets/ram/ram.png" id="2_ohmg4"]
@@ -8,6 +8,22 @@ radius = 56.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bo43"]
 bg_color = Color(0.356863, 0.690196, 0.364706, 0.5)
+
+[sub_resource type="Animation" id="Animation_ni8rn"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_fwuwx"]
+resource_name = "move"
+
+[sub_resource type="Animation" id="Animation_ni1j0"]
+resource_name = "attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_amlrt"]
+_data = {
+"attack": SubResource("Animation_ni1j0"),
+"idle": SubResource("Animation_ni8rn"),
+"move": SubResource("Animation_fwuwx")
+}
 
 [node name="Ram" type="CharacterBody2D"]
 script = ExtResource("1_y4ip7")
@@ -55,3 +71,8 @@ offset_right = 32.0
 offset_bottom = -53.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_4bo43")
 value = 100.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_amlrt")
+}

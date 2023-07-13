@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxkvjfrkfutv1"]
+[gd_scene load_steps=9 format=3 uid="uid://cxkvjfrkfutv1"]
 
 [ext_resource type="Script" path="res://scenes/Enemies/Wolf/Wolf.gd" id="1_h5ig6"]
 [ext_resource type="Texture2D" uid="uid://bunbwl1emyrap" path="res://assets/wolf/wolf.png" id="2_3cl6q"]
@@ -9,6 +9,22 @@ height = 112.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fn543"]
 bg_color = Color(0.356863, 0.690196, 0.364706, 0.5)
+
+[sub_resource type="Animation" id="Animation_jjssa"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_oqmnl"]
+resource_name = "move"
+
+[sub_resource type="Animation" id="Animation_eju4o"]
+resource_name = "attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q4va2"]
+_data = {
+"attack": SubResource("Animation_eju4o"),
+"idle": SubResource("Animation_jjssa"),
+"move": SubResource("Animation_oqmnl")
+}
 
 [node name="Wolf" type="CharacterBody2D"]
 script = ExtResource("1_h5ig6")
@@ -58,3 +74,8 @@ offset_right = 32.0
 offset_bottom = -85.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_fn543")
 value = 100.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q4va2")
+}

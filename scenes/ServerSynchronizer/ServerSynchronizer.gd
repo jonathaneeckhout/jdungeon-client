@@ -70,3 +70,7 @@ func extrapolate(render_time):
 
 @rpc("call_remote", "authority", "reliable") func hurt(current_hp: int, amount: int):
 	root.hurt(current_hp, amount)
+
+
+@rpc("call_remote", "authority", "reliable") func attack(timestamp: float, direction: Vector2):
+	root.attack(timestamp, direction)
