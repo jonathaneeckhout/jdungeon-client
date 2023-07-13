@@ -6,10 +6,34 @@ signal login(status: bool)
 signal player_added(id: int, character_name: String, pos: Vector2)
 signal player_removed(character_name: String)
 
-var client = ENetMultiplayerPeer.new()
-var logged_in = false
+const CLOCK_SYNC_TIMER_TIME = 0.5
+const LATENCY_BUFFER_SIZE = 9
+const LATENCY_BUFFER_MID_POINT = int(LATENCY_BUFFER_SIZE / 2)
+const LATENCY_MINIMUM_THRESHOLD = 20
 
-@onready var debug = Env.get_value("DEBUG")
+var client: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
+var logged_in: bool = false
+
+var clock: float = 0.0
+var clock_sync_timer: Timer
+
+var latency: float = 0.0
+var latency_buffer = []
+var delta_latency: float = 0.0
+
+@onready var debug: String = Env.get_value("DEBUG")
+
+
+func _ready():
+	clock_sync_timer = Timer.new()
+	clock_sync_timer.wait_time = CLOCK_SYNC_TIMER_TIME
+	clock_sync_timer.timeout.connect(_on_clock_sync_timer_timeout)
+	add_child(clock_sync_timer)
+
+
+func _physics_process(delta):
+	clock += delta + delta_latency
+	delta_latency = 0
 
 
 func connect_to_server(ip, port):
@@ -49,11 +73,22 @@ func disconnect_to_server():
 	logged_in = false
 
 
+func start_sync_clock():
+	fetch_server_time.rpc_id(1, Time.get_unix_time_from_system())
+	clock_sync_timer.start(CLOCK_SYNC_TIMER_TIME)
+
+
+func stop_sync_clock():
+	clock_sync_timer.stop()
+
+
 func _on_connection_succeeded():
 	print("Connection succeeded")
 	#TODO: currently the character's name is the player's name
 	#TODO: figure out why this delay is needed
 	await get_tree().create_timer(1).timeout
+
+	start_sync_clock()
 
 	authenticate_with_secret.rpc_id(
 		1, CommonConnection.username, CommonConnection.secret, CommonConnection.username
@@ -62,10 +97,15 @@ func _on_connection_succeeded():
 
 func _on_server_disconnected():
 	print("Server disconnected us")
+	stop_sync_clock()
 
 
 func _on_connection_failed():
 	print("Connection failed")
+
+
+func _on_clock_sync_timer_timeout():
+	get_latency.rpc_id(1, Time.get_unix_time_from_system())
 
 
 @rpc("call_remote", "any_peer", "reliable")
@@ -106,3 +146,43 @@ func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2):
 
 @rpc("call_remote", "authority", "reliable") func remove_enemy(enemy_name: String):
 	enemy_removed.emit(enemy_name)
+
+
+@rpc("call_remote", "any_peer", "reliable") func fetch_server_time(_client_time: float):
+	#Placeholder code
+	pass
+
+
+@rpc("call_remote", "authority", "reliable")
+func return_server_time(server_time: float, client_time: float):
+	latency = (Time.get_unix_time_from_system() - client_time) / 2
+	clock = server_time + latency
+
+
+@rpc("call_remote", "any_peer", "reliable") func get_latency(_client_time: float):
+	#Placeholder code
+	pass
+
+
+@rpc("call_remote", "authority", "reliable") func return_latency(client_time: float):
+	latency_buffer.append((Time.get_unix_time_from_system() - client_time) / 2)
+	if latency_buffer.size() == LATENCY_BUFFER_SIZE:
+		var total_latency = 0
+
+		latency_buffer.sort()
+
+		var mid_point_threshold = latency_buffer[LATENCY_BUFFER_MID_POINT] * 2
+
+		for i in range(LATENCY_BUFFER_SIZE - 1):
+			if (
+				latency_buffer[i] > mid_point_threshold
+				and latency_buffer[i] > LATENCY_MINIMUM_THRESHOLD
+			):
+				latency_buffer.remove_at(i)
+			else:
+				total_latency += latency_buffer[i]
+
+		var average_latency = total_latency / latency_buffer.size()
+		delta_latency = average_latency - latency
+		latency = average_latency
+		latency_buffer.clear()

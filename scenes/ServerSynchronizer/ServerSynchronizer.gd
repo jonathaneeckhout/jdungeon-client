@@ -9,7 +9,7 @@ var server_syncs_buffer = []
 
 
 func _physics_process(_delta):
-	var render_time = Time.get_unix_time_from_system() - INTERPOLATION_OFFSET
+	var render_time = LevelsConnection.clock - INTERPOLATION_OFFSET
 
 	while server_syncs_buffer.size() > 2 and render_time > server_syncs_buffer[1]["timestamp"]:
 		server_syncs_buffer.remove_at(0)
