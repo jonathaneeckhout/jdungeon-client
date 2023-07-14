@@ -93,7 +93,7 @@ func _on_message_received(message: String):
 func authenticate(player_username: String, password: String):
 	var new_req = auth_request.new()
 	add_child(new_req)
-	var res = await new_req.authenticate(player_username, str(password).sha256_text())
+	var res = await new_req.authenticate(player_username, password)
 	new_req.queue_free()
 	if res["response"]:
 		logged_in = true
