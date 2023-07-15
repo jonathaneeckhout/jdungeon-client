@@ -43,6 +43,9 @@ func _physics_process(_delta):
 			elif prev_pos == position:
 				state = STATES.IDLE
 				$AnimationPlayer.play("idle")
+			else:
+				face_direction = prev_pos.direction_to(position)
+				update_face_direction()
 		STATES.ATTACK:
 			if not $AnimationPlayer.is_playing():
 				if check_if_attacking():
