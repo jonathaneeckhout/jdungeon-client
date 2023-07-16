@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hshapjubhdo1"
-path="res://.godot/imported/wolf.png-dad5937ac0248d7ee12b6cc70ab2a659.ctex"
+uid="uid://dqb4wkspvva2l"
+path="res://.godot/imported/thief_headsurprise.png-34988463a5ce2a86c8cb76c4b54a612d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/wolf/wolf.png"
-dest_files=["res://.godot/imported/wolf.png-dad5937ac0248d7ee12b6cc70ab2a659.ctex"]
+source_file="res://assets/enemies/thief/thief_headsurprise.png"
+dest_files=["res://.godot/imported/thief_headsurprise.png-34988463a5ce2a86c8cb76c4b54a612d.ctex"]
 
 [params]
 

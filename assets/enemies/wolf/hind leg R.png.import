@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b713r6vx1qovi"
-path="res://.godot/imported/ram.png-684ec06ddd3a6694ad208de58ea17b07.ctex"
+uid="uid://be1k3elssudid"
+path="res://.godot/imported/hind leg R.png-72e74bf92b61ad81bec740d11a7a6932.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ram/ram.png"
-dest_files=["res://.godot/imported/ram.png-684ec06ddd3a6694ad208de58ea17b07.ctex"]
+source_file="res://assets/enemies/wolf/hind leg R.png"
+dest_files=["res://.godot/imported/hind leg R.png-72e74bf92b61ad81bec740d11a7a6932.ctex"]
 
 [params]
 

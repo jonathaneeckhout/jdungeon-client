@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbdy1rryd4k3u"
-path="res://.godot/imported/thief_frontleg.png-04f206c2e811dd690fbcfc904add681e.ctex"
+uid="uid://ddb7ij57dd2jx"
+path="res://.godot/imported/front leg R.png-88f947f49cbd57343dd18488fdbe4f3c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/thief/thief_frontleg.png"
-dest_files=["res://.godot/imported/thief_frontleg.png-04f206c2e811dd690fbcfc904add681e.ctex"]
+source_file="res://assets/enemies/wolf/front leg R.png"
+dest_files=["res://.godot/imported/front leg R.png-88f947f49cbd57343dd18488fdbe4f3c.ctex"]
 
 [params]
 

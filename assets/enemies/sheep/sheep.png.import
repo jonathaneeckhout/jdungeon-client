@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgbdqelcdo8bq"
-path="res://.godot/imported/thief_torso.png-e9773879bd39a184d0eccc43cf49e8ca.ctex"
+uid="uid://e27fs144y2da"
+path="res://.godot/imported/sheep.png-e2c855e74b7693a6ab4cfcd8c21c1ba0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/thief/thief_torso.png"
-dest_files=["res://.godot/imported/thief_torso.png-e9773879bd39a184d0eccc43cf49e8ca.ctex"]
+source_file="res://assets/enemies/sheep/sheep.png"
+dest_files=["res://.godot/imported/sheep.png-e2c855e74b7693a6ab4cfcd8c21c1ba0.ctex"]
 
 [params]
 

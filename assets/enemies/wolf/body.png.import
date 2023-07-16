@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhh0dtg173bec"
-path="res://.godot/imported/daggerarm.png-b7d394e30b62f78fd0d360c5727cdbf6.ctex"
+uid="uid://d3sixtvft3su"
+path="res://.godot/imported/body.png-7f3222b91cb31ac6e27a804123e927b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/thief/daggerarm.png"
-dest_files=["res://.godot/imported/daggerarm.png-b7d394e30b62f78fd0d360c5727cdbf6.ctex"]
+source_file="res://assets/enemies/wolf/body.png"
+dest_files=["res://.godot/imported/body.png-7f3222b91cb31ac6e27a804123e927b1.ctex"]
 
 [params]
 

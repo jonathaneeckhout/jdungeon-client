@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://cxkvjfrkfutv1"]
 
 [ext_resource type="Script" path="res://scenes/Enemies/Wolf/Wolf.gd" id="1_h5ig6"]
-[ext_resource type="Texture2D" uid="uid://be1k3elssudid" path="res://assets/wolf/hind leg R.png" id="3_qao02"]
-[ext_resource type="Texture2D" uid="uid://ddb7ij57dd2jx" path="res://assets/wolf/front leg R.png" id="4_en7uu"]
-[ext_resource type="Texture2D" uid="uid://d3sixtvft3su" path="res://assets/wolf/body.png" id="5_fwn83"]
-[ext_resource type="Texture2D" uid="uid://ch6s7xt68ua46" path="res://assets/wolf/front leg L.png" id="6_wvj2j"]
-[ext_resource type="Texture2D" uid="uid://cbwyllt1xvepv" path="res://assets/wolf/hind leg L.png" id="7_lsxe4"]
-[ext_resource type="Texture2D" uid="uid://dnu7kj8igpuvj" path="res://assets/wolf/head.png" id="8_t7kew"]
+[ext_resource type="Texture2D" uid="uid://be1k3elssudid" path="res://assets/enemies/wolf/hind leg R.png" id="2_0mx3v"]
+[ext_resource type="Texture2D" uid="uid://ddb7ij57dd2jx" path="res://assets/enemies/wolf/front leg R.png" id="3_jje85"]
+[ext_resource type="Texture2D" uid="uid://d3sixtvft3su" path="res://assets/enemies/wolf/body.png" id="4_arfw7"]
+[ext_resource type="Texture2D" uid="uid://ch6s7xt68ua46" path="res://assets/enemies/wolf/front leg L.png" id="5_ofmo0"]
+[ext_resource type="Texture2D" uid="uid://cbwyllt1xvepv" path="res://assets/enemies/wolf/hind leg L.png" id="6_nlsgx"]
+[ext_resource type="Texture2D" uid="uid://dnu7kj8igpuvj" path="res://assets/enemies/wolf/head.png" id="7_3eknf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j10yg"]
 radius = 40.0
@@ -628,31 +628,31 @@ scale = Vector2(0.1, 0.1)
 
 [node name="HindLegR" type="Sprite2D" parent="Sprites"]
 position = Vector2(190, -110)
-texture = ExtResource("3_qao02")
+texture = ExtResource("2_0mx3v")
 offset = Vector2(-72, 184)
 
 [node name="FrontLegR" type="Sprite2D" parent="Sprites"]
 position = Vector2(-140, -40.0001)
-texture = ExtResource("4_en7uu")
+texture = ExtResource("3_jje85")
 offset = Vector2(-72, 176)
 
 [node name="Body" type="Sprite2D" parent="Sprites"]
 position = Vector2(152, -96)
-texture = ExtResource("5_fwn83")
+texture = ExtResource("4_arfw7")
 
 [node name="FrontLegL" type="Sprite2D" parent="Sprites"]
 position = Vector2(-120, -80.0001)
-texture = ExtResource("6_wvj2j")
+texture = ExtResource("5_ofmo0")
 offset = Vector2(56, 184)
 
 [node name="HindLegL" type="Sprite2D" parent="Sprites"]
 position = Vector2(180, -120)
-texture = ExtResource("7_lsxe4")
+texture = ExtResource("6_nlsgx")
 offset = Vector2(96, 192)
 
 [node name="Head" type="Sprite2D" parent="Sprites"]
 position = Vector2(-272, -208)
-texture = ExtResource("8_t7kew")
+texture = ExtResource("7_3eknf")
 offset = Vector2(-88, -64)
 
 [node name="Interface" type="Control" parent="."]

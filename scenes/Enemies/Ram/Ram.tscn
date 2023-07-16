@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bm62eypls8ai0"]
 
 [ext_resource type="Script" path="res://scenes/Enemies/Ram/Ram.gd" id="1_y4ip7"]
-[ext_resource type="Texture2D" uid="uid://b713r6vx1qovi" path="res://assets/ram/ram.png" id="2_ohmg4"]
+[ext_resource type="Texture2D" uid="uid://b713r6vx1qovi" path="res://assets/enemies/ram/ram.png" id="2_st8rq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_31j1k"]
 radius = 56.0
@@ -114,7 +114,7 @@ scale = Vector2(0.12, 0.12)
 
 [node name="Ram" type="Sprite2D" parent="Sprites"]
 position = Vector2(8, 0)
-texture = ExtResource("2_ohmg4")
+texture = ExtResource("2_st8rq")
 
 [node name="Interface" type="Control" parent="."]
 layout_mode = 3

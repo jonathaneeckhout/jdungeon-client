@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch6s7xt68ua46"
-path="res://.godot/imported/front leg L.png-fb00117739a0b908b4061ac11e35f228.ctex"
+uid="uid://cbwyllt1xvepv"
+path="res://.godot/imported/hind leg L.png-117085af7fc37220055d69a8630856d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/wolf/front leg L.png"
-dest_files=["res://.godot/imported/front leg L.png-fb00117739a0b908b4061ac11e35f228.ctex"]
+source_file="res://assets/enemies/wolf/hind leg L.png"
+dest_files=["res://.godot/imported/hind leg L.png-117085af7fc37220055d69a8630856d9.ctex"]
 
 [params]
 
