@@ -4,11 +4,14 @@ var level: String = ""
 var players: Node2D
 var npcs: Node2D
 var enemies: Node2D
+var terrain: Node2D
 
 @onready var player_scene = load("res://scenes/Player/Player.tscn")
 @onready var wolf_scene = load("res://scenes/Enemies/Wolf/Wolf.tscn")
 @onready var sheep_scene = load("res://scenes/Enemies/Sheep/Sheep.tscn")
 @onready var ram_scene = load("res://scenes/Enemies/Ram/Ram.tscn")
+
+@onready var tree_scene = load("res://scenes/Terrain/Tree/Tree.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,6 +20,7 @@ func _ready():
 	LevelsConnection.player_removed.connect(_on_player_removed)
 	LevelsConnection.enemy_added.connect(_on_enemy_added)
 	LevelsConnection.enemy_removed.connect(_on_enemy_removed)
+	LevelsConnection.level_info_retrieved.connect(_on_level_info_retrieved)
 
 
 func set_level(level_name: String):
@@ -33,9 +37,10 @@ func set_level(level_name: String):
 	self.add_child(level_instance)
 
 	level = level_name
-	players = level_instance.get_node("Players")
-	npcs = level_instance.get_node("NPCS")
-	enemies = level_instance.get_node("Enemies")
+	players = level_instance.get_node("Entities/Players")
+	npcs = level_instance.get_node("Entities/NPCS")
+	enemies = level_instance.get_node("Entities/Enemies")
+	terrain = level_instance.get_node("Entities/Terrain")
 
 	return true
 
@@ -89,3 +94,15 @@ func _on_enemy_added(enemy_name: String, enemy_class: String, pos: Vector2):
 
 func _on_enemy_removed(enemy_name: String):
 	remove_enemy(enemy_name)
+
+
+func _on_level_info_retrieved(level_info: Dictionary):
+	for element in level_info["Terrain"]:
+		var el: Node2D
+
+		match element["class"]:
+			"Tree":
+				el = tree_scene.instantiate()
+
+		el.position = element["position"]
+		terrain.add_child(el)

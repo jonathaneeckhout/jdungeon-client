@@ -5,6 +5,7 @@ signal enemy_removed(enemy_name: String)
 signal login(status: bool)
 signal player_added(id: int, character_name: String, pos: Vector2)
 signal player_removed(character_name: String)
+signal level_info_retrieved(level_info: Dictionary)
 
 const CLOCK_SYNC_TIMER_TIME = 0.5
 const LATENCY_BUFFER_SIZE = 9
@@ -110,13 +111,18 @@ func _on_clock_sync_timer_timeout():
 
 @rpc("call_remote", "any_peer", "reliable")
 func authenticate_with_secret(_username: String, _secret: String, _character: String):
-	#Placeholder code
+	# Placeholder code
 	pass
 
 
 @rpc("call_remote", "authority", "reliable") func client_login_response(succeeded: bool):
 	print("Login %s" % [succeeded])
 	logged_in = succeeded
+
+	# If logged in, load the level
+	if succeeded:
+		load_level.rpc_id(1)
+
 	login.emit(succeeded)
 
 
@@ -130,13 +136,22 @@ func add_player(id: int, character_name: String, pos: Vector2):
 
 
 @rpc("call_remote", "any_peer", "reliable") func move(_input_sequence: int, _pos: Vector2):
-	#Placeholder code
+	# Placeholder code
 	pass
 
 
 @rpc("call_remote", "any_peer", "reliable") func interact(_input_sequence: int, _target: String):
-	#Placeholder code
+	# Placeholder code
 	pass
+
+
+@rpc("call_remote", "any_peer", "reliable") func load_level():
+	# Placeholder code
+	pass
+
+
+@rpc("call_remote", "any_peer", "reliable") func load_level_response(level_info: Dictionary):
+	level_info_retrieved.emit(level_info)
 
 
 @rpc("call_remote", "authority", "reliable")
@@ -149,7 +164,7 @@ func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2):
 
 
 @rpc("call_remote", "any_peer", "reliable") func fetch_server_time(_client_time: float):
-	#Placeholder code
+	# Placeholder code
 	pass
 
 
@@ -160,7 +175,7 @@ func return_server_time(server_time: float, client_time: float):
 
 
 @rpc("call_remote", "any_peer", "reliable") func get_latency(_client_time: float):
-	#Placeholder code
+	# Placeholder code
 	pass
 
 
