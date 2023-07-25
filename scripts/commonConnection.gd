@@ -3,9 +3,12 @@ extends Node
 signal login(status: bool)
 signal connected_to_server
 signal server_disconnected
+signal character_loaded(level: String, address: String, port: int)
 signal chat_message_received(type: String, from: String, message: String)
 
 var auth_request = preload("res://scripts/requests/authRequest.gd")
+var get_level_info_request = preload("res://scripts/requests/getLevelInfoRequest.gd")
+
 var cookie = ""
 var logged_in = false
 var secret = ""
@@ -105,6 +108,15 @@ func authenticate(player_username: String, password: String):
 	return res["response"]
 
 
+func get_level_info(level_name: String, level_hash: int):
+	var new_req = get_level_info_request.new()
+	add_child(new_req)
+	var res = await new_req.get_level_info(level_name, level_hash, cookie)
+	new_req.queue_free()
+
+	return res
+
+
 func load_character():
 	#TODO: open up character selection window, for now load the character with the player's name
 	socket.send_text(
@@ -130,8 +142,9 @@ func _on_chat_message(type: String, from: String, message: String):
 
 
 func _on_load_character_response(level: String, address: String, port: int):
-	print("Switching to level %s on address %s on port %d" % [level, address, port])
-	#Close the current connection
-	LevelsConnection.disconnect_to_server()
-	#Connect to the new level
-	LevelsConnection.connect_to_server(address, port)
+	character_loaded.emit(level, address, port)
+	# print("Switching to level %s on address %s on port %d" % [level, address, port])
+	# #Close the current connection
+	# LevelsConnection.disconnect_to_server()
+	# #Connect to the new level
+	# LevelsConnection.connect_to_server(address, port)

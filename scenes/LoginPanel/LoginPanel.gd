@@ -1,5 +1,9 @@
 extends Panel
 
+var current_level = ""
+
+@onready var level = $"../../Level"
+
 @onready var server_address = Env.get_value("COMMON_SERVER_HOST")
 @onready var server_port = int(Env.get_value("COMMON_SERVER_PORT"))
 @onready var debug_username = Env.get_value("DEBUG_USERNAME")
@@ -13,8 +17,11 @@ func _ready():
 	if debug_password:
 		$VBoxContainer/PasswordText.text = debug_password
 
-	CommonConnection.connected_to_server.connect(_connected_succeeded)
-	CommonConnection.server_disconnected.connect(_server_disconnected)
+	CommonConnection.connected_to_server.connect(_on_common_connected_succeeded)
+	CommonConnection.server_disconnected.connect(_on_common_server_disconnected)
+	CommonConnection.character_loaded.connect(_on_character_loaded)
+
+	LevelsConnection.logged_in.connect(_on_level_server_logged_in)
 
 
 func _on_login_button_pressed():
@@ -38,19 +45,38 @@ func _on_login_button_pressed():
 		print("Failed to connect to server")
 		return false
 
-	$"../".hide()
-
-	await CommonConnection.connected_to_server
-
-	CommonConnection.load_character()
-
 	return true
 
 
-func _connected_succeeded():
-	pass
+func _on_common_connected_succeeded():
+	$"../".hide()
+
+	# TODO: Show loading screen
+
+	CommonConnection.load_character()
 
 
-func _server_disconnected():
+func _on_common_server_disconnected():
 	$VBoxContainer/ErrorLabel.text = "Disconnected from server"
 	$".".show()
+
+
+func _on_character_loaded(level_name: String, address: String, port: int):
+	print("Switching to level %s on address %s on port %d" % [level_name, address, port])
+
+	current_level = level_name
+
+	# Set the level to be sure to be on time for server messages
+	level.set_level(current_level)
+
+	# Close the current connection
+	LevelsConnection.disconnect_to_server()
+
+	# Connect to the new level
+	LevelsConnection.connect_to_server(address, port)
+
+
+func _on_level_server_logged_in():
+	# TODO: store and fetch local hash
+	var level_data = await CommonConnection.get_level_info(current_level, 0)
+	level.load_level(level_data["info"])

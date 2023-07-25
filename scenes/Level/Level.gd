@@ -5,6 +5,7 @@ var players: Node2D
 var npcs: Node2D
 var enemies: Node2D
 var terrain: Node2D
+var tilemap: TileMap
 
 @onready var player_scene = load("res://scenes/Player/Player.tscn")
 @onready var wolf_scene = load("res://scenes/Enemies/Wolf/Wolf.tscn")
@@ -20,7 +21,6 @@ func _ready():
 	LevelsConnection.player_removed.connect(_on_player_removed)
 	LevelsConnection.enemy_added.connect(_on_enemy_added)
 	LevelsConnection.enemy_removed.connect(_on_enemy_removed)
-	LevelsConnection.level_info_retrieved.connect(_on_level_info_retrieved)
 
 
 func set_level(level_name: String):
@@ -41,8 +41,30 @@ func set_level(level_name: String):
 	npcs = level_instance.get_node("Entities/NPCS")
 	enemies = level_instance.get_node("Entities/Enemies")
 	terrain = level_instance.get_node("Entities/Terrain")
+	tilemap = level_instance.get_node("TileMap")
 
 	return true
+
+
+func load_level(level_info: Dictionary):
+	for element in level_info["terrain"]:
+		var el: Node2D
+
+		match element["class"]:
+			"Tree":
+				el = tree_scene.instantiate()
+
+		el.position = Vector2(element["position"]["x"], element["position"]["y"])
+		terrain.add_child(el)
+
+	for layer in level_info["tilemap"]:
+		for cell in layer["data"]:
+			tilemap.set_cell(
+				layer["layer"],
+				Vector2(cell["co"]["x"], cell["co"]["y"]),
+				cell["sid"],
+				Vector2(cell["aco"]["x"], cell["aco"]["y"])
+			)
 
 
 func add_player(id: int, character_name: String, pos: Vector2):
@@ -94,15 +116,3 @@ func _on_enemy_added(enemy_name: String, enemy_class: String, pos: Vector2):
 
 func _on_enemy_removed(enemy_name: String):
 	remove_enemy(enemy_name)
-
-
-func _on_level_info_retrieved(level_info: Dictionary):
-	for element in level_info["Terrain"]:
-		var el: Node2D
-
-		match element["class"]:
-			"Tree":
-				el = tree_scene.instantiate()
-
-		el.position = element["position"]
-		terrain.add_child(el)

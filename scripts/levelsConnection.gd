@@ -2,10 +2,9 @@ extends Node
 
 signal enemy_added(enemy_name: String, enemy_class: String, pos: Vector2)
 signal enemy_removed(enemy_name: String)
-signal login(status: bool)
+signal logged_in
 signal player_added(id: int, character_name: String, pos: Vector2)
 signal player_removed(character_name: String)
-signal level_info_retrieved(level_info: Dictionary)
 
 const CLOCK_SYNC_TIMER_TIME = 0.5
 const LATENCY_BUFFER_SIZE = 9
@@ -13,7 +12,6 @@ const LATENCY_BUFFER_MID_POINT = int(LATENCY_BUFFER_SIZE / float(2))
 const LATENCY_MINIMUM_THRESHOLD = 20
 
 var client: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
-var logged_in: bool = false
 
 var clock: float = 0.0
 var clock_sync_timer: Timer
@@ -71,7 +69,6 @@ func connect_to_server(ip, port):
 
 func disconnect_to_server():
 	client.close()
-	logged_in = false
 
 
 func start_sync_clock():
@@ -116,14 +113,9 @@ func authenticate_with_secret(_username: String, _secret: String, _character: St
 
 
 @rpc("call_remote", "authority", "reliable") func client_login_response(succeeded: bool):
-	print("Login %s" % [succeeded])
-	logged_in = succeeded
-
-	# If logged in, load the level
+	print("Login to level server %s" % [succeeded])
 	if succeeded:
-		load_level.rpc_id(1)
-
-	login.emit(succeeded)
+		logged_in.emit()
 
 
 @rpc("call_remote", "authority", "reliable")
@@ -143,15 +135,6 @@ func add_player(id: int, character_name: String, pos: Vector2):
 @rpc("call_remote", "any_peer", "reliable") func interact(_input_sequence: int, _target: String):
 	# Placeholder code
 	pass
-
-
-@rpc("call_remote", "any_peer", "reliable") func load_level():
-	# Placeholder code
-	pass
-
-
-@rpc("call_remote", "any_peer", "reliable") func load_level_response(level_info: Dictionary):
-	level_info_retrieved.emit(level_info)
 
 
 @rpc("call_remote", "authority", "reliable")
