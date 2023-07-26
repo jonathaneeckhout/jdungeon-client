@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cau3t6w3kde11"]
+[gd_scene load_steps=5 format=3 uid="uid://cau3t6w3kde11"]
 
 [ext_resource type="PackedScene" uid="uid://cbsaidmhsp2ph" path="res://scenes/LoginPanel/LoginPanel.tscn" id="1_0yetu"]
 [ext_resource type="Script" path="res://scenes/Multiplayer/Multiplayer.gd" id="1_oso30"]
 [ext_resource type="PackedScene" uid="uid://dmdy80i827fn5" path="res://scenes/Level/Level.tscn" id="2_yiimm"]
+[ext_resource type="PackedScene" uid="uid://bm4bfncvvu7s3" path="res://scenes/LoadingPanel/LoadingPanel.tscn" id="4_1gvt1"]
 
 [node name="Multiplayer" type="Node2D"]
 script = ExtResource("1_oso30")
@@ -14,12 +15,18 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 4
 
 [node name="LoginPanel" parent="UI" instance=ExtResource("1_0yetu")]
 layout_mode = 1
-offset_top = -128.0
-offset_bottom = 128.0
+
+[node name="LoadingPanel" parent="UI" instance=ExtResource("4_1gvt1")]
+visible = false
+layout_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0

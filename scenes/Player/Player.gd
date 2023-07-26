@@ -15,8 +15,12 @@ func _ready():
 	super()
 
 	if player == multiplayer.get_unique_id():
-		$Camera2D.make_current()
+		# $Camera2D.make_current()
 		$Camera2D/UILayer/GUI/ChatPanel.user_name = username
 		$Camera2D/UILayer.show()
 	else:
 		$Camera2D.queue_free()
+
+
+func focus_camera():
+	$Camera2D.make_current()

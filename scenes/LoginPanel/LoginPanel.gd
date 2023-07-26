@@ -1,8 +1,10 @@
 extends Panel
 
 var current_level = ""
+var current_player = null
 
 @onready var level = $"../../Level"
+@onready var loading_panel = $"../LoadingPanel"
 
 @onready var server_address = Env.get_value("COMMON_SERVER_HOST")
 @onready var server_port = int(Env.get_value("COMMON_SERVER_PORT"))
@@ -22,6 +24,16 @@ func _ready():
 	CommonConnection.character_loaded.connect(_on_character_loaded)
 
 	LevelsConnection.logged_in.connect(_on_level_server_logged_in)
+
+	level.player_added.connect(_on_player_added)
+
+
+func _input(event):
+	if not visible:
+		return
+
+	if event.is_action_pressed("ui_accept"):
+		_on_login_button_pressed()
 
 
 func _on_login_button_pressed():
@@ -49,7 +61,10 @@ func _on_login_button_pressed():
 
 
 func _on_common_connected_succeeded():
-	$"../".hide()
+	hide()
+	loading_panel.show()
+
+	loading_panel.set_progress(10)
 
 	# TODO: Show loading screen
 
@@ -58,11 +73,14 @@ func _on_common_connected_succeeded():
 
 func _on_common_server_disconnected():
 	$VBoxContainer/ErrorLabel.text = "Disconnected from server"
-	$".".show()
+	show()
+	loading_panel.hide()
 
 
 func _on_character_loaded(level_name: String, address: String, port: int):
 	print("Switching to level %s on address %s on port %d" % [level_name, address, port])
+
+	loading_panel.set_progress(30)
 
 	current_level = level_name
 
@@ -78,5 +96,19 @@ func _on_character_loaded(level_name: String, address: String, port: int):
 
 func _on_level_server_logged_in():
 	# TODO: store and fetch local hash
+	loading_panel.set_progress(60)
 	var level_data = await CommonConnection.get_level_info(current_level, 0)
 	level.load_level(level_data["info"])
+
+	loading_panel.set_progress(80)
+
+	loading_panel.hide()
+
+	if current_player == null:
+		current_player = await level.player_added
+
+	current_player.focus_camera()
+
+
+func _on_player_added(player: Entity):
+	current_player = player

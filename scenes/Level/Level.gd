@@ -1,5 +1,7 @@
 extends Node2D
 
+signal player_added(player: Entity)
+
 var level: String = ""
 var players: Node2D
 var npcs: Node2D
@@ -74,6 +76,9 @@ func add_player(id: int, character_name: String, pos: Vector2):
 	player.username = character_name
 	player.name = character_name
 	players.add_child(player)
+
+	if id == multiplayer.get_unique_id():
+		player_added.emit(player)
 
 
 func remove_player(character_name: String):
