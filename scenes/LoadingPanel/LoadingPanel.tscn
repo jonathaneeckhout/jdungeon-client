@@ -3,8 +3,7 @@
 [ext_resource type="Script" path="res://scenes/LoadingPanel/LoadingPanel.gd" id="1_8c6i1"]
 [ext_resource type="Texture2D" uid="uid://hxjk8o7m6yau" path="res://assets/varia/logo/Logo_BG.png" id="1_wn3qw"]
 
-[node name="LoadingPanel" type="Control"]
-layout_mode = 3
+[node name="LoadingPanel" type="Panel"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
