@@ -77,8 +77,8 @@ func extrapolate(render_time):
 
 
 @rpc("call_remote", "authority", "reliable")
-func gain_experience(timestamp: int, current_exp: int, amount: int, needed: int):
-	root.gain_experience(timestamp, current_exp, amount, needed)
+func gain_experience(timestamp: int, current_exp: int, amount: int):
+	root.gain_experience(timestamp, current_exp, amount)
 
 
 @rpc("call_remote", "authority", "reliable")

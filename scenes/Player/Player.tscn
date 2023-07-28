@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dq18xjaweyeec"]
+[gd_scene load_steps=21 format=3 uid="uid://dq18xjaweyeec"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.gd" id="1_2682b"]
 [ext_resource type="Script" path="res://scenes/Player/PlayerInput.gd" id="2_3kipm"]
@@ -21,6 +21,9 @@ radius = 64.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rn7ha"]
 bg_color = Color(0.356863, 0.690196, 0.364706, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7j053"]
+bg_color = Color(0.329412, 0.705882, 0, 0.75)
 
 [sub_resource type="Animation" id="Animation_lpbjh"]
 length = 0.001
@@ -1159,6 +1162,7 @@ offset_top = -32.0
 offset_right = 320.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_7j053")
 
 [node name="Sprites" type="Node2D" parent="."]
 position = Vector2(0, -45)

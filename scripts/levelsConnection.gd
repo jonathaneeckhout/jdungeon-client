@@ -3,7 +3,9 @@ extends Node
 signal enemy_added(enemy_name: String, enemy_class: String, pos: Vector2)
 signal enemy_removed(enemy_name: String)
 signal logged_in
-signal player_added(id: int, character_name: String, pos: Vector2)
+signal player_added(
+	id: int, character_name: String, pos: Vector2, current_level: int, experience: int
+)
 signal player_removed(character_name: String)
 
 const CLOCK_SYNC_TIMER_TIME = 0.5
@@ -119,8 +121,8 @@ func authenticate_with_secret(_username: String, _secret: String, _character: St
 
 
 @rpc("call_remote", "authority", "reliable")
-func add_player(id: int, character_name: String, pos: Vector2):
-	player_added.emit(id, character_name, pos)
+func add_player(id: int, character_name: String, pos: Vector2, current_level: int, experience: int):
+	player_added.emit(id, character_name, pos, current_level, experience)
 
 
 @rpc("call_remote", "authority", "reliable") func remove_player(character_name: String):

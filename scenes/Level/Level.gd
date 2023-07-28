@@ -69,10 +69,12 @@ func load_level(level_info: Dictionary):
 			)
 
 
-func add_player(id: int, character_name: String, pos: Vector2):
+func add_player(id: int, character_name: String, pos: Vector2, current_level: int, experience: int):
 	var player = player_scene.instantiate()
 	player.player = id
 	player.position = pos
+	player.current_level = current_level
+	player.current_experience = experience
 	player.username = character_name
 	player.name = character_name
 	players.add_child(player)
@@ -107,8 +109,10 @@ func remove_enemy(enemy_name: String):
 		enemies.get_node(enemy_name).queue_free()
 
 
-func _on_player_added(id: int, character_name: String, pos: Vector2):
-	add_player(id, character_name, pos)
+func _on_player_added(
+	id: int, character_name: String, pos: Vector2, current_level: int, experience: int
+):
+	add_player(id, character_name, pos, current_level, experience)
 
 
 func _on_player_removed(character_name: String):
