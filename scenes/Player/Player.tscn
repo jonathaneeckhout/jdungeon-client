@@ -1060,8 +1060,6 @@ _data = {
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_2682b")
-username = null
-player = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_bgovn")
@@ -1098,9 +1096,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.0
-offset_top = -96.0
+offset_top = -104.0
 offset_right = 48.0
-offset_bottom = -70.0
+offset_bottom = -78.0
 grow_horizontal = 2
 text = "Testname"
 horizontal_alignment = 1
@@ -1144,9 +1142,22 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
 offset_top = -256.0
-offset_right = 390.0
+offset_right = 512.0
 offset_bottom = 0.0
 grow_horizontal = 1
+grow_vertical = 0
+
+[node name="ExpBar" type="ProgressBar" parent="Camera2D/UILayer/GUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -32.0
+offset_right = 320.0
+grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Sprites" type="Node2D" parent="."]

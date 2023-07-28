@@ -74,3 +74,13 @@ func extrapolate(render_time):
 
 @rpc("call_remote", "authority", "reliable") func attack(timestamp: float, direction: Vector2):
 	root.attack(timestamp, direction)
+
+
+@rpc("call_remote", "authority", "reliable")
+func gain_experience(timestamp: int, current_exp: int, amount: int, needed: int):
+	root.gain_experience(timestamp, current_exp, amount, needed)
+
+
+@rpc("call_remote", "authority", "reliable")
+func gain_level(timestamp: int, current_level: int, amount: int):
+	root.gain_level(timestamp, current_level, amount)
