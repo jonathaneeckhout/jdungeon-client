@@ -6,6 +6,7 @@ var level: String = ""
 var players: Node2D
 var npcs: Node2D
 var enemies: Node2D
+var items: Node2D
 var terrain: Node2D
 var tilemap: TileMap
 
@@ -14,6 +15,8 @@ var tilemap: TileMap
 @onready var sheep_scene = load("res://scenes/Enemies/Sheep/Sheep.tscn")
 @onready var ram_scene = load("res://scenes/Enemies/Ram/Ram.tscn")
 
+@onready var loot_scene = load("res://scenes/Loot/Loot.tscn")
+
 @onready var tree_scene = load("res://scenes/Terrain/Tree/Tree.tscn")
 
 
@@ -21,8 +24,12 @@ var tilemap: TileMap
 func _ready():
 	LevelsConnection.player_added.connect(_on_player_added)
 	LevelsConnection.player_removed.connect(_on_player_removed)
+
 	LevelsConnection.enemy_added.connect(_on_enemy_added)
 	LevelsConnection.enemy_removed.connect(_on_enemy_removed)
+
+	LevelsConnection.item_added.connect(_on_item_added)
+	LevelsConnection.item_removed.connect(_on_item_removed)
 
 
 func set_level(level_name: String):
@@ -42,6 +49,7 @@ func set_level(level_name: String):
 	players = level_instance.get_node("Entities/Players")
 	npcs = level_instance.get_node("Entities/NPCS")
 	enemies = level_instance.get_node("Entities/Enemies")
+	items = level_instance.get_node("Entities/Items")
 	terrain = level_instance.get_node("Entities/Terrain")
 	tilemap = level_instance.get_node("TileMap")
 
@@ -109,6 +117,19 @@ func remove_enemy(enemy_name: String):
 		enemies.get_node(enemy_name).queue_free()
 
 
+func add_item(item_name: String, item_class: String, pos: Vector2):
+	var loot = loot_scene.instantiate()
+	loot.name = item_name
+	loot.position = pos
+	loot.item_class = item_class
+	items.add_child(loot)
+
+
+func remove_item(item_name: String):
+	if items.has_node(item_name):
+		items.get_node(item_name).queue_free()
+
+
 func _on_player_added(
 	id: int, character_name: String, pos: Vector2, current_level: int, experience: int
 ):
@@ -125,3 +146,11 @@ func _on_enemy_added(enemy_name: String, enemy_class: String, pos: Vector2):
 
 func _on_enemy_removed(enemy_name: String):
 	remove_enemy(enemy_name)
+
+
+func _on_item_added(item_name: String, item_class: String, pos: Vector2):
+	add_item(item_name, item_class, pos)
+
+
+func _on_item_removed(item_name: String):
+	remove_item(item_name)

@@ -1,12 +1,16 @@
 extends Node
 
-signal enemy_added(enemy_name: String, enemy_class: String, pos: Vector2)
-signal enemy_removed(enemy_name: String)
 signal logged_in
 signal player_added(
 	id: int, character_name: String, pos: Vector2, current_level: int, experience: int
 )
 signal player_removed(character_name: String)
+
+signal enemy_added(enemy_name: String, enemy_class: String, pos: Vector2)
+signal enemy_removed(enemy_name: String)
+
+signal item_added(item_name: String, item_class: String, pos: Vector2)
+signal item_removed(item_name: String)
 
 const CLOCK_SYNC_TIMER_TIME = 0.5
 const LATENCY_BUFFER_SIZE = 9
@@ -146,6 +150,15 @@ func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2):
 
 @rpc("call_remote", "authority", "reliable") func remove_enemy(enemy_name: String):
 	enemy_removed.emit(enemy_name)
+
+
+@rpc("call_remote", "authority", "reliable")
+func add_item(item_name: String, item_class: String, pos: Vector2):
+	item_added.emit(item_name, item_class, pos)
+
+
+@rpc("call_remote", "authority", "reliable") func remove_item(item_name: String):
+	item_removed.emit(item_name)
 
 
 @rpc("call_remote", "any_peer", "reliable") func fetch_server_time(_client_time: float):
