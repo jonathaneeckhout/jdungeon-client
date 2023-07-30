@@ -26,6 +26,7 @@ func _ready():
 		$Camera2D/UILayer.show()
 		gain_level(0, current_level, 0)
 		gain_experience(0, current_experience, 0)
+		LevelsConnection.item_added_to_inventory.connect(_on_item_added_to_inventory)
 
 	else:
 		$Camera2D.queue_free()
@@ -50,3 +51,8 @@ func gain_level(_timestamp: int, new_level: int, _amount: int):
 
 func calculate_experience_needed_next_level(clvl: int):
 	return BASE_EXPERIENCE + (BASE_EXPERIENCE * (pow(clvl, 2) - 1))
+
+
+func _on_item_added_to_inventory(item_class: String, pos: Vector2):
+	print("Adding item %s to inventory" % item_class)
+	$Camera2D/UILayer/GUI/Inventory.add_item(item_class, pos)

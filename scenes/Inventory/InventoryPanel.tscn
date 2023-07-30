@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmicns3cmcurr"]
+[gd_scene load_steps=3 format=3 uid="uid://bmicns3cmcurr"]
 
 [ext_resource type="Script" path="res://scenes/Inventory/InventoryPanel.gd" id="1_kvfmi"]
-[ext_resource type="Texture2D" uid="uid://c138og2cvg73t" path="res://assets/items/HealthPotion/HealthPotion.png" id="1_limh1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lyqlp"]
 bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
@@ -18,5 +17,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_limh1")
 expand_mode = 2

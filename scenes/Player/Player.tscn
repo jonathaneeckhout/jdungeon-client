@@ -1069,6 +1069,8 @@ script = ExtResource("1_2682b")
 shape = SubResource("CircleShape2D_bgovn")
 
 [node name="MouseArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea2D"]
 shape = SubResource("CircleShape2D_g87ai")

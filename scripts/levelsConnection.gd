@@ -12,6 +12,8 @@ signal enemy_removed(enemy_name: String)
 signal item_added(item_name: String, item_class: String, pos: Vector2)
 signal item_removed(item_name: String)
 
+signal item_added_to_inventory(item_class: String, pos: Vector2)
+
 const CLOCK_SYNC_TIMER_TIME = 0.5
 const LATENCY_BUFFER_SIZE = 9
 const LATENCY_BUFFER_MID_POINT = int(LATENCY_BUFFER_SIZE / float(2))
@@ -159,6 +161,11 @@ func add_item(item_name: String, item_class: String, pos: Vector2):
 
 @rpc("call_remote", "authority", "reliable") func remove_item(item_name: String):
 	item_removed.emit(item_name)
+
+
+@rpc("call_remote", "authority", "reliable")
+func add_item_to_inventory(item_class: String, pos: Vector2):
+	item_added_to_inventory.emit(item_class, pos)
 
 
 @rpc("call_remote", "any_peer", "reliable") func fetch_server_time(_client_time: float):

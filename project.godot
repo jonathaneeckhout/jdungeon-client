@@ -50,6 +50,8 @@ toggle_bag={
 2d_physics/layer_1="world"
 2d_physics/layer_2="players"
 2d_physics/layer_3="enemies"
+2d_physics/layer_4="npcs"
+2d_physics/layer_5="items"
 
 [rendering]
 

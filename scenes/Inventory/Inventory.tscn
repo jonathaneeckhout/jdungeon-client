@@ -35,112 +35,112 @@ theme_override_constants/v_separation = 2
 columns = 6
 metadata/_edit_lock_ = true
 
-[node name="Panel1" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_0_0" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel2" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_1_0" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel3" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_2_0" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel4" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_3_0" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel5" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_4_0" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel6" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_5_0" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel7" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_0_1" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel8" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_1_1" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel9" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_2_1" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel10" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_3_1" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel11" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_4_1" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel12" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_5_1" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel13" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_0_2" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel14" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_1_2" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel15" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_2_2" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel16" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_3_2" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel17" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_4_2" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel18" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_5_2" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel19" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_0_3" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel20" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_1_3" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel21" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_2_3" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel22" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_3_3" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel23" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_4_3" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel24" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_5_3" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel25" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_0_4" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel26" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_1_4" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel27" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_2_4" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel28" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_3_4" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel29" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_4_4" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel30" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_5_4" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel31" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_0_5" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel32" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_1_5" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel33" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_2_5" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel34" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_3_5" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel35" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_4_5" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
-[node name="Panel36" parent="GridContainer" instance=ExtResource("2_3vugu")]
+[node name="Panel_5_5" parent="GridContainer" instance=ExtResource("2_3vugu")]
 layout_mode = 2
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
