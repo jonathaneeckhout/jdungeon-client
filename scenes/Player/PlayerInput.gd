@@ -13,6 +13,10 @@ func _ready():
 
 
 func _input(event):
+	# Don't do anything when above ui
+	if Global.above_ui:
+		return
+
 	if event.is_action_pressed("left_click"):
 		mouse_area.set_global_position(player.get_global_mouse_position())
 		await get_tree().physics_frame
