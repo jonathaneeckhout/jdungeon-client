@@ -72,6 +72,10 @@ func extrapolate(render_time):
 	root.hurt(current_hp, amount)
 
 
+@rpc("call_remote", "authority", "reliable") func heal(current_hp: int, amount: int):
+	root.heal(current_hp, amount)
+
+
 @rpc("call_remote", "authority", "reliable") func attack(timestamp: float, direction: Vector2):
 	root.attack(timestamp, direction)
 

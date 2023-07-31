@@ -83,6 +83,12 @@ func hurt(current_hp: int, _damage: int):
 	update_hp_bar()
 
 
+func heal(current_hp: int, _healing: int):
+	hp = current_hp
+
+	update_hp_bar()
+
+
 func update_hp_bar():
 	$Interface/HPBar.value = (hp / max_hp) * 100
 
