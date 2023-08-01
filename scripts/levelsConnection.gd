@@ -11,6 +11,7 @@ signal enemy_removed(enemy_name: String)
 
 signal item_added(item_name: String, item_class: String, pos: Vector2)
 signal item_removed(item_name: String)
+signal gold_updated(amount: int)
 
 signal item_added_to_inventory(item_class: String, pos: Vector2)
 signal item_removed_from_inventory(pos: Vector2)
@@ -162,6 +163,10 @@ func add_item(item_name: String, item_class: String, pos: Vector2):
 
 @rpc("call_remote", "authority", "reliable") func remove_item(item_name: String):
 	item_removed.emit(item_name)
+
+
+@rpc("call_remote", "authority", "reliable") func sync_gold(amount: int):
+	gold_updated.emit(amount)
 
 
 @rpc("call_remote", "authority", "reliable")

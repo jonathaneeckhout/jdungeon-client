@@ -23,6 +23,10 @@ func _ready():
 			panels[x][y] = panel
 			i += 1
 
+	LevelsConnection.item_added_to_inventory.connect(_on_item_added_to_inventory)
+	LevelsConnection.item_removed_from_inventory.connect(_on_item_removed_from_inventory)
+	LevelsConnection.gold_updated.connect(_on_gold_updated)
+
 
 func _input(event):
 	if event.is_action_pressed("toggle_bag"):
@@ -42,14 +46,17 @@ func add_item(item_class: String, pos: Vector2):
 	match item_class:
 		"HealthPotion":
 			item = load("res://scripts/items/healthPotion.gd").new()
-
+		"Gold":
+			item = load("res://scripts/items/gold.gd").new()
 	if item:
 		var panel = get_panel_at_pos(pos)
 		panel.item = item
 
+
 func remove_item(pos: Vector2):
 	var panel = panels[pos.x][pos.y]
 	panel.item = null
+
 
 func _on_mouse_entered():
 	Global.above_ui = true
@@ -57,3 +64,15 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	Global.above_ui = false
+
+
+func _on_item_added_to_inventory(item_class: String, pos: Vector2):
+	add_item(item_class, pos)
+
+
+func _on_item_removed_from_inventory(pos: Vector2):
+	remove_item(pos)
+
+
+func _on_gold_updated(amount: int):
+	$VBoxContainer/GoldValue.text = str(amount)

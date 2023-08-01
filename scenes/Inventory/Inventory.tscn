@@ -160,6 +160,6 @@ grow_vertical = 0
 layout_mode = 2
 text = "Gold:"
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="GoldValue" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "1000"
+text = "0"

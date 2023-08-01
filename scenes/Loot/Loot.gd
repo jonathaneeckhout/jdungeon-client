@@ -11,6 +11,8 @@ func _ready():
 	match item_class:
 		"HealthPotion":
 			item = load("res://scripts/items/healthPotion.gd").new()
+		"Gold":
+			item = load("res://scripts/items/gold.gd").new()
 
 	if item:
 		sprite.texture = load(item.loot_texture_path)
