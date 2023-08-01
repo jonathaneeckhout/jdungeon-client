@@ -14,6 +14,7 @@ var tilemap: TileMap
 @onready var wolf_scene = load("res://scenes/Enemies/Wolf/Wolf.tscn")
 @onready var sheep_scene = load("res://scenes/Enemies/Sheep/Sheep.tscn")
 @onready var ram_scene = load("res://scenes/Enemies/Ram/Ram.tscn")
+@onready var bushman_scene = load("res://scenes/Enemies/Bushman/Bushman.tscn")
 
 @onready var loot_scene = load("res://scenes/Loot/Loot.tscn")
 
@@ -106,6 +107,8 @@ func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2):
 			enemy = sheep_scene.instantiate()
 		"Ram":
 			enemy = ram_scene.instantiate()
+		"Bushman":
+			enemy = bushman_scene.instantiate()
 
 	enemy.position = pos
 	enemy.name = enemy_name
