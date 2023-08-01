@@ -16,6 +16,8 @@ var current_level: int = 1
 var current_experience: int = 0
 var experience_needed_for_next_level = BASE_EXPERIENCE
 
+@onready var inventory = $Camera2D/UILayer/GUI/Inventory
+
 
 func _ready():
 	super()

@@ -4,6 +4,11 @@ const SIZE = Vector2(6, 6)
 
 var panels = []
 
+@export var gold := 0:
+	set(amount):
+		gold = amount
+		$VBoxContainer/GoldValue.text = str(amount)
+
 
 func _ready():
 	mouse_entered.connect(_on_mouse_entered)
@@ -75,4 +80,4 @@ func _on_item_removed_from_inventory(pos: Vector2):
 
 
 func _on_gold_updated(amount: int):
-	$VBoxContainer/GoldValue.text = str(amount)
+	gold = amount

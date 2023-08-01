@@ -2,7 +2,7 @@ extends Node
 
 signal logged_in
 signal player_added(
-	id: int, character_name: String, pos: Vector2, current_level: int, experience: int
+	id: int, character_name: String, pos: Vector2, current_level: int, experience: int, gold: int
 )
 signal player_removed(character_name: String)
 
@@ -128,9 +128,10 @@ func authenticate_with_secret(_username: String, _secret: String, _character: St
 		logged_in.emit()
 
 
-@rpc("call_remote", "authority", "reliable")
-func add_player(id: int, character_name: String, pos: Vector2, current_level: int, experience: int):
-	player_added.emit(id, character_name, pos, current_level, experience)
+@rpc("call_remote", "authority", "reliable") func add_player(
+	id: int, character_name: String, pos: Vector2, current_level: int, experience: int, gold: int
+):
+	player_added.emit(id, character_name, pos, current_level, experience, gold)
 
 
 @rpc("call_remote", "authority", "reliable") func remove_player(character_name: String):
