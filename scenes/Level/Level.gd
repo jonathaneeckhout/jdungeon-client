@@ -21,6 +21,8 @@ var tilemap: TileMap
 @onready var loot_scene = load("res://scenes/Loot/Loot.tscn")
 
 @onready var tree_scene = load("res://scenes/Terrain/Tree/Tree.tscn")
+@onready var tree_2_scene = load("res://scenes/Terrain/Tree_2/Tree_2.tscn")
+@onready var caravan_scene = load("res://scenes/Terrain/Caravan/Caravan.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -69,6 +71,10 @@ func load_level(level_info: Dictionary):
 		match element["class"]:
 			"Tree":
 				el = tree_scene.instantiate()
+			"Tree_2":
+				el = tree_2_scene.instantiate()
+			"Caravan":
+				el = caravan_scene.instantiate()
 
 		el.position = Vector2(element["position"]["x"], element["position"]["y"])
 		terrain.add_child(el)
