@@ -30,6 +30,9 @@ func _ready():
 	LevelsConnection.player_added.connect(_on_player_added)
 	LevelsConnection.player_removed.connect(_on_player_removed)
 
+	LevelsConnection.other_player_added.connect(_on_other_player_added)
+	LevelsConnection.other_player_removed.connect(_on_other_player_removed)
+
 	LevelsConnection.enemy_added.connect(_on_enemy_added)
 	LevelsConnection.enemy_removed.connect(_on_enemy_removed)
 
@@ -107,6 +110,16 @@ func add_player(
 		player_added.emit(player)
 
 
+func add_other_player(id: int, character_name: String, pos: Vector2, hp: float):
+	var player = player_scene.instantiate()
+	player.player = id
+	player.position = pos
+	player.hp = hp
+	player.username = character_name
+	player.name = character_name
+	players.add_child(player)
+
+
 func remove_player(character_name: String):
 	if players.has_node(character_name):
 		players.get_node(character_name).queue_free()
@@ -174,6 +187,14 @@ func _on_player_added(
 
 
 func _on_player_removed(character_name: String):
+	remove_player(character_name)
+
+
+func _on_other_player_added(id: int, character_name: String, pos: Vector2, hp: float):
+	add_other_player(id, character_name, pos, hp)
+
+
+func _on_other_player_removed(character_name: String):
 	remove_player(character_name)
 
 

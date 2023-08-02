@@ -6,6 +6,9 @@ signal player_added(
 )
 signal player_removed(character_name: String)
 
+signal other_player_added(id: int, character_name: String, pos: Vector2, hp: float)
+signal other_player_removed(character_name: String)
+
 signal enemy_added(enemy_name: String, enemy_class: String, pos: Vector2, hp: float)
 signal enemy_removed(enemy_name: String)
 
@@ -140,6 +143,15 @@ func authenticate_with_secret(_username: String, _secret: String, _character: St
 
 @rpc("call_remote", "authority", "reliable") func remove_player(character_name: String):
 	player_removed.emit(character_name)
+
+
+@rpc("call_remote", "authority", "reliable")
+func add_other_player(id: int, character_name: String, pos: Vector2, hp: float):
+	other_player_added.emit(id, character_name, pos, hp)
+
+
+@rpc("call_remote", "authority", "reliable") func remove_other_player(character_name: String):
+	other_player_removed.emit(character_name)
 
 
 @rpc("call_remote", "any_peer", "reliable") func move(_input_sequence: int, _pos: Vector2):
