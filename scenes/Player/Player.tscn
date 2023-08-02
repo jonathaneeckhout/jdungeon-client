@@ -1168,6 +1168,7 @@ grow_vertical = 0
 theme_override_styles/fill = SubResource("StyleBoxFlat_7j053")
 
 [node name="Inventory" parent="Camera2D/UILayer/GUI" instance=ExtResource("4_ifovv")]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

@@ -18,6 +18,7 @@ signal gold_updated(amount: int)
 
 signal item_added_to_inventory(item_class: String, pos: Vector2)
 signal item_removed_from_inventory(pos: Vector2)
+signal inventory_updated(items: Dictionary)
 
 const CLOCK_SYNC_TIMER_TIME = 0.5
 const LATENCY_BUFFER_SIZE = 9
@@ -194,6 +195,15 @@ func add_item_to_inventory(item_class: String, pos: Vector2):
 @rpc("call_remote", "any_peer", "reliable") func use_inventory_item_at_pos(_grid_pos: Vector2):
 	# Placeholder code
 	pass
+
+
+@rpc("call_remote", "any_peer", "reliable") func get_inventory():
+	# Placeholder code
+	pass
+
+
+@rpc("call_remote", "authority", "reliable") func sync_inventory(inventory: Dictionary):
+	inventory_updated.emit(inventory)
 
 
 @rpc("call_remote", "any_peer", "reliable") func fetch_server_time(_client_time: float):

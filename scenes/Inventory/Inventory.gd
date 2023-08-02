@@ -31,6 +31,7 @@ func _ready():
 	LevelsConnection.item_added_to_inventory.connect(_on_item_added_to_inventory)
 	LevelsConnection.item_removed_from_inventory.connect(_on_item_removed_from_inventory)
 	LevelsConnection.gold_updated.connect(_on_gold_updated)
+	LevelsConnection.inventory_updated.connect(_on_inventory_updated)
 
 
 func _input(event):
@@ -38,6 +39,7 @@ func _input(event):
 		if visible:
 			hide()
 		else:
+			LevelsConnection.get_inventory.rpc_id(1)
 			show()
 
 
@@ -81,3 +83,12 @@ func _on_item_removed_from_inventory(pos: Vector2):
 
 func _on_gold_updated(amount: int):
 	gold = amount
+
+
+func _on_inventory_updated(items: Dictionary):
+	for x in range(SIZE.x):
+		for y in range(SIZE.y):
+			remove_item(Vector2(x, y))
+
+	for item_data in items["items"]:
+		add_item(item_data["class"], Vector2(item_data["pos"]["x"], item_data["pos"]["y"]))
