@@ -24,6 +24,8 @@ func _ready():
 	prev_pos = position
 	$AnimationPlayer.play("idle")
 
+	update_hp_bar()
+
 
 func _physics_process(_delta):
 	match state:
