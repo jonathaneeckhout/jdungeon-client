@@ -16,6 +16,8 @@ var tilemap: TileMap
 @onready var ram_scene = load("res://scenes/Enemies/Ram/Ram.tscn")
 @onready var bushman_scene = load("res://scenes/Enemies/Bushman/Bushman.tscn")
 
+@onready var milklady_scene = load("res://scenes/NPCs/MilkLady/MilkLady.tscn")
+
 @onready var loot_scene = load("res://scenes/Loot/Loot.tscn")
 
 @onready var tree_scene = load("res://scenes/Terrain/Tree/Tree.tscn")
@@ -28,6 +30,9 @@ func _ready():
 
 	LevelsConnection.enemy_added.connect(_on_enemy_added)
 	LevelsConnection.enemy_removed.connect(_on_enemy_removed)
+
+	LevelsConnection.npc_added.connect(_on_npc_added)
+	LevelsConnection.npc_removed.connect(_on_npc_removed)
 
 	LevelsConnection.item_added.connect(_on_item_added)
 	LevelsConnection.item_removed.connect(_on_item_removed)
@@ -124,6 +129,23 @@ func remove_enemy(enemy_name: String):
 		enemies.get_node(enemy_name).queue_free()
 
 
+func add_npc(npc_name: String, npc_class: String, pos: Vector2):
+	var npc: Entity
+
+	match npc_class:
+		"MilkLady":
+			npc = milklady_scene.instantiate()
+
+	npc.position = pos
+	npc.name = npc_name
+	npcs.add_child(npc)
+
+
+func remove_npc(npc_name: String):
+	if npcs.has_node(npc_name):
+		npcs.get_node(npc_name).queue_free()
+
+
 func add_item(item_name: String, item_class: String, pos: Vector2):
 	var loot = loot_scene.instantiate()
 	loot.name = item_name
@@ -153,6 +175,14 @@ func _on_enemy_added(enemy_name: String, enemy_class: String, pos: Vector2):
 
 func _on_enemy_removed(enemy_name: String):
 	remove_enemy(enemy_name)
+
+
+func _on_npc_added(npc_name: String, npc_class: String, pos: Vector2):
+	add_npc(npc_name, npc_class, pos)
+
+
+func _on_npc_removed(npc_name: String):
+	remove_npc(npc_name)
 
 
 func _on_item_added(item_name: String, item_class: String, pos: Vector2):

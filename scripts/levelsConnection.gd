@@ -9,6 +9,9 @@ signal player_removed(character_name: String)
 signal enemy_added(enemy_name: String, enemy_class: String, pos: Vector2)
 signal enemy_removed(enemy_name: String)
 
+signal npc_added(npc_name: String, npc_class: String, pos: Vector2)
+signal npc_removed(npc_name: String)
+
 signal item_added(item_name: String, item_class: String, pos: Vector2)
 signal item_removed(item_name: String)
 signal gold_updated(amount: int)
@@ -164,6 +167,15 @@ func add_item(item_name: String, item_class: String, pos: Vector2):
 
 @rpc("call_remote", "authority", "reliable") func remove_item(item_name: String):
 	item_removed.emit(item_name)
+
+
+@rpc("call_remote", "authority", "reliable")
+func add_npc(npc_name: String, npc_class: String, pos: Vector2):
+	npc_added.emit(npc_name, npc_class, pos)
+
+
+@rpc("call_remote", "authority", "reliable") func remove_npc(npc_name: String):
+	npc_removed.emit(npc_name)
 
 
 @rpc("call_remote", "authority", "reliable") func sync_gold(amount: int):
