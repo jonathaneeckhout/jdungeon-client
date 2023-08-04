@@ -43,12 +43,7 @@ func get_panel_at_pos(pos: Vector2):
 
 
 func add_item(item_class: String, pos: Vector2, price: int):
-	var item: Item
-	match item_class:
-		"HealthPotion":
-			item = load("res://scripts/items/healthPotion.gd").new()
-		"Gold":
-			item = load("res://scripts/items/gold.gd").new()
+	var item: Item = Global.item_class_to_item(item_class)
 	if item:
 		var panel = get_panel_at_pos(pos)
 		item.price = price
