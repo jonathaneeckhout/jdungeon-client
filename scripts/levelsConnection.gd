@@ -23,6 +23,8 @@ signal item_added_to_inventory(item_class: String, pos: Vector2)
 signal item_removed_from_inventory(pos: Vector2)
 signal inventory_updated(items: Dictionary)
 
+signal shop_updated(vendor: String, shop: Dictionary)
+
 const CLOCK_SYNC_TIMER_TIME = 0.5
 const LATENCY_BUFFER_SIZE = 9
 const LATENCY_BUFFER_MID_POINT = int(LATENCY_BUFFER_SIZE / float(2))
@@ -216,6 +218,10 @@ func add_item_to_inventory(item_class: String, pos: Vector2):
 
 @rpc("call_remote", "authority", "reliable") func sync_inventory(inventory: Dictionary):
 	inventory_updated.emit(inventory)
+
+
+@rpc("call_remote", "authority", "reliable") func sync_shop(vendor: String, shop: Dictionary):
+	shop_updated.emit(vendor, shop)
 
 
 @rpc("call_remote", "any_peer", "reliable") func fetch_server_time(_client_time: float):

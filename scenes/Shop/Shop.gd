@@ -1,6 +1,6 @@
 extends Panel
 
-const SIZE = Vector2(6, 6)
+const SIZE = Vector2(4, 4)
 
 var panels = []
 
@@ -26,20 +26,14 @@ func _ready():
 			panel.grid_pos = Vector2(x, y)
 			panels[x][y] = panel
 			i += 1
+	$CloseButton.pressed.connect(_on_close_button_pressed)
 
-	LevelsConnection.item_added_to_inventory.connect(_on_item_added_to_inventory)
-	LevelsConnection.item_removed_from_inventory.connect(_on_item_removed_from_inventory)
-	LevelsConnection.gold_updated.connect(_on_gold_updated)
-	LevelsConnection.inventory_updated.connect(_on_inventory_updated)
+	LevelsConnection.shop_updated.connect(_on_shop_updated)
 
 
 func _input(event):
-	if event.is_action_pressed("toggle_bag"):
-		if visible:
-			hide()
-		else:
-			LevelsConnection.get_inventory.rpc_id(1)
-			show()
+	if event.is_action_pressed("right_click") and not Global.above_ui:
+		hide()
 
 
 func get_panel_at_pos(pos: Vector2):
@@ -47,7 +41,7 @@ func get_panel_at_pos(pos: Vector2):
 	return $GridContainer.get_node(panel_path)
 
 
-func add_item(item_class: String, pos: Vector2):
+func add_item(item_class: String, pos: Vector2, price: int):
 	var item: Item
 	match item_class:
 		"HealthPotion":
@@ -56,12 +50,24 @@ func add_item(item_class: String, pos: Vector2):
 			item = load("res://scripts/items/gold.gd").new()
 	if item:
 		var panel = get_panel_at_pos(pos)
+		item.price = price
 		panel.item = item
 
 
 func remove_item(pos: Vector2):
 	var panel = panels[pos.x][pos.y]
 	panel.item = null
+
+
+func display_info(pos: Vector2, label: String, price: int):
+	$InfoPanel.position = pos
+	$InfoPanel/Label.text = label
+	$InfoPanel/Price.text = str(price)
+	$InfoPanel.show()
+
+
+func hide_info():
+	$InfoPanel.hide()
 
 
 func _on_mouse_entered():
@@ -72,22 +78,22 @@ func _on_mouse_exited():
 	Global.above_ui = false
 
 
-func _on_item_added_to_inventory(item_class: String, pos: Vector2):
-	add_item(item_class, pos)
+func _on_shop_updated(vendor: String, items: Dictionary):
+	$Label.text = "%s's shop" % vendor
 
-
-func _on_item_removed_from_inventory(pos: Vector2):
-	remove_item(pos)
-
-
-func _on_gold_updated(amount: int):
-	gold = amount
-
-
-func _on_inventory_updated(items: Dictionary):
 	for x in range(SIZE.x):
 		for y in range(SIZE.y):
 			remove_item(Vector2(x, y))
 
 	for item_data in items["items"]:
-		add_item(item_data["class"], Vector2(item_data["pos"]["x"], item_data["pos"]["y"]))
+		add_item(
+			item_data["class"],
+			Vector2(item_data["pos"]["x"], item_data["pos"]["y"]),
+			item_data["price"]
+		)
+
+	show()
+
+
+func _on_close_button_pressed():
+	hide()

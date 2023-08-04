@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dq18xjaweyeec"]
+[gd_scene load_steps=23 format=3 uid="uid://dq18xjaweyeec"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.gd" id="1_2682b"]
 [ext_resource type="Script" path="res://scenes/Player/PlayerInput.gd" id="2_3kipm"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://meawplqd8j72" path="res://scenes/Inventory/Inventory.tscn" id="4_ifovv"]
 [ext_resource type="Texture2D" uid="uid://2gshutanpd8q" path="res://assets/enemies/thief/thief_backarm.png" id="4_m28py"]
 [ext_resource type="Texture2D" uid="uid://4kodnsyvllv2" path="res://assets/enemies/thief/thief_backleg.png" id="5_egevc"]
+[ext_resource type="PackedScene" uid="uid://dy1r3n0fpuneq" path="res://scenes/Shop/Shop.tscn" id="5_wrey8"]
 [ext_resource type="Texture2D" uid="uid://cbdy1rryd4k3u" path="res://assets/enemies/thief/thief_frontleg.png" id="6_hupq4"]
 [ext_resource type="Texture2D" uid="uid://bgbdqelcdo8bq" path="res://assets/enemies/thief/thief_torso.png" id="7_jxmcl"]
 [ext_resource type="Texture2D" uid="uid://bsvfq141bedg4" path="res://assets/enemies/thief/thief_head.png" id="8_kpuuq"]
@@ -1181,6 +1182,10 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="Shop" parent="Camera2D/UILayer/GUI" instance=ExtResource("5_wrey8")]
+visible = false
+layout_mode = 1
 
 [node name="Sprites" type="Node2D" parent="."]
 position = Vector2(0, -45)
