@@ -21,7 +21,7 @@ func _ready():
 
 func _gui_input(event: InputEvent):
 	if event.is_action_pressed("right_click"):
-		LevelsConnection.use_inventory_item_at_pos.rpc_id(1, grid_pos)
+		LevelsConnection.buy_shop_item_at_pos.rpc_id(1, shop.vendor, grid_pos)
 
 
 func _on_mouse_entered():

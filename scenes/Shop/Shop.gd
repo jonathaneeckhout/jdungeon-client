@@ -3,6 +3,7 @@ extends Panel
 const SIZE = Vector2(4, 4)
 
 var panels = []
+var vendor: String = ""
 
 @export var gold := 0:
 	set(amount):
@@ -78,7 +79,8 @@ func _on_mouse_exited():
 	Global.above_ui = false
 
 
-func _on_shop_updated(vendor: String, items: Dictionary):
+func _on_shop_updated(vendor_name: String, items: Dictionary):
+	vendor = vendor_name
 	$Label.text = "%s's shop" % vendor
 
 	for x in range(SIZE.x):

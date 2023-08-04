@@ -7,6 +7,7 @@ bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
 
 [node name="Panel" type="Panel"]
 custom_minimum_size = Vector2(64, 64)
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_lyqlp")
 script = ExtResource("1_o7ote")
 

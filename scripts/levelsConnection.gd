@@ -220,6 +220,12 @@ func add_item_to_inventory(item_class: String, pos: Vector2):
 	inventory_updated.emit(inventory)
 
 
+@rpc("call_remote", "any_peer", "reliable")
+func buy_shop_item_at_pos(_vendor: String, _grid_pos: Vector2):
+	# Placeholder code
+	pass
+
+
 @rpc("call_remote", "authority", "reliable") func sync_shop(vendor: String, shop: Dictionary):
 	shop_updated.emit(vendor, shop)
 

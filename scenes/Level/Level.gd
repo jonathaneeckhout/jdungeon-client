@@ -125,6 +125,13 @@ func remove_player(character_name: String):
 		players.get_node(character_name).queue_free()
 
 
+func get_player_by_id(id: int):
+	for player in players.get_children():
+		if player.player == id:
+			return player
+	return null
+
+
 func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2, hp: float):
 	var enemy: Entity
 
