@@ -24,6 +24,7 @@ func _ready():
 		for x in range(SIZE.x):
 			var panel = $GridContainer.get_child(i)
 			panel.grid_pos = Vector2(x, y)
+			panel.drag_panel_offset = (panel.grid_pos * $DragPanel.size) - $DragPanel.size/2
 			panels[x][y] = panel
 			i += 1
 

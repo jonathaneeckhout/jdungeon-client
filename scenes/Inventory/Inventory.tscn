@@ -163,3 +163,13 @@ text = "Gold:"
 [node name="GoldValue" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "0"
+
+[node name="DragPanel" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -197.0
+offset_top = 78.0
+offset_right = -133.0
+offset_bottom = 142.0
+mouse_filter = 2
+expand_mode = 2
