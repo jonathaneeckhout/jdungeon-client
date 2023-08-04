@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bov54jbmbllgw"]
+
+[ext_resource type="Texture2D" uid="uid://xxnb3y38pf3k" path="res://assets/terrain/sign/sign.png" id="1_76rpc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qyirb"]
+radius = 32.0
+
+[node name="CaravanSign" type="StaticBody2D"]
+
+[node name="Sign" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_76rpc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qyirb")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -39.0
+offset_right = 20.0
+offset_bottom = -22.0
+theme_override_font_sizes/font_size = 10
+text = "Caravan"

@@ -22,7 +22,10 @@ var tilemap: TileMap
 
 @onready var tree_scene = load("res://scenes/Terrain/Tree/Tree.tscn")
 @onready var tree_2_scene = load("res://scenes/Terrain/Tree_2/Tree_2.tscn")
+@onready var tree_3_scene = load("res://scenes/Terrain/Tree_3/Tree_3.tscn")
 @onready var caravan_scene = load("res://scenes/Terrain/Caravan/Caravan.tscn")
+@onready var sign_scene = load("res://scenes/Terrain/Sign/CaravanSign.tscn")
+@onready var grass_scene = load("res://scenes/Terrain/Grass/Grass.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -76,8 +79,17 @@ func load_level(level_info: Dictionary):
 				el = tree_scene.instantiate()
 			"Tree_2":
 				el = tree_2_scene.instantiate()
+			"Tree_3":
+				el = tree_3_scene.instantiate()
 			"Caravan":
 				el = caravan_scene.instantiate()
+			"CaravanSign":
+				el = sign_scene.instantiate()
+			"Grass":
+				el = grass_scene.instantiate()
+
+		if not el:
+			return
 
 		el.position = Vector2(element["position"]["x"], element["position"]["y"])
 		terrain.add_child(el)
