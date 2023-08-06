@@ -211,6 +211,11 @@ func add_item_to_inventory(item_class: String, pos: Vector2):
 	pass
 
 
+@rpc("call_remote", "any_peer", "reliable") func drop_inventory_item_at_pos(_grid_pos: Vector2):
+	# Placeholder code
+	pass
+
+
 @rpc("call_remote", "any_peer", "reliable") func get_inventory():
 	# Placeholder code
 	pass

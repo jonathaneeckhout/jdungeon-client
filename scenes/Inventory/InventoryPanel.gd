@@ -24,6 +24,10 @@ func _gui_input(event: InputEvent):
 		drag_panel.texture = null
 		drag_panel.hide()
 		selected = false
+		if Global.above_ui:
+			print("Swapping")
+		else:
+			LevelsConnection.drop_inventory_item_at_pos.rpc_id(1, grid_pos)
 	elif event.is_action_pressed("right_click"):
 		if not selected:
 			LevelsConnection.use_inventory_item_at_pos.rpc_id(1, grid_pos)
