@@ -7,6 +7,9 @@ extends Panel
 			$TextureRect.texture = load(item.inventory_texture_path)
 		else:
 			$TextureRect.texture = null
+
+var item_uuid: String
+
 var grid_pos: Vector2
 var selected = false
 var drag_panel_offset: Vector2
@@ -33,10 +36,12 @@ func _gui_input(event: InputEvent):
 		if Global.above_ui and inventory.mouse_above_this_panel:
 			print("Swapping %s with %s" % [grid_pos, inventory.mouse_above_this_panel.grid_pos])
 		else:
-			LevelsConnection.drop_inventory_item_at_pos.rpc_id(1, grid_pos)
+			if item_uuid and item_uuid != "":
+				LevelsConnection.drop_inventory_item.rpc_id(1, item_uuid)
 	elif event.is_action_pressed("right_click"):
 		if not selected:
-			LevelsConnection.use_inventory_item_at_pos.rpc_id(1, grid_pos)
+			if item_uuid and item_uuid != "":
+				LevelsConnection.use_inventory_item.rpc_id(1, item_uuid)
 		else:
 			selected = false
 			drag_panel.hide()

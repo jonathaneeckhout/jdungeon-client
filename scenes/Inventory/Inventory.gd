@@ -49,16 +49,32 @@ func get_panel_at_pos(pos: Vector2):
 	return $GridContainer.get_node(panel_path)
 
 
-func add_item(item_class: String, pos: Vector2):
+func add_item(item_uuid: String, item_class: String):
 	var item: Item = Global.item_class_to_item(item_class)
 	if item:
-		var panel = get_panel_at_pos(pos)
-		panel.item = item
+		for y in range(SIZE.y):
+			for x in range(SIZE.x):
+				var pos = Vector2(x, y)
+				var panel = get_panel_at_pos(pos)
+				if panel.item == null:
+					panel.item = item
+					panel.item_uuid = item_uuid
+					return
 
 
-func remove_item(pos: Vector2):
+func remove_item(item_uuid: String):
+	for x in range(SIZE.x):
+		for y in range(SIZE.y):
+			var panel = panels[x][y]
+			if panel.item_uuid == item_uuid:
+				panel.item = null
+				panel.item_uuid = ""
+
+
+func remove_item_at_pos(pos: Vector2):
 	var panel = panels[pos.x][pos.y]
 	panel.item = null
+	panel.item_uuid = ""
 
 
 func _on_mouse_entered():
@@ -69,12 +85,12 @@ func _on_mouse_exited():
 	Global.above_ui = false
 
 
-func _on_item_added_to_inventory(item_class: String, pos: Vector2):
-	add_item(item_class, pos)
+func _on_item_added_to_inventory(item_uuid: String, item_class: String):
+	add_item(item_uuid, item_class)
 
 
-func _on_item_removed_from_inventory(pos: Vector2):
-	remove_item(pos)
+func _on_item_removed_from_inventory(item_uuid):
+	remove_item(item_uuid)
 
 
 func _on_gold_updated(amount: int):
@@ -82,9 +98,12 @@ func _on_gold_updated(amount: int):
 
 
 func _on_inventory_updated(items: Dictionary):
+	if not "items" in items:
+		return
+
 	for x in range(SIZE.x):
 		for y in range(SIZE.y):
-			remove_item(Vector2(x, y))
+			remove_item_at_pos(Vector2(x, y))
 
 	for item_data in items["items"]:
-		add_item(item_data["class"], Vector2(item_data["pos"]["x"], item_data["pos"]["y"]))
+		add_item(item_data["uuid"], item_data["class"])

@@ -19,8 +19,8 @@ signal item_added(item_name: String, item_class: String, pos: Vector2)
 signal item_removed(item_name: String)
 signal gold_updated(amount: int)
 
-signal item_added_to_inventory(item_class: String, pos: Vector2)
-signal item_removed_from_inventory(pos: Vector2)
+signal item_added_to_inventory(item_uuid: String, item_class: String)
+signal item_removed_from_inventory(item_uuid: String)
 signal inventory_updated(items: Dictionary)
 
 signal shop_updated(vendor: String, shop: Dictionary)
@@ -198,20 +198,20 @@ func add_npc(npc_name: String, npc_class: String, pos: Vector2, hp: float):
 
 
 @rpc("call_remote", "authority", "reliable")
-func add_item_to_inventory(item_class: String, pos: Vector2):
-	item_added_to_inventory.emit(item_class, pos)
+func add_item_to_inventory(item_uuid: String, item_class: String):
+	item_added_to_inventory.emit(item_uuid, item_class)
 
 
-@rpc("call_remote", "authority", "reliable") func remove_item_from_inventory(pos: Vector2):
-	item_removed_from_inventory.emit(pos)
+@rpc("call_remote", "authority", "reliable") func remove_item_from_inventory(item_uuid: String):
+	item_removed_from_inventory.emit(item_uuid)
 
 
-@rpc("call_remote", "any_peer", "reliable") func use_inventory_item_at_pos(_grid_pos: Vector2):
+@rpc("call_remote", "any_peer", "reliable") func use_inventory_item(_item_uuid: String):
 	# Placeholder code
 	pass
 
 
-@rpc("call_remote", "any_peer", "reliable") func drop_inventory_item_at_pos(_grid_pos: Vector2):
+@rpc("call_remote", "any_peer", "reliable") func drop_inventory_item(_item_uuid: String):
 	# Placeholder code
 	pass
 
