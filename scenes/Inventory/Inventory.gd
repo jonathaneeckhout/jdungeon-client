@@ -2,12 +2,13 @@ extends Panel
 
 const SIZE = Vector2(6, 6)
 
-var panels = []
-
 @export var gold := 0:
 	set(amount):
 		gold = amount
 		$VBoxContainer/GoldValue.text = str(amount)
+
+var panels = []
+var mouse_above_this_panel: Panel
 
 
 func _ready():
@@ -24,7 +25,7 @@ func _ready():
 		for x in range(SIZE.x):
 			var panel = $GridContainer.get_child(i)
 			panel.grid_pos = Vector2(x, y)
-			panel.drag_panel_offset = (panel.grid_pos * $DragPanel.size) - $DragPanel.size/2
+			panel.drag_panel_offset = (panel.grid_pos * $DragPanel.size) - $DragPanel.size / 2
 			panels[x][y] = panel
 			i += 1
 

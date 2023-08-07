@@ -12,7 +12,13 @@ var selected = false
 var drag_panel_offset: Vector2
 
 @onready var camera = $"../../../../.."
+@onready var inventory = $"../.."
 @onready var drag_panel = $"../../DragPanel"
+
+
+func _ready():
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 
 
 func _gui_input(event: InputEvent):
@@ -24,8 +30,8 @@ func _gui_input(event: InputEvent):
 		drag_panel.texture = null
 		drag_panel.hide()
 		selected = false
-		if Global.above_ui:
-			print("Swapping")
+		if Global.above_ui and inventory.mouse_above_this_panel:
+			print("Swapping %s with %s" % [grid_pos, inventory.mouse_above_this_panel.grid_pos])
 		else:
 			LevelsConnection.drop_inventory_item_at_pos.rpc_id(1, grid_pos)
 	elif event.is_action_pressed("right_click"):
@@ -39,3 +45,11 @@ func _gui_input(event: InputEvent):
 func _physics_process(_delta):
 	if selected:
 		drag_panel.position = get_local_mouse_position() + drag_panel_offset
+
+
+func _on_mouse_entered():
+	inventory.mouse_above_this_panel = self
+
+
+func _on_mouse_exited():
+	inventory.mouse_above_this_panel = null
