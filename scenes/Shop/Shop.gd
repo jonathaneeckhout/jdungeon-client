@@ -2,13 +2,13 @@ extends Panel
 
 const SIZE = Vector2(4, 4)
 
-var panels = []
-var vendor: String = ""
-
 @export var gold := 0:
 	set(amount):
 		gold = amount
 		$VBoxContainer/GoldValue.text = str(amount)
+
+var panels = []
+var vendor: String = ""
 
 
 func _ready():
@@ -42,12 +42,18 @@ func get_panel_at_pos(pos: Vector2):
 	return $GridContainer.get_node(panel_path)
 
 
-func add_item(item_class: String, pos: Vector2, price: int):
+func add_item(item_uuid: String, item_class: String, price: int):
 	var item: Item = Global.item_class_to_item(item_class)
 	if item:
-		var panel = get_panel_at_pos(pos)
-		item.price = price
-		panel.item = item
+		for y in range(SIZE.y):
+			for x in range(SIZE.x):
+				var pos = Vector2(x, y)
+				var panel = get_panel_at_pos(pos)
+				if panel.item == null:
+					item.price = price
+					panel.item = item
+					panel.item_uuid = item_uuid
+					return
 
 
 func remove_item(pos: Vector2):
@@ -83,11 +89,7 @@ func _on_shop_updated(vendor_name: String, items: Dictionary):
 			remove_item(Vector2(x, y))
 
 	for item_data in items["items"]:
-		add_item(
-			item_data["class"],
-			Vector2(item_data["pos"]["x"], item_data["pos"]["y"]),
-			item_data["price"]
-		)
+		add_item(item_data["uuid"], item_data["class"], item_data["price"])
 
 	show()
 

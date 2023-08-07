@@ -225,8 +225,7 @@ func add_item_to_inventory(item_class: String, pos: Vector2):
 	inventory_updated.emit(inventory)
 
 
-@rpc("call_remote", "any_peer", "reliable")
-func buy_shop_item_at_pos(_vendor: String, _grid_pos: Vector2):
+@rpc("call_remote", "any_peer", "reliable") func buy_shop_item(_vendor: String, _item_uuid: String):
 	# Placeholder code
 	pass
 

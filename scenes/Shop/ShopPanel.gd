@@ -9,6 +9,8 @@ extends Panel
 		else:
 			$TextureRect.texture = null
 
+var item_uuid: String
+
 var grid_pos: Vector2
 
 @onready var shop = $"../.."
@@ -21,7 +23,7 @@ func _ready():
 
 func _gui_input(event: InputEvent):
 	if event.is_action_pressed("right_click"):
-		LevelsConnection.buy_shop_item_at_pos.rpc_id(1, shop.vendor, grid_pos)
+		LevelsConnection.buy_shop_item.rpc_id(1, shop.vendor, item_uuid)
 
 
 func _on_mouse_entered():
