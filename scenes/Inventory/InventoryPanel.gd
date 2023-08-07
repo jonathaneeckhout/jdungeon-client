@@ -34,7 +34,7 @@ func _gui_input(event: InputEvent):
 		drag_panel.hide()
 		selected = false
 		if Global.above_ui and inventory.mouse_above_this_panel:
-			print("Swapping %s with %s" % [grid_pos, inventory.mouse_above_this_panel.grid_pos])
+			inventory.swap_items(self, inventory.mouse_above_this_panel)
 		else:
 			if item_uuid and item_uuid != "":
 				LevelsConnection.drop_inventory_item.rpc_id(1, item_uuid)
