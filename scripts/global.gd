@@ -6,15 +6,19 @@ var above_ui = false
 func item_class_to_item(item_class: String):
 	var item: Item
 	match item_class:
-		"HealthPotion":
-			item = load("res://scripts/items/healthPotion.gd").new()
 		"Gold":
 			item = load("res://scripts/items/gold.gd").new()
+
+		"HealthPotion":
+			item = load("res://scripts/items/consumables/healthPotion.gd").new()
 		"ManaPotion":
-			item = load("res://scripts/items/manaPotion.gd").new()
+			item = load("res://scripts/items/consumables/manaPotion.gd").new()
 		"Apple":
-			item = load("res://scripts/items/apple.gd").new()
+			item = load("res://scripts/items/consumables/apple.gd").new()
 		"Meat":
-			item = load("res://scripts/items/meat.gd").new()
+			item = load("res://scripts/items/consumables/meat.gd").new()
+
+		"IronSpear":
+			item = load("res://scripts/items/equipment/weapons/ironspear.gd").new()
 
 	return item
