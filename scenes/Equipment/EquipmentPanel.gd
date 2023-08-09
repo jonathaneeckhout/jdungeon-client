@@ -19,10 +19,6 @@ var grid_pos: Vector2
 
 
 func _gui_input(event: InputEvent):
-	if event.is_action_pressed("left_click"):
-		print("left click")
-	elif event.is_action_released("left_click"):
-		print("left release")
-	elif event.is_action_pressed("right_click"):
-		print("right click")
-
+	if event.is_action_pressed("right_click"):
+		if item_uuid and item_uuid != "":
+			LevelsConnection.remove_equipment_item.rpc_id(1, item_uuid)

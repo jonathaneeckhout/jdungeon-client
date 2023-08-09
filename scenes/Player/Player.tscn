@@ -1135,6 +1135,7 @@ visible = false
 layout_mode = 1
 
 [node name="Equipment" parent="Camera2D/UILayer/GUI" instance=ExtResource("6_hdwey")]
+visible = false
 layout_mode = 1
 offset_left = 0.0
 offset_top = -248.0

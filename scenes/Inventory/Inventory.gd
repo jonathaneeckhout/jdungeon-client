@@ -72,6 +72,7 @@ func remove_item(item_uuid: String):
 			if panel.item_uuid == item_uuid:
 				panel.item = null
 				panel.item_uuid = ""
+				return
 
 
 func remove_item_at_pos(pos: Vector2):

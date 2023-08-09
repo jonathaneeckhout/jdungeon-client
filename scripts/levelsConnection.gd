@@ -25,6 +25,10 @@ signal inventory_updated(items: Dictionary)
 
 signal shop_updated(vendor: String, shop: Dictionary)
 
+signal item_equipped(equipment_slot: String, item_uuid: String, item_class: String)
+signal item_unequipped(equipment_slot: String)
+signal equipment_updated(items: Dictionary)
+
 const CLOCK_SYNC_TIMER_TIME = 0.5
 const LATENCY_BUFFER_SIZE = 9
 const LATENCY_BUFFER_MID_POINT = int(LATENCY_BUFFER_SIZE / float(2))
@@ -232,6 +236,29 @@ func add_item_to_inventory(item_uuid: String, item_class: String):
 
 @rpc("call_remote", "authority", "reliable") func sync_shop(vendor: String, shop: Dictionary):
 	shop_updated.emit(vendor, shop)
+
+
+@rpc("call_remote", "authority", "reliable")
+func equip_item(equipment_slot: String, item_uuid: String, item_class: String):
+	item_equipped.emit(equipment_slot, item_uuid, item_class)
+
+
+@rpc("call_remote", "authority", "reliable") func unequip_item(equipment_slot: String):
+	item_unequipped.emit(equipment_slot)
+
+
+@rpc("call_remote", "any_peer", "reliable") func remove_equipment_item(_item_uuid: String):
+	# Placeholder code
+	pass
+
+
+@rpc("call_remote", "any_peer", "reliable") func get_equipment():
+	# Placeholder code
+	pass
+
+
+@rpc("call_remote", "authority", "reliable") func sync_equipment(equiment: Dictionary):
+	equipment_updated.emit(equiment)
 
 
 @rpc("call_remote", "any_peer", "reliable") func fetch_server_time(_client_time: float):
