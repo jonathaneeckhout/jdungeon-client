@@ -5,19 +5,23 @@ extends Skeleton2D
 	"Body": [$Torso/Torso/Equipment],
 	"Legs":
 	[
-		$Torso/UpperLegLeft/UpperLegLeft,
-		$Torso/UpperLegLeft/LowerLegLeft/LowerLegLeft,
-		$UpperLegRight,
-		$LowerLegRight
+		$Torso/UpperLegLeft/UpperLegLeft/Equipment,
+		$Torso/UpperLegLeft/LowerLegLeft/LowerLegLeft/Equipment,
+		$UpperLegRight/Equipment,
+		$LowerLegRight/Equipment
 	],
 	"Arms":
 	[
-		$Torso/UpperArmLeft/UpperArmLeft,
-		$Torso/UpperArmLeft/LowerArmLeft/LowerArmLeft,
-		$UpperArmRight,
-		$LowerArmRight
+		$Torso/UpperArmLeft/UpperArmLeft/Equipment,
+		$Torso/UpperArmLeft/LowerArmLeft/LowerArmLeft/Equipment,
+		$UpperArmRight/Equipment,
+		$LowerArmRight/Equipment
 	],
-	"Feet": [$Torso/UpperLegLeft/LowerLegLeft/FootLeft/FootLeft, $LowerLegRight/FootRight],
+	"Feet":
+	[
+		$Torso/UpperLegLeft/LowerLegLeft/FootLeft/FootLeft/Equipment,
+		$LowerLegRight/FootRight/Equipment
+	],
 	"RightHand": [$LowerArmRight/WeaponRight],
 	"LeftHand": [$Torso/UpperArmLeft/LowerArmLeft/WeaponLeft]
 }
