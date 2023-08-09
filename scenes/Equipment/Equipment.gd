@@ -11,6 +11,8 @@ var panels = []
 var mouse_above_this_panel: Panel
 var location_cache = {}
 
+@onready var sprites = $"../../../../Sprites"
+
 
 func _ready():
 	mouse_entered.connect(_on_mouse_entered)
@@ -55,12 +57,16 @@ func equip_item(equipment_slot: String, item_uuid: String, item_class: String):
 		panel.item = item
 		panel.item_uuid = item_uuid
 
+		sprites.equip_item(equipment_slot, item)
+
 
 func unequip_item(equipment_slot: String):
 	var panel = get_panel_at_slot(equipment_slot)
 	if panel:
 		panel.item = null
 		panel.item_uuid = ""
+
+		sprites.unequip_item(equipment_slot)
 
 
 func _on_mouse_entered():

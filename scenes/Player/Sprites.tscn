@@ -40,6 +40,8 @@ texture = ExtResource("2_uwfom")
 offset = Vector2(20.8534, 37.2025)
 metadata/_edit_lock_ = true
 
+[node name="WeaponRight" type="Sprite2D" parent="LowerArmRight"]
+
 [node name="LowerLegRight" type="Sprite2D" parent="."]
 position = Vector2(-98.4847, -162.659)
 rotation = 0.176241
