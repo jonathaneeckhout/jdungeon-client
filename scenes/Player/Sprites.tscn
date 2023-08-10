@@ -94,7 +94,7 @@ offset = Vector2(9.91063, -171.367)
 metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="Torso/Torso"]
-position = Vector2(13.2719, -189.801)
+position = Vector2(5.457, -159.908)
 
 [node name="UpperLegLeft" type="Bone2D" parent="Torso"]
 position = Vector2(90, 40)
@@ -293,7 +293,7 @@ offset = Vector2(35.8401, -206.274)
 metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="Torso/Head/Head"]
-position = Vector2(140.268, -265.29)
+position = Vector2(150.481, -318.401)
 
 [node name="Expression" type="Sprite2D" parent="Torso/Head/Head"]
 position = Vector2(15.0809, -378.797)

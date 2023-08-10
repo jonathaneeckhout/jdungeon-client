@@ -6,7 +6,7 @@ func _init():
 
 	loot_texture_path = "res://assets/equipment/armour/ironplateset/LowerLegLeft.png"
 
-	loot_scale = Vector2(0.025, 0.025)
+	loot_scale = Vector2(0.1, 0.1)
 
 	inventory_texture_path = loot_texture_path
 
