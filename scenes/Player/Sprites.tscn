@@ -165,7 +165,7 @@ bone_angle = 0.0
 editor_settings/show_bone_gizmo = false
 
 [node name="WeaponLeft" type="Sprite2D" parent="Torso/UpperArmLeft/LowerArmLeft"]
-position = Vector2(243.956, 41.0597)
+position = Vector2(261.243, 201.375)
 rotation = -1.31138
 
 [node name="LowerArmLeft" type="Sprite2D" parent="Torso/UpperArmLeft/LowerArmLeft"]
