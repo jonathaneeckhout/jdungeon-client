@@ -25,61 +25,54 @@ modification_stack = SubResource("SkeletonModificationStack2D_8nfk3")
 script = ExtResource("1_6wdop")
 
 [node name="UpperArmRight" type="Sprite2D" parent="."]
-position = Vector2(-60, -690)
+position = Vector2(40.0014, -560)
 rotation = -0.0341038
 scale = Vector2(0.999991, 0.999991)
 texture = ExtResource("1_j4f8v")
 offset = Vector2(-21.4519, 53.7092)
-metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="UpperArmRight"]
-position = Vector2(-21.6918, 49.2892)
+position = Vector2(-117.885, -64.0576)
 
 [node name="LowerArmRight" type="Sprite2D" parent="."]
-position = Vector2(-160, -570)
+position = Vector2(-9.99854, -550)
 rotation = -0.0354398
 scale = Vector2(0.999991, 0.999991)
 texture = ExtResource("2_uwfom")
 offset = Vector2(20.8534, 37.2025)
-metadata/_edit_lock_ = true
 
 [node name="WeaponRight" type="Sprite2D" parent="LowerArmRight"]
 
 [node name="Equipment" type="Sprite2D" parent="LowerArmRight"]
-position = Vector2(18.5716, 40.6837)
+position = Vector2(-140.622, 15.0266)
 
 [node name="UpperLegRight" type="Sprite2D" parent="."]
-position = Vector2(-79.9999, -350)
-rotation = 0.214039
+position = Vector2(-119.999, -320)
+rotation = 0.146272
 scale = Vector2(0.999991, 0.999991)
 texture = ExtResource("5_kl0o2")
 offset = Vector2(33.5656, 129.636)
-metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="UpperLegRight"]
-position = Vector2(29.7379, 136.806)
-rotation = -0.10472
+position = Vector2(40, 105.911)
 
 [node name="LowerLegRight" type="Sprite2D" parent="."]
-position = Vector2(-110, -170)
-rotation = 0.21404
+position = Vector2(-99.9994, -230)
+rotation = 0.114454
 scale = Vector2(0.999991, 0.999991)
 texture = ExtResource("3_8cvw6")
 offset = Vector2(1.07996, 30.9249)
-metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="LowerLegRight"]
-position = Vector2(-7.64746, 11.8956)
-rotation = -0.10472
+position = Vector2(-17.2417, 112.707)
 
 [node name="FootRight" type="Sprite2D" parent="LowerLegRight"]
-position = Vector2(-7.69664, 166.661)
-rotation = -0.224167
+position = Vector2(-15.3013, 42.0227)
+rotation = -0.12651
 texture = ExtResource("4_e1w7c")
-metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="LowerLegRight/FootRight"]
-position = Vector2(3.03455, -11.1919)
+position = Vector2(-42.2885, 189.506)
 
 [node name="Torso" type="Bone2D" parent="."]
 position = Vector2(0, -400)
@@ -87,15 +80,14 @@ rest = Transform2D(1, 0, 0, 1, 0, -400)
 editor_settings/show_bone_gizmo = false
 
 [node name="Torso" type="Sprite2D" parent="Torso"]
-position = Vector2(1.14441e-05, 0)
+position = Vector2(30.0009, 50.0001)
 rotation = -0.0341038
 scale = Vector2(0.999991, 0.999991)
 texture = ExtResource("6_5aks6")
 offset = Vector2(9.91063, -171.367)
-metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="Torso/Torso"]
-position = Vector2(5.457, -159.908)
+position = Vector2(-32.8161, -211.244)
 
 [node name="UpperLegLeft" type="Bone2D" parent="Torso"]
 position = Vector2(90, 40)
@@ -103,16 +95,14 @@ rest = Transform2D(1, 0, 0, 1, 90, 40)
 editor_settings/show_bone_gizmo = false
 
 [node name="UpperLegLeft" type="Sprite2D" parent="Torso/UpperLegLeft"]
-position = Vector2(6.51627, 9.87101)
-rotation = 0.005719
+position = Vector2(-29.9992, 50.0002)
+rotation = -0.0672223
 scale = Vector2(0.999951, 0.999951)
 texture = ExtResource("8_apmmj")
 offset = Vector2(34.4006, 159.943)
-metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="Torso/UpperLegLeft/UpperLegLeft"]
-position = Vector2(24.401, 161)
-rotation = -0.0959931
+position = Vector2(44, 135)
 
 [node name="LowerLegLeft" type="Bone2D" parent="Torso/UpperLegLeft"]
 position = Vector2(10, 200)
@@ -121,16 +111,15 @@ rest = Transform2D(0.00737585, 0.999973, -0.999973, 0.00737585, 10, 200)
 editor_settings/show_bone_gizmo = false
 
 [node name="LowerLegLeft" type="Sprite2D" parent="Torso/UpperLegLeft/LowerLegLeft"]
-position = Vector2(-5.63411, -2.17659)
-rotation = -1.58455
+position = Vector2(-79.9976, -0.590698)
+rotation = -1.58825
 scale = Vector2(0.999927, 0.999927)
 texture = ExtResource("9_3om4u")
 offset = Vector2(6.93229, 95.7289)
-metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="Torso/UpperLegLeft/LowerLegLeft/LowerLegLeft"]
-position = Vector2(-3.73293, 75.5938)
-rotation = -0.10472
+position = Vector2(-14.4673, 179.709)
+rotation = -0.0352448
 
 [node name="FootLeft" type="Bone2D" parent="Torso/UpperLegLeft/LowerLegLeft"]
 position = Vector2(160.143, -18.8193)
@@ -142,14 +131,13 @@ bone_angle = 0.0
 editor_settings/show_bone_gizmo = false
 
 [node name="FootLeft" type="Sprite2D" parent="Torso/UpperLegLeft/LowerLegLeft/FootLeft"]
-position = Vector2(31.5735, -1.76371)
+position = Vector2(-32.4028, 157.003)
 rotation = -2.91215
 scale = Vector2(0.999927, 0.999927)
 texture = ExtResource("10_0fndb")
-metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="Torso/UpperLegLeft/LowerLegLeft/FootLeft/FootLeft"]
-position = Vector2(10.359, -9.62853)
+position = Vector2(-26.5576, 179.163)
 
 [node name="UpperArmLeft" type="Bone2D" parent="Torso"]
 position = Vector2(120, -310)
@@ -157,15 +145,14 @@ rest = Transform2D(1, -2.32831e-09, 2.32831e-09, 1, 120, -310)
 editor_settings/show_bone_gizmo = false
 
 [node name="UpperArmLeft" type="Sprite2D" parent="Torso/UpperArmLeft"]
-position = Vector2(50, 20)
+position = Vector2(-109.999, 140)
 rotation = -0.0407934
 scale = Vector2(0.999945, 0.999945)
 texture = ExtResource("11_asgfm")
 offset = Vector2(6.84171, 57.243)
-metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="Torso/UpperArmLeft/UpperArmLeft"]
-position = Vector2(7.95459, 50.3695)
+position = Vector2(142.338, -54.2432)
 
 [node name="LowerArmLeft" type="Bone2D" parent="Torso/UpperArmLeft"]
 position = Vector2(80, 140)
@@ -178,19 +165,18 @@ bone_angle = 0.0
 editor_settings/show_bone_gizmo = false
 
 [node name="WeaponLeft" type="Sprite2D" parent="Torso/UpperArmLeft/LowerArmLeft"]
-position = Vector2(212.462, 94.8193)
+position = Vector2(243.956, 41.0597)
 rotation = -1.31138
 
 [node name="LowerArmLeft" type="Sprite2D" parent="Torso/UpperArmLeft/LowerArmLeft"]
-position = Vector2(-14.3267, -17.1682)
+position = Vector2(-132.703, 203.934)
 rotation = -1.15768
 scale = Vector2(0.999927, 0.999927)
 texture = ExtResource("13_c0gd2")
 offset = Vector2(64.0081, 108.678)
-metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="Torso/UpperArmLeft/LowerArmLeft/LowerArmLeft"]
-position = Vector2(70.1453, 99.9106)
+position = Vector2(300.202, 129.593)
 
 [node name="HandLeft" type="Bone2D" parent="Torso/UpperArmLeft/LowerArmLeft"]
 position = Vector2(141.987, -25.2916)
@@ -208,11 +194,10 @@ rest = Transform2D(1, 0, 0, 1, -30, -320)
 editor_settings/show_bone_gizmo = false
 
 [node name="RemoteUpperArmRight" type="RemoteTransform2D" parent="Torso/UpperArmRight"]
-position = Vector2(-30, 30)
+position = Vector2(70.0014, 160)
 rotation = -0.0341038
 scale = Vector2(0.999991, 0.999991)
 remote_path = NodePath("../../../UpperArmRight")
-metadata/_edit_lock_ = true
 
 [node name="LowerArmRight" type="Bone2D" parent="Torso/UpperArmRight"]
 position = Vector2(-100, 150)
@@ -224,11 +209,10 @@ bone_angle = 0.0
 editor_settings/show_bone_gizmo = false
 
 [node name="RemoteLowerArmRight" type="RemoteTransform2D" parent="Torso/UpperArmRight/LowerArmRight"]
-position = Vector2(16.1015, 25.3129)
+position = Vector2(-47.5318, -111.987)
 rotation = -2.17278
 scale = Vector2(0.999991, 0.999991)
 remote_path = NodePath("../../../../LowerArmRight")
-metadata/_edit_lock_ = true
 
 [node name="HandRight" type="Bone2D" parent="Torso/UpperArmRight/LowerArmRight"]
 position = Vector2(152.627, -2.27216)
@@ -244,11 +228,10 @@ rest = Transform2D(1, 0, 0, 1, -70, 50)
 editor_settings/show_bone_gizmo = false
 
 [node name="RemoteUpperLegRight" type="RemoteTransform2D" parent="Torso/UpperLegRight"]
-position = Vector2(-9.99995, 4.19617e-05)
-rotation = 0.214039
+position = Vector2(-49.9992, 29.9997)
+rotation = 0.146272
 scale = Vector2(0.999991, 0.999991)
 remote_path = NodePath("../../../UpperLegRight")
-metadata/_edit_lock_ = true
 
 [node name="LowerLegRight" type="Bone2D" parent="Torso/UpperLegRight"]
 position = Vector2(-40, 180)
@@ -260,11 +243,10 @@ bone_angle = 0.0
 editor_settings/show_bone_gizmo = false
 
 [node name="RemoteLowerLegRight" type="RemoteTransform2D" parent="Torso/UpperLegRight/LowerLegRight"]
-position = Vector2(-3.05176e-05, -7.62939e-06)
-rotation = -1.52357
+position = Vector2(-60.8279, 0.100746)
+rotation = -1.62316
 scale = Vector2(0.999991, 0.999991)
 remote_path = NodePath("../../../../LowerLegRight")
-metadata/_edit_lock_ = true
 
 [node name="FootRight" type="Bone2D" parent="Torso/UpperLegRight/LowerLegRight"]
 position = Vector2(149.578, -15.0447)
@@ -274,7 +256,6 @@ auto_calculate_length_and_angle = false
 length = 100.0
 bone_angle = 0.0
 editor_settings/show_bone_gizmo = false
-metadata/_edit_lock_ = true
 
 [node name="Head" type="Bone2D" parent="Torso"]
 position = Vector2(50, -400)
@@ -287,23 +268,22 @@ bone_angle = 0.0
 editor_settings/show_bone_gizmo = false
 
 [node name="Head" type="Sprite2D" parent="Torso/Head"]
-position = Vector2(10.658, -5.65028)
-rotation = 1.677
+position = Vector2(10.4812, 81.7954)
+rotation = 1.65806
 scale = Vector2(0.999981, 0.999981)
 texture = ExtResource("14_q7elc")
 offset = Vector2(35.8401, -206.274)
-metadata/_edit_lock_ = true
 
 [node name="Equipment" type="Sprite2D" parent="Torso/Head/Head"]
-position = Vector2(140.028, -278.516)
+position = Vector2(58.147, -268.369)
+rotation = 0.015093
 
 [node name="Expression" type="Sprite2D" parent="Torso/Head/Head"]
-position = Vector2(15.0809, -378.797)
+position = Vector2(104.638, -408.849)
 rotation = 0.128645
 scale = Vector2(1.00001, 1.00001)
 texture = ExtResource("16_f6b8q")
 offset = Vector2(-22.0814, 245.232)
-metadata/_edit_lock_ = true
 
 [node name="Targets" type="Node2D" parent="."]
 scale = Vector2(10, 10)
