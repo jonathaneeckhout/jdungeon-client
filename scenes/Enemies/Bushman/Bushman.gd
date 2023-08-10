@@ -5,7 +5,7 @@ func _ready():
 	super()
 	$"Sprites/FrontLeg".hide()
 	$"Sprites/BackLeg".hide()
-	$AnimationPlayer.animation_started.connect(_on_animation_started)
+	$Sprites/AnimationPlayer.animation_started.connect(_on_animation_started)
 
 
 func _on_animation_started(animation_name: String):

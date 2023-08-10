@@ -9,9 +9,6 @@
 radius = 48.0
 height = 112.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fn543"]
-bg_color = Color(0.356863, 0.690196, 0.364706, 0.5)
-
 [sub_resource type="Animation" id="Animation_x6g28"]
 length = 0.001
 tracks/0/type = "value"
@@ -324,6 +321,9 @@ _data = {
 "move": SubResource("Animation_c8isw")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fn543"]
+bg_color = Color(0.356863, 0.690196, 0.364706, 0.5)
+
 [node name="Bushman" type="CharacterBody2D"]
 script = ExtResource("1_gdyg6")
 
@@ -350,6 +350,12 @@ offset = Vector2(160, -270)
 position = Vector2(90, 220)
 texture = ExtResource("5_3edau")
 offset = Vector2(70, -300)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_ddt2y")
+}
 
 [node name="Interface" type="Control" parent="."]
 layout_mode = 3
@@ -385,8 +391,3 @@ offset_right = 32.0
 offset_bottom = -101.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_fn543")
 value = 100.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ddt2y")
-}

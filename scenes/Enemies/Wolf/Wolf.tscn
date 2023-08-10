@@ -12,9 +12,6 @@
 radius = 40.0
 height = 112.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fn543"]
-bg_color = Color(0.356863, 0.690196, 0.364706, 0.5)
-
 [sub_resource type="Animation" id="Animation_owrmx"]
 length = 0.001
 tracks/0/type = "value"
@@ -614,6 +611,9 @@ _data = {
 "move": SubResource("Animation_oqmnl")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fn543"]
+bg_color = Color(0.356863, 0.690196, 0.364706, 0.5)
+
 [node name="Wolf" type="CharacterBody2D"]
 script = ExtResource("1_h5ig6")
 
@@ -655,6 +655,12 @@ position = Vector2(-272, -208)
 texture = ExtResource("7_3eknf")
 offset = Vector2(-88, -64)
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_q4va2")
+}
+
 [node name="Interface" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8
@@ -688,8 +694,3 @@ offset_right = 32.0
 offset_bottom = -85.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_fn543")
 value = 100.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_q4va2")
-}

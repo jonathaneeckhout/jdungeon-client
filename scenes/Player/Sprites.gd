@@ -26,6 +26,8 @@ extends Skeleton2D
 	"LeftHand": [$Torso/UpperArmLeft/LowerArmLeft/WeaponLeft]
 }
 
+@onready var animation_player = $AnimationPlayer
+
 
 func equip_item(equipment_slot: String, item: Item):
 	if not equipment.has(equipment_slot):

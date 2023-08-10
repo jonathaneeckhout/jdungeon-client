@@ -22,7 +22,7 @@ func _ready():
 	add_child(server_synchronizer)
 
 	prev_pos = position
-	$AnimationPlayer.play("idle")
+	$Sprites/AnimationPlayer.play("idle")
 
 	update_hp_bar()
 
@@ -32,30 +32,30 @@ func _physics_process(_delta):
 		STATES.IDLE:
 			if check_if_attacking():
 				state = STATES.ATTACK
-				$AnimationPlayer.play("attack")
+				$Sprites/AnimationPlayer.play("attack")
 			elif prev_pos != position:
 				state = STATES.MOVE
-				$AnimationPlayer.play("move")
+				$Sprites/AnimationPlayer.play("move")
 				face_direction = prev_pos.direction_to(position)
 				update_face_direction()
 		STATES.MOVE:
 			if check_if_attacking():
 				state = STATES.ATTACK
-				$AnimationPlayer.play("attack")
+				$Sprites/AnimationPlayer.play("attack")
 			elif prev_pos == position:
 				state = STATES.IDLE
-				$AnimationPlayer.play("idle")
+				$Sprites/AnimationPlayer.play("idle")
 			else:
 				face_direction = prev_pos.direction_to(position)
 				update_face_direction()
 		STATES.ATTACK:
-			if not $AnimationPlayer.is_playing():
+			if not $Sprites/AnimationPlayer.is_playing():
 				if check_if_attacking():
 					state = STATES.ATTACK
-					$AnimationPlayer.play("attack")
+					$Sprites/AnimationPlayer.play("attack")
 				else:
 					state = STATES.IDLE
-					$AnimationPlayer.play("idle")
+					$Sprites/AnimationPlayer.play("idle")
 
 	prev_pos = position
 

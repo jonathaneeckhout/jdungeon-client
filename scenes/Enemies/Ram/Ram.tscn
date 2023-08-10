@@ -6,9 +6,6 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_31j1k"]
 radius = 56.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bo43"]
-bg_color = Color(0.356863, 0.690196, 0.364706, 0.5)
-
 [sub_resource type="Animation" id="Animation_kk8ue"]
 length = 0.001
 tracks/0/type = "value"
@@ -103,6 +100,9 @@ _data = {
 "move": SubResource("Animation_fwuwx")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bo43"]
+bg_color = Color(0.356863, 0.690196, 0.364706, 0.5)
+
 [node name="Ram" type="CharacterBody2D"]
 script = ExtResource("1_y4ip7")
 
@@ -115,6 +115,12 @@ scale = Vector2(0.12, 0.12)
 [node name="Ram" type="Sprite2D" parent="Sprites"]
 position = Vector2(8, 0)
 texture = ExtResource("2_st8rq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_amlrt")
+}
 
 [node name="Interface" type="Control" parent="."]
 layout_mode = 3
@@ -149,8 +155,3 @@ offset_right = 32.0
 offset_bottom = -53.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_4bo43")
 value = 100.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_amlrt")
-}
