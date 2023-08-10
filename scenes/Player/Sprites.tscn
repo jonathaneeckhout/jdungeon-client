@@ -37,7 +37,7 @@ position = Vector2(-33.0286, 37.0923)
 
 [node name="LowerArmRight" type="Sprite2D" parent="."]
 position = Vector2(-160, -570)
-rotation = -0.0354421
+rotation = -0.0354398
 scale = Vector2(0.999991, 0.999991)
 texture = ExtResource("2_uwfom")
 offset = Vector2(20.8534, 37.2025)
@@ -50,7 +50,7 @@ position = Vector2(24.2584, 31.687)
 
 [node name="LowerLegRight" type="Sprite2D" parent="."]
 position = Vector2(-110, -170)
-rotation = 0.214038
+rotation = 0.21404
 scale = Vector2(0.999991, 0.999991)
 texture = ExtResource("3_8cvw6")
 offset = Vector2(1.07996, 30.9249)
@@ -116,7 +116,6 @@ rotation = -0.0998357
 [node name="LowerLegLeft" type="Bone2D" parent="Torso/UpperLegLeft"]
 position = Vector2(10, 200)
 rotation = 1.56342
-scale = Vector2(1, 1)
 rest = Transform2D(0.00737585, 0.999973, -0.999973, 0.00737585, 10, 200)
 editor_settings/show_bone_gizmo = false
 
@@ -135,7 +134,6 @@ rotation = -0.0276273
 [node name="FootLeft" type="Bone2D" parent="Torso/UpperLegLeft/LowerLegLeft"]
 position = Vector2(160.143, -18.8193)
 rotation = 1.31223
-scale = Vector2(1, 1)
 rest = Transform2D(0.255693, 0.966758, -0.966758, 0.255693, 160.143, -18.8193)
 auto_calculate_length_and_angle = false
 length = 100.0
@@ -217,7 +215,6 @@ metadata/_edit_lock_ = true
 [node name="LowerArmRight" type="Bone2D" parent="Torso/UpperArmRight"]
 position = Vector2(-100, 150)
 rotation = 2.13734
-scale = Vector2(1, 1)
 rest = Transform2D(-0.536717, 0.843762, -0.843762, -0.536717, -100, 150)
 auto_calculate_length_and_angle = false
 length = 200.0
@@ -254,7 +251,6 @@ metadata/_edit_lock_ = true
 [node name="LowerLegRight" type="Bone2D" parent="Torso/UpperLegRight"]
 position = Vector2(-40, 180)
 rotation = 1.73761
-scale = Vector2(1, 1)
 rest = Transform2D(-0.166039, 0.986119, -0.986119, -0.166039, -40, 180)
 auto_calculate_length_and_angle = false
 length = 200.0
@@ -271,7 +267,6 @@ metadata/_edit_lock_ = true
 [node name="FootRight" type="Bone2D" parent="Torso/UpperLegRight/LowerLegRight"]
 position = Vector2(149.578, -15.0447)
 rotation = 1.1718
-scale = Vector2(1, 1)
 rest = Transform2D(0.388498, 0.92145, -0.92145, 0.388498, 149.578, -15.0447)
 auto_calculate_length_and_angle = false
 length = 100.0

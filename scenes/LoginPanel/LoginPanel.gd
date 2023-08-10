@@ -102,6 +102,11 @@ func _on_level_server_logged_in():
 
 	loading_panel.set_progress(80)
 
+	# Load the player's equipment when logged in
+	await LevelsConnection.get_equipment.rpc_id(1)
+
+	loading_panel.set_progress(90)
+
 	loading_panel.hide()
 
 	if current_player == null:
