@@ -4,8 +4,8 @@ enum STATES { IDLE, MOVE, ATTACK }
 
 var server_synchronizer: Node2D
 
-var max_hp: float = 100.0
-var hp: float = max_hp
+var max_hp: int = 10
+var hp: int = 0
 
 var state = STATES.IDLE
 var prev_pos: Vector2
@@ -17,6 +17,8 @@ var attack_buffer = []
 
 
 func _ready():
+	hp = max_hp
+
 	var server_synchronizer_scene = load("res://scenes/ServerSynchronizer/ServerSynchronizer.tscn")
 	server_synchronizer = server_synchronizer_scene.instantiate()
 	add_child(server_synchronizer)
@@ -92,7 +94,7 @@ func heal(current_hp: int, _healing: int):
 
 
 func update_hp_bar():
-	$Interface/HPBar.value = (hp / max_hp) * 100
+	$Interface/HPBar.value = (hp * 100 / max_hp)
 
 
 func attack(timestamp: float, direction: Vector2):

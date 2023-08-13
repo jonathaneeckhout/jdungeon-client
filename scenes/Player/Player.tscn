@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dq18xjaweyeec"]
+[gd_scene load_steps=20 format=3 uid="uid://dq18xjaweyeec"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.gd" id="1_2682b"]
 [ext_resource type="Script" path="res://scenes/Player/PlayerInput.gd" id="2_3kipm"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dy1r3n0fpuneq" path="res://scenes/Shop/Shop.tscn" id="5_wrey8"]
 [ext_resource type="PackedScene" uid="uid://bqsdy2usb2e6d" path="res://scenes/Equipment/Equipment.tscn" id="6_hdwey"]
 [ext_resource type="PackedScene" uid="uid://dme2x3k2lk2lb" path="res://scenes/Player/Sprites.tscn" id="6_rqg8q"]
+[ext_resource type="PackedScene" uid="uid://bt54c4x0i0jjm" path="res://scenes/Stats/Stats.tscn" id="7_mh2yx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bgovn"]
 radius = 32.0
@@ -1141,6 +1142,16 @@ offset_left = 0.0
 offset_top = -248.0
 offset_right = 159.0
 offset_bottom = 248.0
+
+[node name="Stats" parent="Camera2D/UILayer/GUI" instance=ExtResource("7_mh2yx")]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -256.0
+offset_right = 0.0
+grow_horizontal = 0
 
 [node name="Sprites" parent="." instance=ExtResource("6_rqg8q")]
 

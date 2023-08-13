@@ -29,6 +29,8 @@ signal item_equipped(equipment_slot: String, item_uuid: String, item_class: Stri
 signal item_unequipped(equipment_slot: String)
 signal equipment_updated(items: Dictionary)
 
+signal stats_updated(stats: Dictionary)
+
 const CLOCK_SYNC_TIMER_TIME = 0.5
 const LATENCY_BUFFER_SIZE = 9
 const LATENCY_BUFFER_MID_POINT = int(LATENCY_BUFFER_SIZE / float(2))
@@ -259,6 +261,15 @@ func equip_item(equipment_slot: String, item_uuid: String, item_class: String):
 
 @rpc("call_remote", "authority", "reliable") func sync_equipment(equiment: Dictionary):
 	equipment_updated.emit(equiment)
+
+
+@rpc("call_remote", "any_peer", "reliable") func get_stats():
+	# Placeholder code
+	pass
+
+
+@rpc("call_remote", "authority", "reliable") func sync_stats(stats: Dictionary):
+	stats_updated.emit(stats)
 
 
 @rpc("call_remote", "any_peer", "reliable") func fetch_server_time(_client_time: float):

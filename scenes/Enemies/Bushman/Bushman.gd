@@ -1,6 +1,10 @@
 extends "res://scripts/entity.gd"
 
 
+func _init():
+	max_hp = 10
+
+
 func _ready():
 	super()
 	$"Sprites/FrontLeg".hide()

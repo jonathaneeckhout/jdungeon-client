@@ -1012,8 +1012,8 @@ modification_stack = SubResource("SkeletonModificationStack2D_8nfk3")
 script = ExtResource("1_6wdop")
 
 [node name="UpperArmRight" type="Sprite2D" parent="."]
-position = Vector2(58.943, -586.487)
-rotation = -0.356121
+position = Vector2(58.9431, -586.487)
+rotation = -0.35612
 scale = Vector2(0.99999, 0.99999)
 texture = ExtResource("1_j4f8v")
 offset = Vector2(-21.4519, 53.7092)
@@ -1183,7 +1183,6 @@ editor_settings/show_bone_gizmo = false
 [node name="UpperArmRight" type="Bone2D" parent="Torso"]
 position = Vector2(-30, -320)
 rotation = -0.233734
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -30, -320)
 editor_settings/show_bone_gizmo = false
 
@@ -1220,7 +1219,6 @@ editor_settings/show_bone_gizmo = false
 [node name="UpperLegRight" type="Bone2D" parent="Torso"]
 position = Vector2(-70, 50)
 rotation = -0.103119
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -70, 50)
 editor_settings/show_bone_gizmo = false
 
