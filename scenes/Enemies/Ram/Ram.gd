@@ -2,4 +2,4 @@ extends "res://scripts/entity.gd"
 
 
 func _init():
-	max_hp = 7
+	max_hp = 14

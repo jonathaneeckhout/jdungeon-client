@@ -1,5 +1,7 @@
 extends Panel
 
+@onready var player = $"../../../.."
+
 
 func _ready():
 	LevelsConnection.stats_updated.connect(_on_stats_updated)
@@ -31,6 +33,8 @@ func _on_stats_updated(stats: Dictionary):
 			"hp":
 				$VBoxContainer/HPValue.text = str_val
 			"max_hp":
+				player.max_hp = int(str_val)
+				player.update_hp_bar()
 				$VBoxContainer/HPValue.text = $VBoxContainer/HPValue.text + "/" + str_val
 			"attack_power":
 				$VBoxContainer/AttackPowerValue.text = str_val
