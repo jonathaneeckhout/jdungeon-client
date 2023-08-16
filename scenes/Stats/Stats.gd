@@ -34,11 +34,15 @@ func _on_stats_updated(stats: Dictionary):
 				$VBoxContainer/HPValue.text = str_val
 			"max_hp":
 				player.max_hp = int(str_val)
-				player.update_hp_bar()
 				$VBoxContainer/HPValue.text = $VBoxContainer/HPValue.text + "/" + str_val
+				player.update_hp_bar()
 			"attack_power":
 				$VBoxContainer/AttackPowerValue.text = str_val
 			"attack_speed":
 				$VBoxContainer/AttackSpeedValue.text = str_val
 			"defense":
 				$VBoxContainer/DefenseValue.text = str_val
+
+
+func update_hp():
+	$VBoxContainer/HPValue.text = str(player.hp) + "/" + str(player.max_hp)
