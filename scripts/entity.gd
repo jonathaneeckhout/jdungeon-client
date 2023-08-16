@@ -15,6 +15,8 @@ var attack_buffer = []
 @onready var sprites = $Sprites
 @onready var original_sprites_scale = $Sprites.scale
 
+@onready var floating_text_scene = preload("res://scenes/FloatingText/FloatingText.tscn")
+
 
 func _ready():
 	hp = max_hp
@@ -81,16 +83,26 @@ func check_if_attacking():
 			return true
 
 
-func hurt(current_hp: int, _damage: int):
+func hurt(current_hp: int, damage: int):
 	hp = current_hp
 
 	update_hp_bar()
 
+	var text = floating_text_scene.instantiate()
+	text.amount = damage
+	text.type = text.TYPES.DAMAGE
+	add_child(text)
 
-func heal(current_hp: int, _healing: int):
+
+func heal(current_hp: int, healing: int):
 	hp = current_hp
 
 	update_hp_bar()
+
+	var text = floating_text_scene.instantiate()
+	text.amount = healing
+	text.type = text.TYPES.HEALING
+	add_child(text)
 
 
 func update_hp_bar():
