@@ -1093,14 +1093,7 @@ size_flags_horizontal = 4
 
 [node name="ChatPanel" parent="Camera2D/UILayer/GUI" instance=ExtResource("2_k42yq")]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_right = 0.0
 offset_top = -256.0
-offset_right = 512.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 0
 
 [node name="ExpBar" type="ProgressBar" parent="Camera2D/UILayer/GUI"]
 layout_mode = 1

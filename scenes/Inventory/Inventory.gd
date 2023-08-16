@@ -37,7 +37,7 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("toggle_bag"):
+	if not Global.typing_chat and event.is_action_pressed("toggle_bag"):
 		if visible:
 			hide()
 		else:

@@ -1,6 +1,7 @@
 extends Node
 
 var above_ui = false
+var typing_chat = false
 
 
 func item_class_to_item(item_class: String):

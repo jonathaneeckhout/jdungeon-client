@@ -8,7 +8,7 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("toggle_stats"):
+	if not Global.typing_chat and event.is_action_pressed("toggle_stats"):
 		if visible:
 			hide()
 		else:

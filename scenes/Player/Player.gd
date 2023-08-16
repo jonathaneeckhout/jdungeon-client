@@ -17,6 +17,7 @@ var current_experience: int = 0
 var experience_needed_for_next_level = BASE_EXPERIENCE
 
 @onready var inventory = $Camera2D/UILayer/GUI/Inventory
+@onready var chat_panel = $Camera2D/UILayer/GUI/ChatPanel
 
 
 func _ready():
@@ -26,8 +27,8 @@ func _ready():
 		# $Camera2D.make_current()
 		$Camera2D/UILayer/GUI/ChatPanel.user_name = username
 		$Camera2D/UILayer.show()
-		gain_level(0, current_level, 0)
-		gain_experience(0, current_experience, 0)
+		set_level(0, current_level, 0)
+		set_experience(0, current_experience, 0)
 
 	else:
 		$Camera2D.queue_free()
@@ -37,6 +38,20 @@ func focus_camera():
 	$Camera2D.make_current()
 
 
+func hurt(current_hp: int, damage: int):
+	super(current_hp, damage)
+
+	if player == multiplayer.get_unique_id():
+		chat_panel.append_log_line("You received %d damage" % damage)
+
+
+func heal(current_hp: int, healing: int):
+	super(current_hp, healing)
+
+	if player == multiplayer.get_unique_id():
+		chat_panel.append_log_line("You received %d healing" % healing)
+
+
 func update_hp_bar():
 	super()
 
@@ -44,17 +59,29 @@ func update_hp_bar():
 		$Camera2D/UILayer/GUI/Stats.update_hp()
 
 
-func gain_experience(_timestamp: int, current_exp: int, _amount: int):
+func set_experience(_timestamp: int, current_exp: int, _amount: int):
 	var progress = float(current_exp) / experience_needed_for_next_level * 100
 	if progress >= 100:
 		progress = 0
 	$Camera2D/UILayer/GUI/ExpBar.value = progress
 
 
-func gain_level(_timestamp: int, new_level: int, _amount: int):
+func gain_experience(timestamp: int, current_exp: int, amount: int):
+	set_experience(timestamp, current_exp, amount)
+
+	chat_panel.append_log_line("You gained %d experience" % amount)
+
+
+func set_level(_timestamp: int, new_level: int, _amount: int):
 	current_level = new_level
 	experience_needed_for_next_level = calculate_experience_needed_next_level(current_level)
 	$Interface/Username.text = username + " (%d)" % current_level
+
+
+func gain_level(timestamp: int, new_level: int, amount: int):
+	set_level(timestamp, new_level, amount)
+
+	chat_panel.append_log_line("You gained %d level(s)" % amount)
 
 
 func calculate_experience_needed_next_level(clvl: int):
