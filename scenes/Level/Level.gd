@@ -16,6 +16,7 @@ var tilemap: TileMap
 @onready var ram_scene = load("res://scenes/Enemies/Ram/Ram.tscn")
 @onready var bushman_scene = load("res://scenes/Enemies/Bushman/Bushman.tscn")
 @onready var treetrunkguy_scene = load("res://scenes/Enemies/TreeTrunkGuy/TreeTrunkGuy.tscn")
+@onready var flower_scene = load("res://scenes/Enemies/Flower/Flower.tscn")
 
 @onready var milklady_scene = load("res://scenes/NPCs/MilkLady/MilkLady.tscn")
 
@@ -159,6 +160,8 @@ func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2, hp: float)
 			enemy = bushman_scene.instantiate()
 		"TreeTrunkGuy":
 			enemy = treetrunkguy_scene.instantiate()
+		"Flower":
+			enemy = flower_scene.instantiate()
 
 	if not enemy:
 		return
