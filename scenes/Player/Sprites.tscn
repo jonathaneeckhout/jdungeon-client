@@ -1013,7 +1013,7 @@ script = ExtResource("1_6wdop")
 
 [node name="UpperArmRight" type="Sprite2D" parent="."]
 position = Vector2(58.9431, -586.487)
-rotation = -0.35612
+rotation = -0.356121
 scale = Vector2(0.99999, 0.99999)
 texture = ExtResource("1_j4f8v")
 offset = Vector2(-21.4519, 53.7092)
@@ -1022,7 +1022,7 @@ offset = Vector2(-21.4519, 53.7092)
 position = Vector2(-117.885, -64.0576)
 
 [node name="LowerArmRight" type="Sprite2D" parent="."]
-position = Vector2(14.6779, -561.177)
+position = Vector2(14.678, -561.177)
 rotation = -0.357457
 scale = Vector2(0.999989, 0.999989)
 texture = ExtResource("2_uwfom")
@@ -1035,7 +1035,7 @@ position = Vector2(-140.622, 15.0266)
 
 [node name="UpperLegRight" type="Sprite2D" parent="."]
 position = Vector2(-108.698, -305.06)
-rotation = -0.0451297
+rotation = -0.0451298
 scale = Vector2(0.99999, 0.99999)
 texture = ExtResource("5_kl0o2")
 offset = Vector2(33.5656, 129.636)

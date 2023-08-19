@@ -17,31 +17,42 @@ func _input(event):
 
 
 func _on_stats_updated(stats: Dictionary):
-	if not "stats" in stats:
-		return
+	var experience = 0
+	var experience_needed = 0
 
-	for stat in stats["stats"]:
-		var str_val = str(stats["stats"][stat])
+	var hp = 0
+	var max_hp = 0
+
+	for stat in stats:
+		var val = stats[stat]
 
 		match stat:
 			"level":
-				$VBoxContainer/LevelValue.text = str_val
+				$VBoxContainer/LevelValue.text = str(val)
+				player.set_level(val, 0)
 			"experience":
-				$VBoxContainer/ExpValue.text = str_val
+				experience = val
 			"experience_needed":
-				$VBoxContainer/ExpValue.text = $VBoxContainer/ExpValue.text + "/" + str_val
+				experience_needed = val
 			"hp":
-				$VBoxContainer/HPValue.text = str_val
+				hp = val
+				player.hp = val
 			"max_hp":
-				player.max_hp = int(str_val)
-				$VBoxContainer/HPValue.text = $VBoxContainer/HPValue.text + "/" + str_val
-				player.update_hp_bar()
+				max_hp = val
+				player.max_hp = val
 			"attack_power":
-				$VBoxContainer/AttackPowerValue.text = str_val
+				$VBoxContainer/AttackPowerValue.text = str(val)
 			"attack_speed":
-				$VBoxContainer/AttackSpeedValue.text = str_val
+				$VBoxContainer/AttackSpeedValue.text = str(val)
 			"defense":
-				$VBoxContainer/DefenseValue.text = str_val
+				$VBoxContainer/DefenseValue.text = str(val)
+
+	$VBoxContainer/ExpValue.text = str(experience) + "/" + str(experience_needed)
+	player.experience_needed_for_next_level = experience_needed
+	player.set_experience(experience, 0)
+
+	$VBoxContainer/HPValue.text = str(hp) + "/" + str(max_hp)
+	player.update_hp_bar()
 
 
 func update_hp():

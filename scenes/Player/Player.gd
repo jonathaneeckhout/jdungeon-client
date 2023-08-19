@@ -27,8 +27,8 @@ func _ready():
 		# $Camera2D.make_current()
 		$Camera2D/UILayer/GUI/ChatPanel.user_name = username
 		$Camera2D/UILayer.show()
-		set_level(0, current_level, 0)
-		set_experience(0, current_experience, 0)
+		set_level(current_level, 0)
+		set_experience(current_experience, 0)
 
 	else:
 		$Camera2D.queue_free()
@@ -59,27 +59,28 @@ func update_hp_bar():
 		$Camera2D/UILayer/GUI/Stats.update_hp()
 
 
-func set_experience(_timestamp: int, current_exp: int, _amount: int):
+func set_experience(current_exp: int, _amount: int):
 	var progress = float(current_exp) / experience_needed_for_next_level * 100
 	if progress >= 100:
 		progress = 0
 	$Camera2D/UILayer/GUI/ExpBar.value = progress
 
 
-func gain_experience(timestamp: int, current_exp: int, amount: int):
-	set_experience(timestamp, current_exp, amount)
+func gain_experience(_timestamp: int, current_exp: int, amount: int):
+	set_experience(current_exp, amount)
 
 	chat_panel.append_log_line("You gained %d experience" % amount)
 
 
-func set_level(_timestamp: int, new_level: int, _amount: int):
+func set_level(new_level: int, _amount: int):
 	current_level = new_level
-	experience_needed_for_next_level = calculate_experience_needed_next_level(current_level)
 	$Interface/Username.text = username + " (%d)" % current_level
 
 
-func gain_level(timestamp: int, new_level: int, amount: int):
-	set_level(timestamp, new_level, amount)
+func gain_level(_timestamp: int, new_level: int, amount: int, exp_needed_for_next_level: int):
+	experience_needed_for_next_level = exp_needed_for_next_level
+
+	set_level(new_level, amount)
 
 	chat_panel.append_log_line("You gained %d level(s)" % amount)
 

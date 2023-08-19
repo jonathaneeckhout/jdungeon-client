@@ -7,6 +7,9 @@ signal character_loaded(level: String, address: String, port: int)
 signal chat_message_received(type: String, from: String, message: String)
 
 var auth_request = preload("res://scripts/requests/authRequest.gd")
+var get_characters_request = preload("res://scripts/requests/getCharactersRequest.gd")
+var create_character_request = preload("res://scripts/requests/createCharacterRequest.gd")
+var get_level_request = preload("res://scripts/requests/getLevelRequest.gd")
 var get_level_info_request = preload("res://scripts/requests/getLevelInfoRequest.gd")
 
 var cookie = ""
@@ -15,8 +18,6 @@ var secret = ""
 var socket = WebSocketPeer.new()
 var username = ""
 var _connected = false
-
-@onready var debug = Env.get_value("DEBUG")
 
 
 func _ready():
@@ -28,7 +29,7 @@ func connect_to_server(ip, port):
 
 	var client_tls_options: TLSOptions
 
-	if debug == "true":
+	if Global.env_debug:
 		client_tls_options = TLSOptions.client_unsafe()
 	else:
 		client_tls_options = TLSOptions.client()
@@ -42,6 +43,10 @@ func connect_to_server(ip, port):
 	set_process(true)
 
 	return true
+
+
+func disconnect_from_server():
+	socket.close()
 
 
 func _process(_delta):
@@ -106,6 +111,33 @@ func authenticate(player_username: String, password: String):
 
 	login.emit(res["response"])
 	return res["response"]
+
+
+func get_characters():
+	var new_req = get_characters_request.new()
+	add_child(new_req)
+	var res = await new_req.get_characters(cookie)
+	new_req.queue_free()
+
+	return res
+
+
+func create_character(character_name: String):
+	var new_req = create_character_request.new()
+	add_child(new_req)
+	var res = await new_req.create_character(character_name, cookie)
+	new_req.queue_free()
+
+	return res
+
+
+func get_level(level_name: String):
+	var new_req = get_level_request.new()
+	add_child(new_req)
+	var res = await new_req.get_level(level_name, cookie)
+	new_req.queue_free()
+
+	return res
 
 
 func get_level_info(level_name: String, level_hash: int):

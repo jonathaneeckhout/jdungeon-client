@@ -106,6 +106,12 @@ func update_cache():
 				location_cache[panel.item_uuid] = panel.grid_pos
 
 
+func clear_inventory():
+	for x in range(SIZE.x):
+		for y in range(SIZE.y):
+			remove_item_at_pos(Vector2(x, y))
+
+
 func _on_mouse_entered():
 	Global.above_ui = true
 
@@ -130,19 +136,15 @@ func _on_gold_updated(amount: int):
 	gold = amount
 
 
-func _on_inventory_updated(items: Dictionary):
-	if not "items" in items:
-		return
+func _on_inventory_updated(inventory_data: Dictionary):
+	gold = inventory_data.get("gold", 0)
 
-	# Clear the inventory
-	for x in range(SIZE.x):
-		for y in range(SIZE.y):
-			remove_item_at_pos(Vector2(x, y))
+	clear_inventory()
 
 	var to_be_added_items = []
 
 	# If the items are in the location cache, set them to their previous position
-	for item_data in items["items"]:
+	for item_data in inventory_data.get("items", []):
 		if location_cache.has(item_data["uuid"]):
 			var item: Item = Global.item_class_to_item(item_data["class"])
 			if item:

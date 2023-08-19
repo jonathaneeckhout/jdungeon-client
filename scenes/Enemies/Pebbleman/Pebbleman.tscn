@@ -732,32 +732,27 @@ offset = Vector2(170, 320)
 
 [node name="PebbleManBakgroundleg" type="Sprite2D" parent="Sprites"]
 position = Vector2(-190, 9.99998)
-scale = Vector2(1, 1)
 texture = ExtResource("4_m7bty")
 offset = Vector2(190, -170)
 
 [node name="PebbleManTorso" type="Sprite2D" parent="Sprites"]
 position = Vector2(-10, -70)
-scale = Vector2(1, 1)
 texture = ExtResource("9_0sptn")
 offset = Vector2(10, -170)
 
 [node name="PebbleManHead" type="Sprite2D" parent="Sprites"]
 position = Vector2(1.90735e-06, -780)
-scale = Vector2(1, 1)
 texture = ExtResource("8_f156l")
 offset = Vector2(-1.90735e-06, 540)
 
 [node name="PebbleManForegroundleg" type="Sprite2D" parent="Sprites"]
 position = Vector2(160, -40)
-scale = Vector2(1, 1)
 texture = ExtResource("6_5c4sa")
 offset = Vector2(-160, -160)
 
 [node name="PebbleManHanmer" type="Sprite2D" parent="Sprites"]
 position = Vector2(160, -20)
 rotation = -0.177913
-scale = Vector2(1, 1)
 texture = ExtResource("7_xiq3r")
 offset = Vector2(-110, -140)
 

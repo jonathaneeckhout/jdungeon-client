@@ -86,5 +86,5 @@ func gain_experience(timestamp: int, current_exp: int, amount: int):
 
 
 @rpc("call_remote", "authority", "reliable")
-func gain_level(timestamp: int, current_level: int, amount: int):
-	root.gain_level(timestamp, current_level, amount)
+func gain_level(timestamp: int, current_level: int, amount: int, exp_needed_for_next_level: int):
+	root.gain_level(timestamp, current_level, amount, exp_needed_for_next_level)

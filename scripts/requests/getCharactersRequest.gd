@@ -2,7 +2,7 @@ extends Node
 
 signal request_response(response: Dictionary)
 
-@onready var url = "%s/level/info" % Global.env_common_server_address
+@onready var url = "%s/player/characters" % Global.env_common_server_address
 
 @onready var http_request = HTTPRequest.new()
 
@@ -22,16 +22,15 @@ func _ready():
 	http_request.request_completed.connect(_http_request_completed)
 
 
-func get_level_info(level_name: String, level_hash: int, cookie: String):
-	var request_url = "%s?level=%s&hash=%s" % [url, level_name, level_hash]
+func get_characters(cookie: String):
 	var headers = ["Content-Type: application/json", "Cookie: %s" % cookie]
 
-	var error = http_request.request(request_url, headers, HTTPClient.METHOD_GET)
+	var error = http_request.request(url, headers, HTTPClient.METHOD_GET)
 	if error != OK:
 		print("An error occurred in the HTTP request.")
 		return null
 
-	print("Sending out get request to %s" % [request_url])
+	print("Sending out get request to %s" % [url])
 
 	var response = await request_response
 	return response

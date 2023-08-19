@@ -1,9 +1,8 @@
 extends Node
 
-signal logged_in
-signal player_added(
-	id: int, character_name: String, pos: Vector2, current_level: int, experience: int, gold: int
-)
+signal connected(succeeded: bool)
+signal logged_in(succeeded: bool)
+signal player_added(id: int, character_name: String, pos: Vector2)
 signal player_removed(character_name: String)
 
 signal other_player_added(id: int, character_name: String, pos: Vector2, hp: float)
@@ -45,8 +44,6 @@ var latency: float = 0.0
 var latency_buffer = []
 var delta_latency: float = 0.0
 
-@onready var debug: String = Env.get_value("DEBUG")
-
 
 func _ready():
 	clock_sync_timer = Timer.new()
@@ -73,7 +70,7 @@ func connect_to_server(ip, port):
 
 	var client_tls_options: TLSOptions
 
-	if debug == "true":
+	if Global.env_debug:
 		client_tls_options = TLSOptions.client_unsafe()
 	else:
 		client_tls_options = TLSOptions.client()
@@ -107,15 +104,9 @@ func stop_sync_clock():
 
 func _on_connection_succeeded():
 	print("Connection succeeded")
-	#TODO: currently the character's name is the player's name
-	#TODO: figure out why this delay is needed
-	await get_tree().create_timer(1).timeout
+	connected.emit(true)
 
 	start_sync_clock()
-
-	authenticate_with_secret.rpc_id(
-		1, CommonConnection.username, CommonConnection.secret, CommonConnection.username
-	)
 
 
 func _on_server_disconnected():
@@ -125,6 +116,8 @@ func _on_server_disconnected():
 
 func _on_connection_failed():
 	print("Connection failed")
+
+	connected.emit(false)
 
 
 func _on_clock_sync_timer_timeout():
@@ -139,14 +132,12 @@ func authenticate_with_secret(_username: String, _secret: String, _character: St
 
 @rpc("call_remote", "authority", "reliable") func client_login_response(succeeded: bool):
 	print("Login to level server %s" % [succeeded])
-	if succeeded:
-		logged_in.emit()
+	logged_in.emit(succeeded)
 
 
-@rpc("call_remote", "authority", "reliable") func add_player(
-	id: int, character_name: String, pos: Vector2, current_level: int, experience: int, gold: int
-):
-	player_added.emit(id, character_name, pos, current_level, experience, gold)
+@rpc("call_remote", "authority", "reliable")
+func add_player(id: int, character_name: String, pos: Vector2):
+	player_added.emit(id, character_name, pos)
 
 
 @rpc("call_remote", "authority", "reliable") func remove_player(character_name: String):

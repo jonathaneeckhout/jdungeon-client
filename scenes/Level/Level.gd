@@ -107,19 +107,13 @@ func load_level(level_info: Dictionary):
 			)
 
 
-func add_player(
-	id: int, character_name: String, pos: Vector2, current_level: int, experience: int, gold: int
-):
+func add_player(id: int, character_name: String, pos: Vector2):
 	var player = player_scene.instantiate()
 	player.player = id
 	player.position = pos
-	player.current_level = current_level
-	player.current_experience = experience
 	player.username = character_name
 	player.name = character_name
 	players.add_child(player)
-
-	player.inventory.gold = gold
 
 	if id == multiplayer.get_unique_id():
 		player_added.emit(player)
@@ -211,10 +205,8 @@ func remove_item(item_name: String):
 		items.get_node(item_name).queue_free()
 
 
-func _on_player_added(
-	id: int, character_name: String, pos: Vector2, current_level: int, experience: int, gold: int
-):
-	add_player(id, character_name, pos, current_level, experience, gold)
+func _on_player_added(id: int, character_name: String, pos: Vector2):
+	add_player(id, character_name, pos)
 
 
 func _on_player_removed(character_name: String):

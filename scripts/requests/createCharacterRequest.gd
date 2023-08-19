@@ -1,9 +1,8 @@
 extends Node
 
-signal request_response(response: Dictionary)
+signal request_response(response)
 
-@onready var url = "%s/level/info" % Global.env_common_server_address
-
+@onready var url = "%s/player/characters/create" % Global.env_common_server_address
 @onready var http_request = HTTPRequest.new()
 
 
@@ -22,16 +21,15 @@ func _ready():
 	http_request.request_completed.connect(_http_request_completed)
 
 
-func get_level_info(level_name: String, level_hash: int, cookie: String):
-	var request_url = "%s?level=%s&hash=%s" % [url, level_name, level_hash]
+func create_character(character_name: String, cookie: String):
 	var headers = ["Content-Type: application/json", "Cookie: %s" % cookie]
 
-	var error = http_request.request(request_url, headers, HTTPClient.METHOD_GET)
+	var body = JSON.stringify({"character": character_name})
+
+	var error = http_request.request(url, headers, HTTPClient.METHOD_POST, body)
 	if error != OK:
 		print("An error occurred in the HTTP request.")
-		return null
-
-	print("Sending out get request to %s" % [request_url])
+		return false
 
 	var response = await request_response
 	return response
@@ -41,21 +39,21 @@ func get_level_info(level_name: String, level_hash: int, cookie: String):
 func _http_request_completed(result, response_code, _headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
 		print("HTTPRequest failed")
-		request_response.emit(null)
+		request_response.emit(false)
 		return
 
 	if response_code != 200:
 		print("Error in response")
-		request_response.emit(null)
+		request_response.emit(false)
 		return
 
 	var json = JSON.new()
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
 
-	if !"error" in response or response["error"] or !"data" in response:
+	if !response.has("error") or response["error"]:
 		print("Error or invalid response format")
-		request_response.emit(null)
+		request_response.emit(false)
 		return
 
-	request_response.emit(response["data"])
+	request_response.emit(true)

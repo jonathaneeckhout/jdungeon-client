@@ -3,12 +3,45 @@ extends Node
 var above_ui = false
 var typing_chat = false
 
+var env_debug: bool
+var env_debug_username: String
+var env_debug_password: String
+
+var env_common_server_host: String
+var env_common_server_port: int
+
+var env_common_server_address: String
+
+
+func load_env_variables():
+	env_debug = Env.get_value("DEBUG") == "true"
+
+	env_debug_username = Env.get_value("DEBUG_USERNAME")
+
+	env_debug_password = Env.get_value("DEBUG_PASSWORD")
+
+	env_common_server_host = Env.get_value("COMMON_SERVER_HOST")
+	if env_common_server_host == "":
+		return false
+
+	var env_common_server_port_str = Env.get_value("COMMON_SERVER_PORT")
+	if env_common_server_port_str == "":
+		return false
+
+	env_common_server_port = int(env_common_server_port_str)
+
+	env_common_server_address = Env.get_value("COMMON_SERVER_ADDRESS")
+	if env_common_server_address == "":
+		return false
+
+	return true
+
 
 func item_class_to_item(item_class: String):
 	var item: Item
 	match item_class:
 		"Gold":
-			item = load("res://scripts/items/gold.gd").new()
+			item = load("res://scripts/items/varia/gold.gd").new()
 
 		"HealthPotion":
 			item = load("res://scripts/items/consumables/healthPotion.gd").new()

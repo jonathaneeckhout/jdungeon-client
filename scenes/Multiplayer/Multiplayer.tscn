@@ -22,6 +22,7 @@ grow_vertical = 2
 size_flags_vertical = 4
 
 [node name="LoginPanel" parent="UI" instance=ExtResource("1_0yetu")]
+unique_name_in_owner = true
 layout_mode = 1
 
 [node name="LoadingPanel" parent="UI" instance=ExtResource("4_1gvt1")]
