@@ -35,7 +35,6 @@ func show_error(message: String):
 
 
 func load_debug_username_and_password():
-	print("HIER")
 	if Global.env_debug_username:
 		$VBoxContainer/UsernameText.text = Global.env_debug_username
 

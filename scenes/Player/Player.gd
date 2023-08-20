@@ -38,18 +38,22 @@ func focus_camera():
 	$Camera2D.make_current()
 
 
-func hurt(current_hp: int, damage: int):
-	super(current_hp, damage)
-
+func check_if_hurt():
 	if player == multiplayer.get_unique_id():
-		chat_panel.append_log_line("You received %d damage" % damage)
+		for i in range(hurt_buffer.size() - 1, -1, -1):
+			if hurt_buffer[i]["timestamp"] <= LevelsConnection.clock:
+				chat_panel.append_log_line("You received %d damage" % hurt_buffer[i]["damage"])
+
+	super()
 
 
-func heal(current_hp: int, healing: int):
-	super(current_hp, healing)
-
+func check_if_heal():
 	if player == multiplayer.get_unique_id():
-		chat_panel.append_log_line("You received %d healing" % healing)
+		for i in range(heal_buffer.size() - 1, -1, -1):
+			if heal_buffer[i]["timestamp"] <= LevelsConnection.clock:
+				chat_panel.append_log_line("You received %d healing" % heal_buffer[i]["healing"])
+
+	super()
 
 
 func update_hp_bar():

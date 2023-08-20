@@ -68,12 +68,14 @@ func extrapolate(render_time):
 	server_syncs_buffer.append({"timestamp": timestamp, "position": pos})
 
 
-@rpc("call_remote", "authority", "reliable") func hurt(current_hp: int, amount: int):
-	root.hurt(current_hp, amount)
+@rpc("call_remote", "authority", "reliable")
+func hurt(timestamp: float, current_hp: int, amount: int):
+	root.hurt(timestamp, current_hp, amount)
 
 
-@rpc("call_remote", "authority", "reliable") func heal(current_hp: int, amount: int):
-	root.heal(current_hp, amount)
+@rpc("call_remote", "authority", "reliable")
+func heal(timestamp: float, current_hp: int, amount: int):
+	root.heal(timestamp, current_hp, amount)
 
 
 @rpc("call_remote", "authority", "reliable") func attack(timestamp: float, direction: Vector2):

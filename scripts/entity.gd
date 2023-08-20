@@ -11,6 +11,8 @@ var state = STATES.IDLE
 var prev_pos: Vector2
 var face_direction: Vector2
 var attack_buffer = []
+var hurt_buffer = []
+var heal_buffer = []
 
 @onready var sprites = $Sprites
 @onready var original_sprites_scale = $Sprites.scale
@@ -27,6 +29,7 @@ func _ready():
 	$Sprites/AnimationPlayer.play("idle")
 
 	update_hp_bar()
+	check_if_heal()
 
 
 func _physics_process(_delta):
@@ -61,6 +64,9 @@ func _physics_process(_delta):
 
 	prev_pos = position
 
+	check_if_hurt()
+	check_if_heal()
+
 
 func update_face_direction():
 	if face_direction.x < 0:
@@ -73,7 +79,7 @@ func check_if_attacking():
 	if attack_buffer.is_empty():
 		return false
 
-	for i in range(attack_buffer.size()):
+	for i in range(attack_buffer.size() - 1, -1, -1):
 		if attack_buffer[i]["timestamp"] <= LevelsConnection.clock:
 			face_direction = attack_buffer[i]["direction"]
 			update_face_direction()
@@ -81,26 +87,45 @@ func check_if_attacking():
 			return true
 
 
-func hurt(current_hp: int, damage: int):
-	hp = current_hp
-
-	update_hp_bar()
-
-	var text = floating_text_scene.instantiate()
-	text.amount = damage
-	text.type = text.TYPES.DAMAGE
-	add_child(text)
+func hurt(timestamp: float, current_hp: int, damage: int):
+	hurt_buffer.append({"timestamp": timestamp, "current_hp": current_hp, "damage": damage})
 
 
-func heal(current_hp: int, healing: int):
-	hp = current_hp
+func check_if_hurt():
+	for i in range(hurt_buffer.size() - 1, -1, -1):
+		if hurt_buffer[i]["timestamp"] <= LevelsConnection.clock:
+			hp = hurt_buffer[i]["current_hp"]
 
-	update_hp_bar()
+			update_hp_bar()
 
-	var text = floating_text_scene.instantiate()
-	text.amount = healing
-	text.type = text.TYPES.HEALING
-	add_child(text)
+			var text = floating_text_scene.instantiate()
+			text.amount = hurt_buffer[i]["damage"]
+			text.type = text.TYPES.DAMAGE
+			add_child(text)
+
+			hurt_buffer.remove_at(i)
+			return true
+
+
+func heal(timestamp: float, current_hp: int, healing: int):
+	print("HEALING")
+	heal_buffer.append({"timestamp": timestamp, "current_hp": current_hp, "healing": healing})
+
+
+func check_if_heal():
+	for i in range(heal_buffer.size() - 1, -1, -1):
+		if heal_buffer[i]["timestamp"] <= LevelsConnection.clock:
+			hp = heal_buffer[i]["current_hp"]
+
+			update_hp_bar()
+
+			var text = floating_text_scene.instantiate()
+			text.amount = heal_buffer[i]["healing"]
+			text.type = text.TYPES.HEALING
+			add_child(text)
+
+			heal_buffer.remove_at(i)
+			return true
 
 
 func update_hp_bar():
