@@ -119,11 +119,12 @@ func add_player(id: int, character_name: String, pos: Vector2):
 		player_added.emit(player)
 
 
-func add_other_player(id: int, character_name: String, pos: Vector2, hp: float):
+func add_other_player(id: int, character_name: String, pos: Vector2, hp: int, max_hp: int):
 	var player = player_scene.instantiate()
 	player.player = id
 	player.position = pos
 	player.hp = hp
+	player.max_hp = max_hp
 	player.username = character_name
 	player.name = character_name
 	players.add_child(player)
@@ -141,7 +142,7 @@ func get_player_by_id(id: int):
 	return null
 
 
-func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2, hp: float):
+func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2, hp: int, max_hp: int):
 	var enemy: Entity
 
 	match enemy_class:
@@ -166,6 +167,7 @@ func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2, hp: float)
 	enemy.position = pos
 	enemy.name = enemy_name
 	enemy.hp = hp
+	enemy.max_hp = max_hp
 	enemies.add_child(enemy)
 
 
@@ -174,7 +176,7 @@ func remove_enemy(enemy_name: String):
 		enemies.get_node(enemy_name).queue_free()
 
 
-func add_npc(npc_name: String, npc_class: String, pos: Vector2, hp: float):
+func add_npc(npc_name: String, npc_class: String, pos: Vector2, hp: int, max_hp: int):
 	var npc: Entity
 
 	match npc_class:
@@ -184,6 +186,7 @@ func add_npc(npc_name: String, npc_class: String, pos: Vector2, hp: float):
 	npc.position = pos
 	npc.name = npc_name
 	npc.hp = hp
+	npc.max_hp = max_hp
 	npcs.add_child(npc)
 
 
@@ -213,24 +216,24 @@ func _on_player_removed(character_name: String):
 	remove_player(character_name)
 
 
-func _on_other_player_added(id: int, character_name: String, pos: Vector2, hp: float):
-	add_other_player(id, character_name, pos, hp)
+func _on_other_player_added(id: int, character_name: String, pos: Vector2, hp: int, max_hp: int):
+	add_other_player(id, character_name, pos, hp, max_hp)
 
 
 func _on_other_player_removed(character_name: String):
 	remove_player(character_name)
 
 
-func _on_enemy_added(enemy_name: String, enemy_class: String, pos: Vector2, hp: float):
-	add_enemy(enemy_name, enemy_class, pos, hp)
+func _on_enemy_added(enemy_name: String, enemy_class: String, pos: Vector2, hp: int, max_hp: int):
+	add_enemy(enemy_name, enemy_class, pos, hp, max_hp)
 
 
 func _on_enemy_removed(enemy_name: String):
 	remove_enemy(enemy_name)
 
 
-func _on_npc_added(npc_name: String, npc_class: String, pos: Vector2, hp: float):
-	add_npc(npc_name, npc_class, pos, hp)
+func _on_npc_added(npc_name: String, npc_class: String, pos: Vector2, hp: int, max_hp: int):
+	add_npc(npc_name, npc_class, pos, hp, max_hp)
 
 
 func _on_npc_removed(npc_name: String):

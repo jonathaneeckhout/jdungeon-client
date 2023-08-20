@@ -5,13 +5,13 @@ signal logged_in(succeeded: bool)
 signal player_added(id: int, character_name: String, pos: Vector2)
 signal player_removed(character_name: String)
 
-signal other_player_added(id: int, character_name: String, pos: Vector2, hp: float)
+signal other_player_added(id: int, character_name: String, pos: Vector2, hp: int, max_hp: int)
 signal other_player_removed(character_name: String)
 
-signal enemy_added(enemy_name: String, enemy_class: String, pos: Vector2, hp: float)
+signal enemy_added(enemy_name: String, enemy_class: String, pos: Vector2, hp: int, max_hp: int)
 signal enemy_removed(enemy_name: String)
 
-signal npc_added(npc_name: String, npc_class: String, pos: Vector2, hp: float)
+signal npc_added(npc_name: String, npc_class: String, pos: Vector2, hp: int, max_hp: int)
 signal npc_removed(npc_name: String)
 
 signal item_added(item_name: String, item_class: String, pos: Vector2)
@@ -145,8 +145,8 @@ func add_player(id: int, character_name: String, pos: Vector2):
 
 
 @rpc("call_remote", "authority", "reliable")
-func add_other_player(id: int, character_name: String, pos: Vector2, hp: float):
-	other_player_added.emit(id, character_name, pos, hp)
+func add_other_player(id: int, character_name: String, pos: Vector2, hp: int, max_hp: int):
+	other_player_added.emit(id, character_name, pos, hp, max_hp)
 
 
 @rpc("call_remote", "authority", "reliable") func remove_other_player(character_name: String):
@@ -164,8 +164,8 @@ func add_other_player(id: int, character_name: String, pos: Vector2, hp: float):
 
 
 @rpc("call_remote", "authority", "reliable")
-func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2, hp: float):
-	enemy_added.emit(enemy_name, enemy_class, pos, hp)
+func add_enemy(enemy_name: String, enemy_class: String, pos: Vector2, hp: int, max_hp: int):
+	enemy_added.emit(enemy_name, enemy_class, pos, hp, max_hp)
 
 
 @rpc("call_remote", "authority", "reliable") func remove_enemy(enemy_name: String):
@@ -182,8 +182,8 @@ func add_item(item_name: String, item_class: String, pos: Vector2):
 
 
 @rpc("call_remote", "authority", "reliable")
-func add_npc(npc_name: String, npc_class: String, pos: Vector2, hp: float):
-	npc_added.emit(npc_name, npc_class, pos, hp)
+func add_npc(npc_name: String, npc_class: String, pos: Vector2, hp: int, max_hp: int):
+	npc_added.emit(npc_name, npc_class, pos, hp, max_hp)
 
 
 @rpc("call_remote", "authority", "reliable") func remove_npc(npc_name: String):

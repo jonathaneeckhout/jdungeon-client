@@ -5,7 +5,7 @@ enum STATES { IDLE, MOVE, ATTACK }
 var server_synchronizer: Node2D
 
 var max_hp: int = 10
-var hp: int = 0
+var hp: int = max_hp
 
 var state = STATES.IDLE
 var prev_pos: Vector2
@@ -19,8 +19,6 @@ var attack_buffer = []
 
 
 func _ready():
-	hp = max_hp
-
 	var server_synchronizer_scene = load("res://scenes/ServerSynchronizer/ServerSynchronizer.tscn")
 	server_synchronizer = server_synchronizer_scene.instantiate()
 	add_child(server_synchronizer)
