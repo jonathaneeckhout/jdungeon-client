@@ -36,8 +36,7 @@ func _physics_process(_delta):
 	match state:
 		STATES.IDLE:
 			if check_if_attacking():
-				state = STATES.ATTACK
-				$Sprites/AnimationPlayer.play("attack")
+				handle_attack()
 			elif prev_pos != position:
 				state = STATES.MOVE
 				$Sprites/AnimationPlayer.play("move")
@@ -45,8 +44,7 @@ func _physics_process(_delta):
 				update_face_direction()
 		STATES.MOVE:
 			if check_if_attacking():
-				state = STATES.ATTACK
-				$Sprites/AnimationPlayer.play("attack")
+				handle_attack()
 			elif prev_pos == position:
 				state = STATES.IDLE
 				$Sprites/AnimationPlayer.play("idle")
@@ -56,8 +54,7 @@ func _physics_process(_delta):
 		STATES.ATTACK:
 			if not $Sprites/AnimationPlayer.is_playing():
 				if check_if_attacking():
-					state = STATES.ATTACK
-					$Sprites/AnimationPlayer.play("attack")
+					handle_attack()
 				else:
 					state = STATES.IDLE
 					$Sprites/AnimationPlayer.play("idle")
@@ -66,6 +63,11 @@ func _physics_process(_delta):
 
 	check_if_hurt()
 	check_if_heal()
+
+
+func handle_attack():
+	state = STATES.ATTACK
+	$Sprites/AnimationPlayer.play("attack")
 
 
 func update_face_direction():

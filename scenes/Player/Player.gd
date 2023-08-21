@@ -34,6 +34,18 @@ func _ready():
 		$Camera2D.queue_free()
 
 
+func handle_attack():
+	state = STATES.ATTACK
+	$Sprites/AnimationPlayer.play("attack")
+
+	var i = randi_range(0, 1)
+	match i:
+		0:
+			$Sprites/AnimationPlayer.play("attack")
+		1:
+			$Sprites/AnimationPlayer.play("attack_2")
+
+
 func focus_camera():
 	$Camera2D.make_current()
 
