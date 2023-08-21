@@ -38,12 +38,14 @@ func handle_attack():
 	state = STATES.ATTACK
 	$Sprites/AnimationPlayer.play("attack")
 
-	var i = randi_range(0, 1)
+	var i = randi_range(0, 2)
 	match i:
 		0:
 			$Sprites/AnimationPlayer.play("attack")
 		1:
 			$Sprites/AnimationPlayer.play("attack_2")
+		2:
+			$Sprites/AnimationPlayer.play("attack_3")
 
 
 func focus_camera():
